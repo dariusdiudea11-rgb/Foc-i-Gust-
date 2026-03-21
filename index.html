@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foc i Gust — The Art of Grilling Meat</title>
+  <style>
+    :root {
+      --fire-red:    #e63c1e;
+      --fire-orange: #f57c20;
+      --fire-yellow: #fbbf24;
+      --coal:        #1a1a1a;
+      --ash:         #2d2d2d;
+      --smoke:       #3f3f3f;
+      --cream:       #fdf6ec;
+      --text-light:  #f5e6d3;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--coal);
+      color: var(--text-light);
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    header {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: linear-gradient(180deg, #0a0a0a 0%, #1a0a00 60%, #2d1000 100%);
+    }
+
+    .flames {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      align-items: flex-end;
+    }
+
+    .flame {
+      width: 18px;
+      border-radius: 50% 50% 20% 20%;
+      animation: flicker 0.8s ease-in-out infinite alternate;
+      transform-origin: bottom center;
+    }
+
+    .flame:nth-child(odd)  { background: var(--fire-red);    height: 55px; animation-delay: 0s; }
+    .flame:nth-child(even) { background: var(--fire-orange);  height: 70px; animation-delay: 0.3s; }
+    .flame:nth-child(3n)   { background: var(--fire-yellow);  height: 40px; animation-delay: 0.6s; }
+
+    @keyframes flicker {
+      0%   { transform: scaleX(1)   scaleY(1)   rotate(-2deg); opacity: 0.9; }
+      100% { transform: scaleX(0.8) scaleY(1.15) rotate(2deg);  opacity: 1;   }
+    }
+
+    header h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--fire-yellow), var(--fire-orange), var(--fire-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      color: #c9a98a;
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--ash);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 10px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--fire-orange);
+    }
+
+    nav a {
+      color: var(--fire-yellow);
+      text-decoration: none;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav a:hover { background: var(--fire-orange); color: var(--coal); }
+
+    /* ── SECTIONS ── */
+    main { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    section { margin-bottom: 60px; }
+
+    section h2 {
+      font-size: 1.8rem;
+      color: var(--fire-orange);
+      border-left: 4px solid var(--fire-red);
+      padding-left: 14px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── CARDS ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--ash);
+      border-radius: 12px;
+      padding: 22px 18px;
+      border: 1px solid #3a3a3a;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover { transform: translateY(-4px); border-color: var(--fire-orange); }
+
+    .card .icon { font-size: 2.2rem; margin-bottom: 10px; }
+    .card h3    { font-size: 1.1rem; color: var(--fire-yellow); margin-bottom: 8px; }
+    .card p     { font-size: 0.9rem; color: #c2a98a; line-height: 1.55; }
+
+    /* ── TEMPERATURE GAUGE ── */
+    .temp-guide {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .temp-card {
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .temp-card:hover { transform: scale(1.04); }
+
+    .temp-card .degree {
+      font-size: 2rem;
+      font-weight: bold;
+      display: block;
+    }
+
+    .temp-card .label  { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+    .temp-card .desc   { font-size: 0.8rem;  margin-top: 8px; opacity: 0.7; }
+
+    .rare       { background: linear-gradient(135deg, #5c1010, #a01e1e); }
+    .medium-rare{ background: linear-gradient(135deg, #7a2a0a, #c44a1a); }
+    .medium     { background: linear-gradient(135deg, #8a4010, #d46820); }
+    .medium-well{ background: linear-gradient(135deg, #7a5010, #b87820); }
+    .well-done  { background: linear-gradient(135deg, #5a5010, #8a7820); }
+
+    /* ── TIMER ── */
+    .timer-box {
+      background: var(--ash);
+      border-radius: 14px;
+      padding: 30px;
+      text-align: center;
+      border: 1px solid #3a3a3a;
+    }
+
+    .timer-controls { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+
+    .timer-controls select,
+    .timer-controls button {
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .timer-controls select { background: var(--smoke); color: var(--text-light); }
+
+    .timer-controls button {
+      background: var(--fire-orange);
+      color: var(--coal);
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+
+    .timer-controls button:hover { background: var(--fire-yellow); }
+
+    #timer-display {
+      font-size: 4rem;
+      font-weight: bold;
+      color: var(--fire-yellow);
+      letter-spacing: 4px;
+      font-family: 'Courier New', monospace;
+    }
+
+    #timer-label { color: #c2a98a; font-size: 1rem; margin-top: 8px; font-style: italic; }
+
+    /* ── TIPS ── */
+    .tips-list { list-style: none; display: grid; gap: 14px; }
+
+    .tips-list li {
+      background: var(--ash);
+      border-radius: 10px;
+      padding: 16px 20px;
+      border-left: 4px solid var(--fire-red);
+      font-size: 0.95rem;
+      color: #d9c0a8;
+      line-height: 1.5;
+    }
+
+    .tips-list li strong { color: var(--fire-yellow); }
+
+    /* ── MARINADE BUILDER ── */
+    .marinade-builder {
+      background: var(--ash);
+      border-radius: 14px;
+      padding: 28px;
+      border: 1px solid #3a3a3a;
+    }
+
+    .marinade-builder h3 { color: var(--fire-yellow); margin-bottom: 16px; font-size: 1.1rem; }
+
+    .ingredient-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .ingredient-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 2px solid #4a4a4a;
+      background: var(--smoke);
+      color: var(--text-light);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .ingredient-btn.selected {
+      border-color: var(--fire-orange);
+      background: #4a2000;
+      color: var(--fire-yellow);
+    }
+
+    #marinade-result {
+      background: #1a1000;
+      border-radius: 10px;
+      padding: 18px;
+      min-height: 60px;
+      font-size: 0.9rem;
+      color: #d9c0a8;
+      line-height: 1.6;
+      border: 1px solid #3a2a10;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #5a4a3a;
+      font-size: 0.85rem;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    footer span { color: var(--fire-orange); }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<header>
+  <h1>Foc i Gust</h1>
+  <p>Fire and Flavour — The Art of Grilling Meat</p>
+  <div class="flames" id="flames"></div>
+</header>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="#cuts">Cuts</a>
+  <a href="#temps">Temperatures</a>
+  <a href="#techniques">Techniques</a>
+  <a href="#timer">Timer</a>
+  <a href="#tips">Master Tips</a>
+  <a href="#marinade">Marinade Builder</a>
+</nav>
+
+<main>
+
+  <!-- ═══ MEAT CUTS ═══ -->
+  <section id="cuts">
+    <h2>🥩 Know Your Cuts</h2>
+    <div class="card-grid" id="cuts-grid"></div>
+  </section>
+
+  <!-- ═══ TEMPERATURES ═══ -->
+  <section id="temps">
+    <h2>🌡️ Internal Temperatures</h2>
+    <p style="color:#c2a98a; margin-bottom:20px; font-size:0.9rem;">
+      Always use a meat thermometer — it's the single most important tool for perfect grilling.
+    </p>
+    <div class="temp-guide" id="temp-guide"></div>
+  </section>
+
+  <!-- ═══ TECHNIQUES ═══ -->
+  <section id="techniques">
+    <h2>🔥 Grilling Techniques</h2>
+    <div class="card-grid" id="techniques-grid"></div>
+  </section>
+
+  <!-- ═══ TIMER ═══ -->
+  <section id="timer">
+    <h2>⏱️ Grill Timer</h2>
+    <div class="timer-box">
+      <div class="timer-controls">
+        <select id="preset-select">
+          <option value="">— Choose a preset —</option>
+          <option value="120">Thin burger (2 min/side)</option>
+          <option value="180">Thick burger (3 min/side)</option>
+          <option value="240">Ribeye 2cm (4 min/side)</option>
+          <option value="300">Ribeye 3cm (5 min/side)</option>
+          <option value="480">Chicken breast (8 min/side)</option>
+          <option value="600">Pork chop (10 min/side)</option>
+        </select>
+        <button onclick="startTimer()">▶ Start</button>
+        <button onclick="pauseTimer()">⏸ Pause</button>
+        <button onclick="resetTimer()">↺ Reset</button>
+      </div>
+      <div id="timer-display">00:00</div>
+      <div id="timer-label">Select a preset and press Start</div>
+    </div>
+  </section>
+
+  <!-- ═══ TIPS ═══ -->
+  <section id="tips">
+    <h2>💡 Master Pitmaster Tips</h2>
+    <ul class="tips-list" id="tips-list"></ul>
+  </section>
+
+  <!-- ═══ MARINADE BUILDER ═══ -->
+  <section id="marinade">
+    <h2>🧄 Marinade Builder</h2>
+    <div class="marinade-builder">
+      <h3>Select ingredients and build your marinade:</h3>
+      <div class="ingredient-grid" id="ingredient-grid"></div>
+      <div id="marinade-result">Pick ingredients above to get your custom marinade recipe.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Made with <span>🔥</span> and love &mdash; Foc i Gust &copy; 2026
+</footer>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────
+
+const cuts = [
+  { icon: "🥩", name: "Ribeye",       desc: "The king of steaks. Rich marbling delivers intense beefy flavour and a buttery texture. Best over high direct heat." },
+  { icon: "🍖", name: "T-Bone",       desc: "Two cuts in one: strip and tenderloin. Grill hot and fast; the bone adds extra flavour from the inside out." },
+  { icon: "🍗", name: "Chicken Thigh",desc: "Forgiving and flavourful. The fat keeps it juicy; skin crisps beautifully. Medium heat, bone-side down first." },
+  { icon: "🐑", name: "Lamb Chops",   desc: "Tender and aromatic. A quick sear on high heat seals the herbs. Pairs beautifully with rosemary and garlic." },
+  { icon: "🐷", name: "Pork Ribs",    desc: "Low and slow is the law. 3–2–1 method (smoke, wrap, glaze) transforms tough collagen into melt-off-the-bone joy." },
+  { icon: "🥩", name: "Flank Steak",  desc: "Lean and bold. Marinate for at least 2 hours, grill hot and fast, then slice thin against the grain." },
+  { icon: "🍗", name: "Whole Chicken",desc: "Spatchcock it for even cooking. Indirect heat, lid closed, let convection do the work." },
+  { icon: "🐷", name: "Pork Neck",    desc: "Often overlooked, incredibly juicy. Medium heat with a sweet glaze — one of the best cuts you can grill." },
+];
+
+const temps = [
+  { cls:"rare",        degree:"52°C", label:"Rare",        desc:"Bright red centre · Cool to the hand · Beefy and tender" },
+  { cls:"medium-rare", degree:"57°C", label:"Medium Rare", desc:"Warm red centre · Soft under pressure · Chef's gold standard" },
+  { cls:"medium",      degree:"63°C", label:"Medium",      desc:"Pink centre · Springs back · Great balance of juicy & cooked" },
+  { cls:"medium-well", degree:"68°C", label:"Medium Well",  desc:"Slightly pink · Firmer texture · Less juice but still tasty" },
+  { cls:"well-done",   degree:"74°C", label:"Well Done",    desc:"No pink · Fully cooked · Safe for all meat types" },
+];
+
+const techniques = [
+  { icon: "🔥", name: "Direct Grilling",   desc: "Food sits directly over the heat source. Perfect for thin cuts, burgers, and anything that cooks in under 20 minutes." },
+  { icon: "♨️", name: "Indirect Grilling", desc: "Heat on one side, food on the other. Lid closed. Acts like a convection oven — ideal for thick roasts and whole birds." },
+  { icon: "💨", name: "The Two-Zone Setup", desc: "Hot zone for searing, cool zone for finishing. The most versatile setup for restaurant-quality results at home." },
+  { icon: "🌲", name: "Smoking",           desc: "Low temperature (110–130°C) with wood smoke over hours. Brisket, ribs, and pork shoulder are transformed by this process." },
+  { icon: "🔄", name: "Reverse Sear",      desc: "Cook low and slow first, then blast with high heat to finish. Gives a perfect edge-to-edge doneness with a gorgeous crust." },
+  { icon: "🍋", name: "Wet Basting",       desc: "Mop sauces, butter, and marinades applied during cooking keep meat moist and build layers of caramelised flavour." },
+];
+
+const tips = [
+  { bold: "Rest your meat.", text: "After grilling, rest steaks for at least 5 minutes. This lets juices redistribute — cutting too early means dry meat." },
+  { bold: "Pat it dry before grilling.", text: "Surface moisture steams instead of sears. A paper-towel dry surface gives you the Maillard crust you're after." },
+  { bold: "Don't press the burger.", text: "That sizzle when you press is the sound of juice you'll never get back. Let the meat cook undisturbed." },
+  { bold: "Room temperature matters.", text: "Take meat out of the fridge 30–45 min before grilling. A cold centre means uneven cooking." },
+  { bold: "Season generously.", text: "Salt draws out moisture briefly, then it's reabsorbed. Season at least 40 minutes ahead, or right before grilling." },
+  { bold: "Keep the lid closed.", text: "Every time you lift the lid you lose heat and smoke. Trust the process; open only when necessary." },
+  { bold: "Clean grill, better flavour.", text: "Brush grates before and after each session. Old carbon build-up creates bitter, acrid notes." },
+  { bold: "Read the fire, not the clock.", text: "Recipes give times as guides. A thermometer and your senses are more reliable than a stopwatch." },
+];
+
+const ingredients = {
+  "Olive Oil":   "base fat that carries fat-soluble flavours deep into the meat",
+  "Garlic":      "adds pungent depth and caramelises beautifully on the grill",
+  "Lemon Juice": "acid that tenderises proteins and brightens the overall flavour",
+  "Soy Sauce":   "adds umami, salt, and a rich brown colour when grilled",
+  "Rosemary":    "piney, aromatic herb — a classic partner for lamb and beef",
+  "Paprika":     "sweet smokiness and a gorgeous red colour on the crust",
+  "Honey":       "sugars caramelise quickly — adds sweetness and a lacquered glaze",
+  "Dijon":       "emulsifier that binds the marinade and adds sharp complexity",
+  "Cumin":       "earthy warmth — essential for Latin and Middle-Eastern styles",
+  "Chilli":      "heat and colour; adds fire without masking other flavours",
+  "Thyme":       "floral and savoury — pairs brilliantly with pork and chicken",
+  "Balsamic":    "sweet-tart Italian vinegar that reduces to a sticky glaze",
+};
+
+const marindeCombos = {
+  default: "Select at least 3 ingredients to generate your marinade recipe.",
+  minimal: (sel) => `Mix together: ${sel.join(", ")}. Combine in a bowl, coat your meat well and marinate for at least 1 hour in the fridge.`,
+  recipe:  (sel, base) => {
+    const acid  = sel.find(s => ["Lemon Juice","Balsamic","Soy Sauce"].includes(s));
+    const fat   = sel.find(s => s === "Olive Oil");
+    const sweet = sel.find(s => ["Honey","Paprika"].includes(s));
+    const herbs = sel.filter(s => ["Rosemary","Thyme","Cumin","Chilli","Garlic","Dijon"].includes(s));
+    let r = `🧄 <strong>Custom Marinade</strong><br><br>`;
+    r += `<strong>Ingredients:</strong> ${sel.join(" · ")}<br><br>`;
+    r += `<strong>Method:</strong> `;
+    if (fat) r += `Whisk ${fat} as your base. `;
+    if (acid) r += `Add ${acid} for acidity and tenderising. `;
+    if (sweet) r += `Stir in ${sweet} for colour and caramelisation. `;
+    if (herbs.length) r += `Season with ${herbs.join(", ")} for depth. `;
+    r += `<br><br><strong>Time:</strong> Marinate for `;
+    if (sel.includes("Lemon Juice") || sel.includes("Balsamic")) r += "1–3 hours (acid-based — longer may over-tenderise).";
+    else r += "2–12 hours in the fridge.";
+    r += `<br><br><em>💡 Pat dry before grilling for a better sear.</em>`;
+    return r;
+  }
+};
+
+// ── RENDER ────────────────────────────────────────────────────────────
+
+function renderCuts() {
+  const g = document.getElementById("cuts-grid");
+  g.innerHTML = cuts.map(c => `
+    <div class="card">
+      <div class="icon">${c.icon}</div>
+      <h3>${c.name}</h3>
+      <p>${c.desc}</p>
+    </div>`).join("");
+}
+
+function renderTemps() {
+  const g = document.getElementById("temp-guide");
+  g.innerHTML = temps.map(t => `
+    <div class="temp-card ${t.cls}">
+      <span class="degree">${t.degree}</span>
+      <div class="label">${t.label}</div>
+      <div class="desc">${t.desc}</div>
+    </div>`).join("");
+}
+
+function renderTechniques() {
+  const g = document.getElementById("techniques-grid");
+  g.innerHTML = techniques.map(t => `
+    <div class="card">
+      <div class="icon">${t.icon}</div>
+      <h3>${t.name}</h3>
+      <p>${t.desc}</p>
+    </div>`).join("");
+}
+
+function renderTips() {
+  const l = document.getElementById("tips-list");
+  l.innerHTML = tips.map(t => `
+    <li><strong>${t.bold}</strong> ${t.text}</li>`).join("");
+}
+
+function renderIngredients() {
+  const g = document.getElementById("ingredient-grid");
+  g.innerHTML = Object.keys(ingredients).map(name => `
+    <button class="ingredient-btn" onclick="toggleIngredient(this,'${name}')">${name}</button>`
+  ).join("");
+}
+
+function toggleIngredient(btn, name) {
+  btn.classList.toggle("selected");
+  updateMarinade();
+}
+
+function updateMarinade() {
+  const selected = [...document.querySelectorAll(".ingredient-btn.selected")]
+    .map(b => b.textContent);
+  const result = document.getElementById("marinade-result");
+  if (selected.length < 3) {
+    result.innerHTML = marindeCombos.default;
+  } else {
+    result.innerHTML = marindeCombos.recipe(selected);
+  }
+}
+
+// ── FLAMES ────────────────────────────────────────────────────────────
+function renderFlames() {
+  const container = document.getElementById("flames");
+  for (let i = 0; i < 36; i++) {
+    const f = document.createElement("div");
+    f.className = "flame";
+    container.appendChild(f);
+  }
+}
+
+// ── TIMER ─────────────────────────────────────────────────────────────
+let timerInterval = null;
+let timerSeconds  = 0;
+let timerRunning  = false;
+
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${String(m).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;
+}
+
+function startTimer() {
+  const preset = document.getElementById("preset-select").value;
+  if (!timerRunning) {
+    if (preset && timerSeconds === 0) {
+      timerSeconds = parseInt(preset);
+      document.getElementById("timer-display").textContent = formatTime(timerSeconds);
+      const label = document.getElementById("preset-select").selectedOptions[0].text;
+      document.getElementById("timer-label").textContent = "⏱ " + label;
+    }
+    if (timerSeconds === 0) return;
+    timerRunning = true;
+    timerInterval = setInterval(() => {
+      if (timerSeconds <= 0) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        document.getElementById("timer-label").textContent = "🔔 Time to flip or remove!";
+        document.getElementById("timer-display").style.color = "#e63c1e";
+        return;
+      }
+      timerSeconds--;
+      document.getElementById("timer-display").textContent = formatTime(timerSeconds);
+    }, 1000);
+  }
+}
+
+function pauseTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning  = false;
+  timerSeconds  = 0;
+  document.getElementById("timer-display").textContent = "00:00";
+  document.getElementById("timer-display").style.color = "";
+  document.getElementById("timer-label").textContent   = "Select a preset and press Start";
+  document.getElementById("preset-select").value       = "";
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────
+renderFlames();
+renderCuts();
+renderTemps();
+renderTechniques();
+renderTips();
+renderIngredients();
+</script>
+</body>
+</html>
