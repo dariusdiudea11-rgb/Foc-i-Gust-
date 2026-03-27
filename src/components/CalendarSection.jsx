@@ -14,8 +14,8 @@ const events = [
 ]
 
 const badgeClass = {
-  confirmed: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-  pending:   'bg-amber-500/10 text-amber-400 border border-amber-500/20',
+  confirmed: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
+  pending:   'bg-[#c41e3a]/5 text-[#c41e3a] border border-[#c41e3a]/20',
 }
 const badgeLabel = {
   confirmed: 'Confirmat',
@@ -27,70 +27,51 @@ export default function CalendarSection() {
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section id="calendar" className="relative py-32 px-6 bg-[#080808]">
-
-      {/* Grid background */}
+    <section id="calendar" className="relative py-32 px-6 bg-[#faf3e8]">
       <div className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: `
-            repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 60px),
-            repeating-linear-gradient(90deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 60px)
+            repeating-linear-gradient(0deg, rgba(26,21,32,0.025) 0px, rgba(26,21,32,0.025) 1px, transparent 1px, transparent 60px),
+            repeating-linear-gradient(90deg, rgba(26,21,32,0.025) 0px, rgba(26,21,32,0.025) 1px, transparent 1px, transparent 60px)
           `,
-        }} />
+        }}/>
 
       <div className="relative max-w-5xl mx-auto">
-
-        {/* Header */}
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-5">
-            <div className="w-12 h-px bg-[#e8a838]" />
-            <span className="text-xs tracking-[0.3em] text-[#e8a838] uppercase">Unde ne găsești</span>
+            <div className="w-12 h-px bg-[#c41e3a]"/>
+            <span className="text-xs tracking-[0.3em] text-[#c41e3a] uppercase">Unde ne găsești</span>
           </div>
-          <h2 className="text-4xl md:text-5xl text-[#f0ece4]"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>
-            Sezon 2026
-          </h2>
+          <h2 className="text-4xl md:text-5xl text-[#1a1520]"
+            style={{ fontFamily: '"DM Serif Display", serif' }}>Sezon 2026</h2>
         </div>
 
-        {/* Grid of event cards */}
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {events.map((ev, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+            <motion.div key={i}
+              initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.45, delay: i * 0.07, ease: 'easeOut' }}
-              className="group bg-white/[0.02] backdrop-blur-sm border border-white/[0.05] rounded-2xl p-6 hover:border-[#e8a838]/30 hover:bg-white/[0.04] hover:scale-[1.02] transition-all duration-300 cursor-default"
-            >
-              {/* Top row: date + badge */}
+              className="group bg-white/80 border border-[#1a1520]/5 rounded-2xl p-6 hover:border-[#c41e3a]/20 hover:scale-[1.02] transition-all duration-300 cursor-default">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[#e8a838] text-xl"
-                  style={{ fontFamily: '"DM Serif Display", serif' }}>
-                  {ev.date}
-                </span>
+                <span className="text-[#c41e3a] text-xl"
+                  style={{ fontFamily: '"DM Serif Display", serif' }}>{ev.date}</span>
                 <span className={`text-xs px-3 py-1 rounded-full ${badgeClass[ev.status]}`}>
                   {badgeLabel[ev.status]}
                 </span>
               </div>
-
-              {/* Bottom row: name + location */}
-              <p className="text-[#f0ece4] font-semibold text-lg leading-snug mb-2">
-                {ev.name}
-              </p>
-              <div className="flex items-center gap-1.5 text-[#7a7368] text-sm">
-                <MapPin size={13} strokeWidth={1.5} />
+              <p className="text-[#1a1520] font-semibold text-lg leading-snug mb-2">{ev.name}</p>
+              <div className="flex items-center gap-1.5 text-[#8a7e6d] text-sm">
+                <MapPin size={13} strokeWidth={1.5}/>
                 {ev.location}
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Note */}
-        <p className="text-sm text-[#7a7368] text-center mt-12 leading-relaxed">
-          Calendarul se actualizează pe parcursul sezonului.
-          <br />Urmărește-ne pe Facebook pentru noutăți.
+        <p className="text-sm text-[#8a7e6d] text-center mt-12 leading-relaxed">
+          Calendarul se actualizează pe parcursul sezonului.<br/>
+          Urmărește-ne pe Facebook pentru noutăți.
         </p>
-
       </div>
     </section>
   )

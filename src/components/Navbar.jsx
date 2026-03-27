@@ -17,14 +17,10 @@ function scrollTo(id) {
 function FlameIcon() {
   return (
     <svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path
-        d="M7 0C7 0 11 4.5 11 8C11 8 9.5 7 8.5 6C8.5 6 10 9 8 11.5C8 11.5 8 9.5 6.5 8.5C6.5 8.5 7.5 12 5 14C5 14 5.5 11 4 10C4 10 2 13 3.5 16C3.5 16 1 14.5 1 11.5C1 8.5 3 7 3 7C3 7 2.5 10 4 10.5C4 10.5 3 6.5 7 0Z"
-        fill="#e8a838"
-      />
-      <path
-        d="M7 13C7 13 8.5 14.5 8.5 16C8.5 17.5 7.5 19 6.5 19.5C6.5 19.5 7 18 6 17C6 17 5 18.5 5.5 19.5C5.5 19.5 4 18.5 4 16.5C4 14.5 5.5 13.5 7 13Z"
-        fill="#f5c563"
-      />
+      <path d="M7 0C7 0 11 4.5 11 8C11 8 9.5 7 8.5 6C8.5 6 10 9 8 11.5C8 11.5 8 9.5 6.5 8.5C6.5 8.5 7.5 12 5 14C5 14 5.5 11 4 10.5C4 10.5 2 13 3.5 16C3.5 16 1 14.5 1 11.5C1 8.5 3 7 3 7C3 7 2.5 10 4 10.5C4 10.5 3 6.5 7 0Z"
+        fill="#c41e3a"/>
+      <path d="M7 13C7 13 8.5 14.5 8.5 16C8.5 17.5 7.5 19 6.5 19.5C6.5 19.5 7 18 6 17C6 17 5 18.5 5.5 19.5C5.5 19.5 4 18.5 4 16.5C4 14.5 5.5 13.5 7 13Z"
+        fill="#e63950"/>
     </svg>
   )
 }
@@ -41,79 +37,51 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? 'bg-black/80 backdrop-blur-xl' : 'bg-transparent'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between py-4">
-
-          {/* Logo */}
-          <button
-            onClick={() => scrollTo('hero')}
-            className="flex items-center gap-2 group"
-          >
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled ? 'bg-[#faf3e8]/95 backdrop-blur-xl' : 'bg-transparent'
+      }`}>
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <button onClick={() => scrollTo('hero')} className="flex items-center gap-2">
             <FlameIcon />
             <span className="text-2xl" style={{ fontFamily: '"DM Serif Display", serif' }}>
-              <span className="text-[#e8a838]">Foc </span>
-              <span className="text-[#f0ece4]">și Gust</span>
+              <span className="text-[#c41e3a]">Foc </span>
+              <span className="text-[#1a1520]">și Gust</span>
             </span>
           </button>
 
-          {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
             {links.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollTo(link.id)}
-                className="relative text-sm tracking-wider uppercase text-[#f0ece4]/60 hover:text-[#e8a838] transition-colors duration-300 group py-1"
-              >
+              <button key={link.id} onClick={() => scrollTo(link.id)}
+                className="relative text-sm tracking-wider uppercase text-[#1a1520]/60 hover:text-[#c41e3a] transition-colors duration-300 group py-1">
                 {link.label}
-                <span className="absolute bottom-0 left-0 h-px w-0 bg-[#e8a838] group-hover:w-full transition-all duration-300" />
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c41e3a] group-hover:w-full transition-all duration-300"/>
               </button>
             ))}
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden flex flex-col gap-[5px] p-2"
-            onClick={() => setMenuOpen(o => !o)}
-            aria-label="Meniu"
-          >
-            <span className={`block h-px w-6 bg-[#e8a838] transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
-            <span className={`block h-px w-6 bg-[#e8a838] transition-all duration-300 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
-            <span className={`block h-px w-6 bg-[#e8a838] transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+          <button className="md:hidden flex flex-col gap-[5px] p-2"
+            onClick={() => setMenuOpen(o => !o)} aria-label="Meniu">
+            <span className={`block h-px w-6 bg-[#1a1520] transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`}/>
+            <span className={`block h-px w-6 bg-[#1a1520] transition-all duration-300 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`}/>
+            <span className={`block h-px w-6 bg-[#1a1520] transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`}/>
           </button>
         </div>
-
-        {/* Bottom gradient line */}
-        <div
-          className="h-px w-full opacity-30"
-          style={{ background: 'linear-gradient(to right, transparent, #e8a838, transparent)' }}
-        />
+        <div className="h-px w-full opacity-30"
+          style={{ background: 'linear-gradient(to right, transparent, #c41e3a, transparent)' }}/>
       </nav>
 
-      {/* Mobile overlay */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center"
-          >
+            className="fixed inset-0 z-40 bg-[#1a1520]/95 backdrop-blur-2xl flex flex-col items-center justify-center">
             {links.map((link, i) => (
-              <motion.button
-                key={link.id}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 12 }}
-                transition={{ delay: i * 0.1, duration: 0.35 }}
+              <motion.button key={link.id}
+                initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 12 }} transition={{ delay: i * 0.1, duration: 0.35 }}
                 onClick={() => { scrollTo(link.id); setMenuOpen(false) }}
-                className="text-3xl text-[#f0ece4] hover:text-[#e8a838] transition-colors duration-300 py-4"
-                style={{ fontFamily: '"DM Serif Display", serif' }}
-              >
+                className="text-3xl text-[#faf3e8] hover:text-[#c41e3a] transition-colors duration-300 py-4"
+                style={{ fontFamily: '"DM Serif Display", serif' }}>
                 {link.label}
               </motion.button>
             ))}
