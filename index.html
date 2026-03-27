@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Foc i Gust — The Art of Grilling Meat</title>
+  <title>Foc și Gust — Arta Grătarului</title>
   <style>
     :root {
       --fire-red:    #e63c1e;
@@ -294,164 +294,164 @@
 <!-- ═══ HERO ═══ -->
 <header>
   <h1>Foc i Gust</h1>
-  <p>Fire and Flavour — The Art of Grilling Meat</p>
+  <p>Foc și Savoare — Arta Grătarului Perfect</p>
   <div class="flames" id="flames"></div>
 </header>
 
 <!-- ═══ NAV ═══ -->
 <nav>
-  <a href="#cuts">Cuts</a>
-  <a href="#temps">Temperatures</a>
-  <a href="#techniques">Techniques</a>
-  <a href="#timer">Timer</a>
-  <a href="#tips">Master Tips</a>
-  <a href="#marinade">Marinade Builder</a>
+  <a href="#cuts">Bucăți</a>
+  <a href="#temps">Temperaturi</a>
+  <a href="#techniques">Tehnici</a>
+  <a href="#timer">Cronometru</a>
+  <a href="#tips">Sfaturi</a>
+  <a href="#marinade">Marinadă</a>
 </nav>
 
 <main>
 
   <!-- ═══ MEAT CUTS ═══ -->
   <section id="cuts">
-    <h2>🥩 Know Your Cuts</h2>
+    <h2>🥩 Cunoaște Bucățile de Carne</h2>
     <div class="card-grid" id="cuts-grid"></div>
   </section>
 
   <!-- ═══ TEMPERATURES ═══ -->
   <section id="temps">
-    <h2>🌡️ Internal Temperatures</h2>
+    <h2>🌡️ Temperaturi Interne</h2>
     <p style="color:#c2a98a; margin-bottom:20px; font-size:0.9rem;">
-      Always use a meat thermometer — it's the single most important tool for perfect grilling.
+      Folosește întotdeauna un termometru pentru carne — este cel mai important instrument pentru un grătar perfect.
     </p>
     <div class="temp-guide" id="temp-guide"></div>
   </section>
 
   <!-- ═══ TECHNIQUES ═══ -->
   <section id="techniques">
-    <h2>🔥 Grilling Techniques</h2>
+    <h2>🔥 Tehnici de Grătar</h2>
     <div class="card-grid" id="techniques-grid"></div>
   </section>
 
   <!-- ═══ TIMER ═══ -->
   <section id="timer">
-    <h2>⏱️ Grill Timer</h2>
+    <h2>⏱️ Cronometru Grătar</h2>
     <div class="timer-box">
       <div class="timer-controls">
         <select id="preset-select">
-          <option value="">— Choose a preset —</option>
-          <option value="120">Thin burger (2 min/side)</option>
-          <option value="180">Thick burger (3 min/side)</option>
-          <option value="240">Ribeye 2cm (4 min/side)</option>
-          <option value="300">Ribeye 3cm (5 min/side)</option>
-          <option value="480">Chicken breast (8 min/side)</option>
-          <option value="600">Pork chop (10 min/side)</option>
+          <option value="">— Alege o presetare —</option>
+          <option value="120">Burger subțire (2 min/parte)</option>
+          <option value="180">Burger gros (3 min/parte)</option>
+          <option value="240">Ribeye 2 cm (4 min/parte)</option>
+          <option value="300">Ribeye 3 cm (5 min/parte)</option>
+          <option value="480">Piept de pui (8 min/parte)</option>
+          <option value="600">Cotlet de porc (10 min/parte)</option>
         </select>
         <button onclick="startTimer()">▶ Start</button>
-        <button onclick="pauseTimer()">⏸ Pause</button>
-        <button onclick="resetTimer()">↺ Reset</button>
+        <button onclick="pauseTimer()">⏸ Pauză</button>
+        <button onclick="resetTimer()">↺ Resetare</button>
       </div>
       <div id="timer-display">00:00</div>
-      <div id="timer-label">Select a preset and press Start</div>
+      <div id="timer-label">Alege o presetare și apasă Start</div>
     </div>
   </section>
 
   <!-- ═══ TIPS ═══ -->
   <section id="tips">
-    <h2>💡 Master Pitmaster Tips</h2>
+    <h2>💡 Sfaturi de la Maeștrii Grătarului</h2>
     <ul class="tips-list" id="tips-list"></ul>
   </section>
 
   <!-- ═══ MARINADE BUILDER ═══ -->
   <section id="marinade">
-    <h2>🧄 Marinade Builder</h2>
+    <h2>🧄 Constructor de Marinadă</h2>
     <div class="marinade-builder">
-      <h3>Select ingredients and build your marinade:</h3>
+      <h3>Selectează ingredientele și creează-ți marinada:</h3>
       <div class="ingredient-grid" id="ingredient-grid"></div>
-      <div id="marinade-result">Pick ingredients above to get your custom marinade recipe.</div>
+      <div id="marinade-result">Alege ingredientele de mai sus pentru a-ți crea propria rețetă de marinadă.</div>
     </div>
   </section>
 
 </main>
 
 <footer>
-  Made with <span>🔥</span> and love &mdash; Foc i Gust &copy; 2026
+  Făcut cu <span>🔥</span> și pasiune &mdash; Foc și Gust &copy; 2026
 </footer>
 
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────
 
 const cuts = [
-  { icon: "🥩", name: "Ribeye",       desc: "The king of steaks. Rich marbling delivers intense beefy flavour and a buttery texture. Best over high direct heat." },
-  { icon: "🍖", name: "T-Bone",       desc: "Two cuts in one: strip and tenderloin. Grill hot and fast; the bone adds extra flavour from the inside out." },
-  { icon: "🍗", name: "Chicken Thigh",desc: "Forgiving and flavourful. The fat keeps it juicy; skin crisps beautifully. Medium heat, bone-side down first." },
-  { icon: "🐑", name: "Lamb Chops",   desc: "Tender and aromatic. A quick sear on high heat seals the herbs. Pairs beautifully with rosemary and garlic." },
-  { icon: "🐷", name: "Pork Ribs",    desc: "Low and slow is the law. 3–2–1 method (smoke, wrap, glaze) transforms tough collagen into melt-off-the-bone joy." },
-  { icon: "🥩", name: "Flank Steak",  desc: "Lean and bold. Marinate for at least 2 hours, grill hot and fast, then slice thin against the grain." },
-  { icon: "🍗", name: "Whole Chicken",desc: "Spatchcock it for even cooking. Indirect heat, lid closed, let convection do the work." },
-  { icon: "🐷", name: "Pork Neck",    desc: "Often overlooked, incredibly juicy. Medium heat with a sweet glaze — one of the best cuts you can grill." },
+  { icon: "🥩", name: "Ribeye",          desc: "Regele fripturilor. Marmorarea bogată oferă o savoare intensă și o textură catifelată. Cel mai bun la foc direct și puternic." },
+  { icon: "🍖", name: "T-Bone",          desc: "Două bucăți într-una: antricot și mușchi. Se frige repede la foc mare; osul adaugă savoare suplimentară din interior." },
+  { icon: "🍗", name: "Pulpă de Pui",    desc: "Iertătoare și gustoasă. Grăsimea o menține suculentă, iar pielea se rumenește frumos. Foc mediu, cu osul în jos mai întâi." },
+  { icon: "🐑", name: "Cotlet de Miel",  desc: "Fraged și aromat. O rumenire rapidă la foc mare fixează ierburile aromatice. Se potrivește perfect cu rozmarin și usturoi." },
+  { icon: "🐷", name: "Coaste de Porc",  desc: "Focul mic și răbdarea sunt lege. Metoda 3–2–1 (fum, împachetare, glazurare) transformă colagenul dur în carne care se desprinde de pe os." },
+  { icon: "🥩", name: "Flank Steak",     desc: "Slab și gustos. Marinează cel puțin 2 ore, frige repede la foc mare, apoi taie subțire perpendicular pe fibre." },
+  { icon: "🍗", name: "Pui Întreg",      desc: "Aplatizează-l pentru o coacere uniformă. Foc indirect, capac închis — lasă convecția să lucreze." },
+  { icon: "🐷", name: "Ceafă de Porc",   desc: "Adesea ignorată, incredibil de suculentă. Foc mediu cu o glazură dulce — una dintre cele mai bune bucăți de pus pe grătar." },
 ];
 
 const temps = [
-  { cls:"rare",        degree:"52°C", label:"Rare",        desc:"Bright red centre · Cool to the hand · Beefy and tender" },
-  { cls:"medium-rare", degree:"57°C", label:"Medium Rare", desc:"Warm red centre · Soft under pressure · Chef's gold standard" },
-  { cls:"medium",      degree:"63°C", label:"Medium",      desc:"Pink centre · Springs back · Great balance of juicy & cooked" },
-  { cls:"medium-well", degree:"68°C", label:"Medium Well",  desc:"Slightly pink · Firmer texture · Less juice but still tasty" },
-  { cls:"well-done",   degree:"74°C", label:"Well Done",    desc:"No pink · Fully cooked · Safe for all meat types" },
+  { cls:"rare",        degree:"52°C", label:"În Sânge",         desc:"Centru roșu aprins · Rece la atingere · Gustos și fraged" },
+  { cls:"medium-rare", degree:"57°C", label:"Puțin în Sânge",   desc:"Centru roșu cald · Moale la presiune · Standardul bucătarilor" },
+  { cls:"medium",      degree:"63°C", label:"Mediu",            desc:"Centru roz · Elastic · Echilibru perfect între suculent și gătit" },
+  { cls:"medium-well", degree:"68°C", label:"Aproape Bine Făcut", desc:"Ușor roz · Textură mai fermă · Mai puțin suculent, dar gustos" },
+  { cls:"well-done",   degree:"74°C", label:"Bine Făcut",       desc:"Fără roz · Complet gătit · Sigur pentru toate tipurile de carne" },
 ];
 
 const techniques = [
-  { icon: "🔥", name: "Direct Grilling",   desc: "Food sits directly over the heat source. Perfect for thin cuts, burgers, and anything that cooks in under 20 minutes." },
-  { icon: "♨️", name: "Indirect Grilling", desc: "Heat on one side, food on the other. Lid closed. Acts like a convection oven — ideal for thick roasts and whole birds." },
-  { icon: "💨", name: "The Two-Zone Setup", desc: "Hot zone for searing, cool zone for finishing. The most versatile setup for restaurant-quality results at home." },
-  { icon: "🌲", name: "Smoking",           desc: "Low temperature (110–130°C) with wood smoke over hours. Brisket, ribs, and pork shoulder are transformed by this process." },
-  { icon: "🔄", name: "Reverse Sear",      desc: "Cook low and slow first, then blast with high heat to finish. Gives a perfect edge-to-edge doneness with a gorgeous crust." },
-  { icon: "🍋", name: "Wet Basting",       desc: "Mop sauces, butter, and marinades applied during cooking keep meat moist and build layers of caramelised flavour." },
+  { icon: "🔥", name: "Grătar Direct",        desc: "Carnea stă direct deasupra sursei de căldură. Perfect pentru bucăți subțiri, burgeri și orice se gătește în mai puțin de 20 de minute." },
+  { icon: "♨️", name: "Grătar Indirect",      desc: "Căldura pe o parte, carnea pe cealaltă. Capac închis. Funcționează ca un cuptor cu convecție — ideal pentru fripturi groase și păsări întregi." },
+  { icon: "💨", name: "Configurația cu Două Zone", desc: "Zonă fierbinte pentru rumenire, zonă rece pentru finisare. Cea mai versatilă configurație pentru rezultate de restaurant acasă." },
+  { icon: "🌲", name: "Afumare",              desc: "Temperatură scăzută (110–130°C) cu fum de lemn timp de ore întregi. Pieptul de vită, coastele și ceafa de porc sunt transformate prin acest procedeu." },
+  { icon: "🔄", name: "Rumenire Inversă",     desc: "Gătește la foc mic mai întâi, apoi finisează la foc mare. Oferă o gătire uniformă de la margine la margine și o crustă spectaculoasă." },
+  { icon: "🍋", name: "Ungere în Timpul Gătirii", desc: "Sosuri, unt și marinade aplicate în timpul gătitului mențin carnea umedă și construiesc straturi de savoare caramelizată." },
 ];
 
 const tips = [
-  { bold: "Rest your meat.", text: "After grilling, rest steaks for at least 5 minutes. This lets juices redistribute — cutting too early means dry meat." },
-  { bold: "Pat it dry before grilling.", text: "Surface moisture steams instead of sears. A paper-towel dry surface gives you the Maillard crust you're after." },
-  { bold: "Don't press the burger.", text: "That sizzle when you press is the sound of juice you'll never get back. Let the meat cook undisturbed." },
-  { bold: "Room temperature matters.", text: "Take meat out of the fridge 30–45 min before grilling. A cold centre means uneven cooking." },
-  { bold: "Season generously.", text: "Salt draws out moisture briefly, then it's reabsorbed. Season at least 40 minutes ahead, or right before grilling." },
-  { bold: "Keep the lid closed.", text: "Every time you lift the lid you lose heat and smoke. Trust the process; open only when necessary." },
-  { bold: "Clean grill, better flavour.", text: "Brush grates before and after each session. Old carbon build-up creates bitter, acrid notes." },
-  { bold: "Read the fire, not the clock.", text: "Recipes give times as guides. A thermometer and your senses are more reliable than a stopwatch." },
+  { bold: "Lasă carnea să se odihnească.", text: "După grătar, lasă fripturile să se odihnească cel puțin 5 minute. Astfel, sucurile se redistribuie — tăind prea devreme obții carne uscată." },
+  { bold: "Usucă suprafața înainte de grătar.", text: "Umiditatea de la suprafață produce aburi în loc să rumenească. O suprafață uscată cu un prosop de bucătărie îți oferă crusta Maillard dorită." },
+  { bold: "Nu apăsa burgerul.", text: "Sfârâitul când apeși este sunetul sucurilor pe care nu le vei mai recupera niciodată. Lasă carnea să se gătească fără să o deranjezi." },
+  { bold: "Temperatura camerei contează.", text: "Scoate carnea din frigider cu 30–45 de minute înainte de grătar. Un centru rece înseamnă o gătire neuniformă." },
+  { bold: "Condimentează generos.", text: "Sarea extrage umiditatea pentru scurt timp, după care este reabsorbită. Condimentează cu cel puțin 40 de minute înainte sau chiar înainte de a pune pe grătar." },
+  { bold: "Ține capacul închis.", text: "De fiecare dată când ridici capacul, pierzi căldură și fum. Ai încredere în proces; deschide doar când este necesar." },
+  { bold: "Grătar curat, savoare mai bună.", text: "Curăță grătarul înainte și după fiecare sesiune. Depunerile vechi de carbon creează note amare și acide." },
+  { bold: "Citește focul, nu ceasul.", text: "Rețetele oferă timpi orientativi. Un termometru și simțurile tale sunt mai de încredere decât un cronometru." },
 ];
 
 const ingredients = {
-  "Olive Oil":   "base fat that carries fat-soluble flavours deep into the meat",
-  "Garlic":      "adds pungent depth and caramelises beautifully on the grill",
-  "Lemon Juice": "acid that tenderises proteins and brightens the overall flavour",
-  "Soy Sauce":   "adds umami, salt, and a rich brown colour when grilled",
-  "Rosemary":    "piney, aromatic herb — a classic partner for lamb and beef",
-  "Paprika":     "sweet smokiness and a gorgeous red colour on the crust",
-  "Honey":       "sugars caramelise quickly — adds sweetness and a lacquered glaze",
-  "Dijon":       "emulsifier that binds the marinade and adds sharp complexity",
-  "Cumin":       "earthy warmth — essential for Latin and Middle-Eastern styles",
-  "Chilli":      "heat and colour; adds fire without masking other flavours",
-  "Thyme":       "floral and savoury — pairs brilliantly with pork and chicken",
-  "Balsamic":    "sweet-tart Italian vinegar that reduces to a sticky glaze",
+  "Ulei de Măsline": "grăsimea de bază care transportă aromele liposolubile adânc în carne",
+  "Usturoi":         "adaugă profunzime pungentă și se caramelizează frumos pe grătar",
+  "Suc de Lămâie":   "acid care frăgezește proteinele și luminează savoarea de ansamblu",
+  "Sos de Soia":     "adaugă umami, sare și o culoare maro bogată la gătire",
+  "Rozmarin":        "iarbă aromatică cu notă rășinoasă — partener clasic pentru miel și vită",
+  "Boia de Ardei":   "afumare dulce și o culoare roșie superbă pe crustă",
+  "Miere":           "zaharurile se caramelizează rapid — adaugă dulceață și o glazură lucioasă",
+  "Muștar Dijon":    "emulgator care leagă marinada și adaugă complexitate picantă",
+  "Chimen":          "căldură pământoasă — esențial pentru stilurile latino și orientale",
+  "Ardei Iute":      "căldură și culoare; adaugă foc fără a masca celelalte arome",
+  "Cimbru":          "floral și savuros — se potrivește excelent cu porc și pui",
+  "Oțet Balsamic":   "oțet italian dulce-acrișor care se reduce la o glazură lipicioasă",
 };
 
 const marindeCombos = {
-  default: "Select at least 3 ingredients to generate your marinade recipe.",
-  minimal: (sel) => `Mix together: ${sel.join(", ")}. Combine in a bowl, coat your meat well and marinate for at least 1 hour in the fridge.`,
+  default: "Selectează cel puțin 3 ingrediente pentru a genera rețeta de marinadă.",
+  minimal: (sel) => `Amestecă: ${sel.join(", ")}. Combină într-un bol, acoperă bine carnea și marinează cel puțin 1 oră la frigider.`,
   recipe:  (sel, base) => {
-    const acid  = sel.find(s => ["Lemon Juice","Balsamic","Soy Sauce"].includes(s));
-    const fat   = sel.find(s => s === "Olive Oil");
-    const sweet = sel.find(s => ["Honey","Paprika"].includes(s));
-    const herbs = sel.filter(s => ["Rosemary","Thyme","Cumin","Chilli","Garlic","Dijon"].includes(s));
-    let r = `🧄 <strong>Custom Marinade</strong><br><br>`;
-    r += `<strong>Ingredients:</strong> ${sel.join(" · ")}<br><br>`;
-    r += `<strong>Method:</strong> `;
-    if (fat) r += `Whisk ${fat} as your base. `;
-    if (acid) r += `Add ${acid} for acidity and tenderising. `;
-    if (sweet) r += `Stir in ${sweet} for colour and caramelisation. `;
-    if (herbs.length) r += `Season with ${herbs.join(", ")} for depth. `;
-    r += `<br><br><strong>Time:</strong> Marinate for `;
-    if (sel.includes("Lemon Juice") || sel.includes("Balsamic")) r += "1–3 hours (acid-based — longer may over-tenderise).";
-    else r += "2–12 hours in the fridge.";
-    r += `<br><br><em>💡 Pat dry before grilling for a better sear.</em>`;
+    const acid  = sel.find(s => ["Suc de Lămâie","Oțet Balsamic","Sos de Soia"].includes(s));
+    const fat   = sel.find(s => s === "Ulei de Măsline");
+    const sweet = sel.find(s => ["Miere","Boia de Ardei"].includes(s));
+    const herbs = sel.filter(s => ["Rozmarin","Cimbru","Chimen","Ardei Iute","Usturoi","Muștar Dijon"].includes(s));
+    let r = `🧄 <strong>Marinada Ta Personalizată</strong><br><br>`;
+    r += `<strong>Ingrediente:</strong> ${sel.join(" · ")}<br><br>`;
+    r += `<strong>Metodă:</strong> `;
+    if (fat) r += `Bate ${fat} ca bază. `;
+    if (acid) r += `Adaugă ${acid} pentru aciditate și frăgezire. `;
+    if (sweet) r += `Incorporează ${sweet} pentru culoare și caramelizare. `;
+    if (herbs.length) r += `Condimentează cu ${herbs.join(", ")} pentru profunzime. `;
+    r += `<br><br><strong>Timp:</strong> Marinează `;
+    if (sel.includes("Suc de Lămâie") || sel.includes("Oțet Balsamic")) r += "1–3 ore (marinadă acidă — mai mult poate suprafrăgezi carnea).";
+    else r += "2–12 ore la frigider.";
+    r += `<br><br><em>💡 Usucă suprafața înainte de grătar pentru o rumenire mai bună.</em>`;
     return r;
   }
 };
@@ -553,7 +553,7 @@ function startTimer() {
       if (timerSeconds <= 0) {
         clearInterval(timerInterval);
         timerRunning = false;
-        document.getElementById("timer-label").textContent = "🔔 Time to flip or remove!";
+        document.getElementById("timer-label").textContent = "🔔 E timpul să întorci sau să scoți carnea!";
         document.getElementById("timer-display").style.color = "#e63c1e";
         return;
       }
@@ -574,7 +574,7 @@ function resetTimer() {
   timerSeconds  = 0;
   document.getElementById("timer-display").textContent = "00:00";
   document.getElementById("timer-display").style.color = "";
-  document.getElementById("timer-label").textContent   = "Select a preset and press Start";
+  document.getElementById("timer-label").textContent   = "Alege o presetare și apasă Start";
   document.getElementById("preset-select").value       = "";
 }
 
