@@ -2,6 +2,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import AboutSection from './components/AboutSection'
 import MenuSection from './components/MenuSection'
+import EquipmentSection from './components/EquipmentSection'
 
 function PlaceholderSection({ id, label }) {
   return (
@@ -26,7 +27,7 @@ export default function App() {
       <Hero />
       <AboutSection />
       <MenuSection />
-      <PlaceholderSection id="echipament"  label="Echipament" />
+      <EquipmentSection />
       <PlaceholderSection id="calendar"    label="Calendar" />
       <PlaceholderSection id="catering"    label="Catering" />
       <PlaceholderSection id="contact"     label="Contact" />
