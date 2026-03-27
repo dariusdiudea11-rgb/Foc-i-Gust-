@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
 
 const links = [
-  { label: 'Acasă',      id: 'hero' },
   { label: 'Meniu',      id: 'meniu' },
   { label: 'Echipament', id: 'echipament' },
   { label: 'Calendar',   id: 'calendar' },
@@ -16,12 +14,27 @@ function scrollTo(id) {
   if (el) el.scrollIntoView({ behavior: 'smooth' })
 }
 
+function FlameIcon() {
+  return (
+    <svg width="14" height="20" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path
+        d="M7 0C7 0 11 4.5 11 8C11 8 9.5 7 8.5 6C8.5 6 10 9 8 11.5C8 11.5 8 9.5 6.5 8.5C6.5 8.5 7.5 12 5 14C5 14 5.5 11 4 10C4 10 2 13 3.5 16C3.5 16 1 14.5 1 11.5C1 8.5 3 7 3 7C3 7 2.5 10 4 10.5C4 10.5 3 6.5 7 0Z"
+        fill="#e8a838"
+      />
+      <path
+        d="M7 13C7 13 8.5 14.5 8.5 16C8.5 17.5 7.5 19 6.5 19.5C6.5 19.5 7 18 6 17C6 17 5 18.5 5.5 19.5C5.5 19.5 4 18.5 4 16.5C4 14.5 5.5 13.5 7 13Z"
+        fill="#f5c563"
+      />
+    </svg>
+  )
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50)
+    const onScroll = () => setScrolled(window.scrollY > 80)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -29,45 +42,58 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-[#0d0d0d]/95 backdrop-blur-sm border-b border-[#1a1a1a]' : 'bg-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled ? 'bg-black/80 backdrop-blur-xl' : 'bg-transparent'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between py-4">
+
           {/* Logo */}
           <button
             onClick={() => scrollTo('hero')}
-            className="font-display text-xl text-[#e8a838] tracking-wide hover:text-[#f5c563] transition-colors"
-            style={{ fontFamily: '"DM Serif Display", serif' }}
+            className="flex items-center gap-2 group"
           >
-            Foc și Gust
+            <FlameIcon />
+            <span className="text-2xl" style={{ fontFamily: '"DM Serif Display", serif' }}>
+              <span className="text-[#e8a838]">Foc </span>
+              <span className="text-[#f0ece4]">și Gust</span>
+            </span>
           </button>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-8">
             {links.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
-                className="px-4 py-2 text-sm text-[#7a7368] hover:text-[#f0ece4] transition-colors rounded-md hover:bg-white/5"
+                className="relative text-sm tracking-wider uppercase text-[#f0ece4]/60 hover:text-[#e8a838] transition-colors duration-300 group py-1"
               >
                 {link.label}
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-[#e8a838] group-hover:w-full transition-all duration-300" />
               </button>
             ))}
           </div>
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden text-[#e8a838] p-2"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Deschide meniu"
+            className="md:hidden flex flex-col gap-[5px] p-2"
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label="Meniu"
           >
-            <Menu size={22} />
+            <span className={`block h-px w-6 bg-[#e8a838] transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+            <span className={`block h-px w-6 bg-[#e8a838] transition-all duration-300 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
+            <span className={`block h-px w-6 bg-[#e8a838] transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
           </button>
         </div>
+
+        {/* Bottom gradient line */}
+        <div
+          className="h-px w-full opacity-30"
+          style={{ background: 'linear-gradient(to right, transparent, #e8a838, transparent)' }}
+        />
       </nav>
 
-      {/* Mobile full-screen overlay */}
+      {/* Mobile overlay */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -75,31 +101,22 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] bg-[#0d0d0d]/98 flex flex-col items-center justify-center"
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center"
           >
-            <button
-              className="absolute top-5 right-6 text-[#7a7368] hover:text-[#e8a838] transition-colors"
-              onClick={() => setMenuOpen(false)}
-              aria-label="Închide meniu"
-            >
-              <X size={28} />
-            </button>
-
-            <div className="flex flex-col items-center gap-8">
-              {links.map((link, i) => (
-                <motion.button
-                  key={link.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.06 }}
-                  onClick={() => { scrollTo(link.id); setMenuOpen(false) }}
-                  className="text-2xl text-[#f0ece4] hover:text-[#e8a838] transition-colors"
-                  style={{ fontFamily: '"DM Serif Display", serif' }}
-                >
-                  {link.label}
-                </motion.button>
-              ))}
-            </div>
+            {links.map((link, i) => (
+              <motion.button
+                key={link.id}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 12 }}
+                transition={{ delay: i * 0.1, duration: 0.35 }}
+                onClick={() => { scrollTo(link.id); setMenuOpen(false) }}
+                className="text-3xl text-[#f0ece4] hover:text-[#e8a838] transition-colors duration-300 py-4"
+                style={{ fontFamily: '"DM Serif Display", serif' }}
+              >
+                {link.label}
+              </motion.button>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
