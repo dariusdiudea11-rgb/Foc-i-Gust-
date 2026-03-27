@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import AboutSection from './components/AboutSection'
 
 function PlaceholderSection({ id, label }) {
   return (
@@ -22,6 +23,7 @@ export default function App() {
     <div className="bg-[#0d0d0d] min-h-screen">
       <Navbar />
       <Hero />
+      <AboutSection />
       <PlaceholderSection id="meniu"       label="Meniu" />
       <PlaceholderSection id="echipament"  label="Echipament" />
       <PlaceholderSection id="calendar"    label="Calendar" />
