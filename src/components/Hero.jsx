@@ -56,6 +56,31 @@ export default function Hero() {
       className="relative min-h-screen overflow-hidden flex items-center justify-center bg-[#faf3e8]"
       style={{ perspective: '1000px' }}>
 
+      {/* Floating gradient mesh */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute w-[500px] h-[500px] rounded-full"
+          style={{
+            top: '20%', left: '10%',
+            background: 'rgba(196,30,58,0.06)',
+            filter: 'blur(120px)',
+            animation: 'float1 20s ease-in-out infinite',
+          }}/>
+        <div className="absolute w-[400px] h-[400px] rounded-full"
+          style={{
+            bottom: '20%', right: '15%',
+            background: 'rgba(251,207,232,0.04)',
+            filter: 'blur(120px)',
+            animation: 'float2 25s ease-in-out infinite',
+          }}/>
+        <div className="absolute w-[300px] h-[300px] rounded-full"
+          style={{
+            top: '50%', left: '50%',
+            background: 'rgba(254,243,199,0.03)',
+            filter: 'blur(100px)',
+            animation: 'float3 15s ease-in-out infinite',
+          }}/>
+      </div>
+
       {/* Radial warm glow */}
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse at center, rgba(196,30,58,0.05) 0%, transparent 65%)' }}/>

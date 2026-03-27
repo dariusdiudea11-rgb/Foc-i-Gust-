@@ -8,19 +8,23 @@ import CateringSection from './components/CateringSection'
 import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
 import OasOrnament from './components/OasOrnament'
+import WatermarkBand from './components/WatermarkBand'
+import RedBand from './components/RedBand'
+import CustomCursor from './components/CustomCursor'
 
 export default function App() {
   return (
     <div className="bg-[#faf3e8] min-h-screen">
+      <CustomCursor />
       <Navbar />
       <Hero />
       <OasOrnament variant="light" />
       <AboutSection />
-      <OasOrnament variant="dark" />
+      <WatermarkBand variant="dark" text="FOCUL REAL DĂ GUSTUL REAL" />
       <MenuSection />
-      <OasOrnament variant="light" />
+      <RedBand />
       <EquipmentSection />
-      <OasOrnament variant="dark" />
+      <WatermarkBand variant="dark" text="TRADIȚIA CARE ARDE GUSTUL CARE RĂMÂNE" />
       <CalendarSection />
       <OasOrnament variant="light" />
       <CateringSection />

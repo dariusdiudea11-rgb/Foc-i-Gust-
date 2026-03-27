@@ -28,14 +28,21 @@ function GratarCard({ item, index, inView }) {
       initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
       className="group bg-white/80 border border-[#1a1520]/5 rounded-2xl overflow-hidden hover:border-[#c41e3a]/20 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(26,21,32,0.08)] transition-all duration-400">
-      <div className="aspect-video flex items-center justify-center bg-[#1a1520]/5">
-        <p className="text-[#8a7e6d] text-xs text-center px-4">{item.img}</p>
+      {/* Image with hover zoom + overlay */}
+      <div className="aspect-video overflow-hidden relative bg-[#1a1520]/5">
+        <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-110">
+          <p className="text-[#8a7e6d] text-xs text-center px-4">{item.img}</p>
+        </div>
+        {/* Gradient overlay — fades on hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"/>
       </div>
       <div className="p-6">
         <div className="flex items-start justify-between gap-4">
           <span className="text-[#1a1520] font-semibold text-lg leading-snug">{item.name}</span>
-          <span className="text-[#c41e3a] text-2xl shrink-0"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>{item.price} lei</span>
+          <span
+            className="text-[#c41e3a] text-2xl shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+            style={{ fontFamily: '"DM Serif Display", serif' }}
+          >{item.price} lei</span>
         </div>
         <p className="text-[#1a1520]/40 text-sm mt-1">{item.desc}</p>
       </div>

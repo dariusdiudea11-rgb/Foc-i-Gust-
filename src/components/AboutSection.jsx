@@ -1,18 +1,39 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import useCountUp from '../hooks/useCountUp'
 
-const stats = [
-  { number: '150+', label: 'Porții pe zi' },
-  { number: '100%', label: 'Cărbuni naturali' },
-  { number: '0%',   label: 'Conservanți' },
+const statsDef = [
+  { target: 150, suffix: '+', label: 'Porții pe zi' },
+  { target: 100, suffix: '%', label: 'Cărbuni naturali' },
+  { target: 0,   suffix: '%', label: 'Conservanți' },
 ]
 
+function StatItem({ target, suffix, label }) {
+  const { ref, count } = useCountUp(target, 2000)
+  return (
+    <div ref={ref} className="flex flex-col gap-1">
+      <span
+        className="text-4xl md:text-5xl text-[#c41e3a]"
+        style={{ fontFamily: '"DM Serif Display", serif' }}
+      >
+        {count}{suffix}
+      </span>
+      <span className="text-xs text-[#faf3e8]/40 uppercase tracking-wider">{label}</span>
+    </div>
+  )
+}
+
 export default function AboutSection() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const sectionRef = useRef(null)
+  const inViewRef  = useRef(null)
+  const imgRef     = useRef(null)
+  const inView = useInView(inViewRef, { once: true, margin: '-80px' })
+
+  const { scrollYProgress } = useScroll({ target: imgRef, offset: ['start end', 'end start'] })
+  const imgY = useTransform(scrollYProgress, [0, 1], [-30, 30])
 
   return (
-    <section id="despre" className="relative py-32 px-6 overflow-hidden bg-[#1a1520]">
+    <section id="despre" ref={sectionRef} className="relative py-32 px-6 overflow-hidden bg-[#1a1520]">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[600px] h-[600px]"
           style={{ background: 'radial-gradient(ellipse at top right, rgba(196,30,58,0.05) 0%, transparent 65%)' }}/>
@@ -25,8 +46,9 @@ export default function AboutSection() {
           }}/>
       </div>
 
-      <div ref={ref} className="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
+      <div ref={inViewRef} className="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
 
+        {/* Text column */}
         <motion.div className="md:col-span-7 flex flex-col gap-7"
           initial={{ opacity: 0, x: -40 }} animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7, ease: 'easeOut' }}>
@@ -48,25 +70,24 @@ export default function AboutSection() {
             cârnăciori pe care nu le găsești în comerț. Focul real dă gustul real.
           </p>
           <div className="flex gap-8 md:gap-12 mt-4 pt-10 border-t border-white/5">
-            {stats.map((s) => (
-              <div key={s.label} className="flex flex-col gap-1">
-                <span className="text-3xl text-[#c41e3a]"
-                  style={{ fontFamily: '"DM Serif Display", serif' }}>{s.number}</span>
-                <span className="text-xs text-[#faf3e8]/40 uppercase tracking-wider">{s.label}</span>
-              </div>
+            {statsDef.map((s) => (
+              <StatItem key={s.label} {...s} />
             ))}
           </div>
         </motion.div>
 
+        {/* Image column */}
         <motion.div className="md:col-span-5 md:mt-16"
           initial={{ opacity: 0, x: 40 }} animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}>
           <div className="relative">
             <div className="absolute inset-0 border-2 border-[#c41e3a]/20 rounded-2xl translate-x-4 translate-y-4 pointer-events-none"/>
-            <div className="relative aspect-[3/4] bg-[#231e2a] rounded-2xl overflow-hidden flex items-center justify-center">
-              <p className="text-[#7a7080] text-xs text-center px-6 leading-relaxed">
-                [POZĂ: Noi doi la stand]
-              </p>
+            <div ref={imgRef} className="relative aspect-[3/4] bg-[#231e2a] rounded-2xl overflow-hidden flex items-center justify-center">
+              <motion.div style={{ y: imgY }} className="absolute inset-0 flex items-center justify-center">
+                <p className="text-[#7a7080] text-xs text-center px-6 leading-relaxed">
+                  [POZĂ: Noi doi la stand]
+                </p>
+              </motion.div>
             </div>
             <div className="mt-3 px-4 py-2 bg-[#c41e3a]/10 rounded-lg inline-flex">
               <span className="text-xs text-[#c41e3a] tracking-wider">Est. 2026 · Negrești-Oaș</span>

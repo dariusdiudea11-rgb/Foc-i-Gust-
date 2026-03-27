@@ -19,10 +19,17 @@
 }
 
 body {
-  background-color: #0d0d0d;
-  color: #f0ece4;
+  background-color: #faf3e8;
+  color: #1a1520;
   font-family: "DM Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Hide default cursor on desktop */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
 }
 
 /* Grain texture overlay */
@@ -31,7 +38,36 @@ body::after {
   position: fixed;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.025;
+  opacity: 0.018;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 9998;
+}
+
+/* Floating mesh keyframes for Hero */
+@keyframes float1 {
+  0%   { transform: translate(0px, 0px); }
+  50%  { transform: translate(30px, -20px); }
+  100% { transform: translate(0px, 0px); }
+}
+@keyframes float2 {
+  0%   { transform: translate(0px, 0px); }
+  50%  { transform: translate(-25px, 15px); }
+  100% { transform: translate(0px, 0px); }
+}
+@keyframes float3 {
+  0%   { transform: translate(0px, 0px); }
+  50%  { transform: translate(20px, 25px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+/* Marquee animation for WatermarkBand */
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+  display: flex;
+  width: max-content;
 }

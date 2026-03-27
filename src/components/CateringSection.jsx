@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
 
 const fieldClass =
@@ -15,8 +15,12 @@ const bullets = [
 
 export default function CateringSection() {
   const [form, setForm] = useState(empty)
-  const ref = useRef(null)
+  const ref    = useRef(null)
+  const imgRef = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
+
+  const { scrollYProgress } = useScroll({ target: imgRef, offset: ['start end', 'end start'] })
+  const imgY = useTransform(scrollYProgress, [0, 1], [-30, 30])
 
   const handle = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
   const submit = (e) => { e.preventDefault(); alert('Mulțumim! Te contactăm în maxim 24h.'); setForm(empty) }
@@ -52,10 +56,12 @@ export default function CateringSection() {
               </li>
             ))}
           </ul>
-          <div className="aspect-[4/3] bg-[#231e2a] rounded-2xl flex items-center justify-center border border-white/[0.05] mt-2">
-            <p className="text-[#7a7080] text-xs text-center px-6 leading-relaxed">
-              [POZĂ: Setup catering la eveniment privat]
-            </p>
+          <div ref={imgRef} className="aspect-[4/3] bg-[#231e2a] rounded-2xl overflow-hidden border border-white/[0.05] mt-2 relative">
+            <motion.div style={{ y: imgY }} className="absolute inset-0 flex items-center justify-center">
+              <p className="text-[#7a7080] text-xs text-center px-6 leading-relaxed">
+                [POZĂ: Setup catering la eveniment privat]
+              </p>
+            </motion.div>
           </div>
         </motion.div>
 
