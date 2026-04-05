@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import Carousel3D from './components/Carousel3D'
 import AboutSection from './components/AboutSection'
 import MenuSection from './components/MenuSection'
 import EquipmentSection from './components/EquipmentSection'
@@ -18,6 +19,9 @@ export default function App() {
       <CustomCursor />
       <Navbar />
       <Hero />
+      <section id="carousel-3d">
+        <Carousel3D />
+      </section>
       <OasOrnament variant="light" />
       <AboutSection />
       <WatermarkBand variant="dark" text="FOCUL REAL DĂ GUSTUL REAL" />
