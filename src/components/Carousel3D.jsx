@@ -13,15 +13,42 @@ const TOTAL  = PRODUCTS.length
 const STEP   = 360 / TOTAL
 const RADIUS = 320
 
+/* ── Oaș ornament ── */
+function OasOrnament() {
+  return (
+    <svg
+      viewBox="0 0 120 16"
+      width="120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ display: 'block', margin: '0 auto' }}
+      aria-hidden="true"
+    >
+      {[0, 25, 50, 75, 100].map((x) => (
+        <path
+          key={x}
+          d={`M${x + 10} 8L${x} 0L${x + 10} 8L${x + 20} 0L${x + 10} 8L${x + 20} 16L${x + 10} 8L${x} 16L${x + 10} 8Z`}
+          stroke="rgba(196,30,58,0.15)"
+          strokeWidth="0.8"
+          fill="none"
+        />
+      ))}
+    </svg>
+  )
+}
+
 export default function Carousel3D() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [autoRotate, setAutoRotate]   = useState(true)
   const [isDragging, setIsDragging]   = useState(false)
+  const [mouse, setMouse]             = useState({ x: 0, y: 0 })
+
   const autoRef    = useRef(autoRotate)
   const dragStartX = useRef(null)
+  const wrapperRef = useRef(null)
   autoRef.current  = autoRotate
 
-  /* inject keyframes once */
+  /* ── inject keyframes once ── */
   useEffect(() => {
     const id = 'carousel3d-styles'
     if (!document.getElementById(id)) {
@@ -36,12 +63,24 @@ export default function Carousel3D() {
           from { opacity: 0; transform: translateY(20px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        @keyframes c3d-float1 {
+          0%, 100% { transform: translate(0, 0); }
+          50%       { transform: translate(25px, -15px); }
+        }
+        @keyframes c3d-float2 {
+          0%, 100% { transform: translate(0, 0); }
+          50%       { transform: translate(-20px, 20px); }
+        }
+        @keyframes c3d-float3 {
+          0%, 100% { transform: translate(0, 0); }
+          50%       { transform: translate(15px, 10px); }
+        }
       `
       document.head.appendChild(style)
     }
   }, [])
 
-  /* auto-rotate */
+  /* ── auto-rotate ── */
   useEffect(() => {
     const interval = setInterval(() => {
       if (autoRef.current) setActiveIndex(prev => (prev + 1) % TOTAL)
@@ -49,15 +88,24 @@ export default function Carousel3D() {
     return () => clearInterval(interval)
   }, [])
 
-  /* navigation helpers */
-  const goTo = (i) => {
-    setActiveIndex((i + TOTAL) % TOTAL)
-    setAutoRotate(false)
-  }
+  /* ── mouse parallax (desktop only) ── */
+  useEffect(() => {
+    const onMove = (e) => {
+      setMouse({
+        x: (e.clientX / window.innerWidth)  * 2 - 1,   // -1 … 1
+        y: (e.clientY / window.innerHeight) * 2 - 1,
+      })
+    }
+    window.addEventListener('mousemove', onMove)
+    return () => window.removeEventListener('mousemove', onMove)
+  }, [])
+
+  /* ── navigation ── */
+  const goTo = (i) => { setActiveIndex((i + TOTAL) % TOTAL); setAutoRotate(false) }
   const prev = () => goTo(activeIndex - 1)
   const next = () => goTo(activeIndex + 1)
 
-  /* drag / swipe */
+  /* ── drag / swipe ── */
   const onDragStart = (clientX) => {
     setIsDragging(true)
     dragStartX.current = clientX
@@ -71,24 +119,118 @@ export default function Carousel3D() {
       dragStartX.current = clientX
     }
   }
-  const onDragEnd = () => {
-    setIsDragging(false)
-    dragStartX.current = null
-  }
+  const onDragEnd = () => { setIsDragging(false); dragStartX.current = null }
 
   const active = PRODUCTS[activeIndex]
 
+  /* parallax offsets for blobs */
+  const b1 = { x: mouse.x * 15, y: mouse.y * 10 }
+  const b2 = { x: mouse.x * -10, y: mouse.y * -8 }
+
   return (
-    <div style={{ userSelect: 'none' }}>
+    <div ref={wrapperRef} style={{ userSelect: 'none', position: 'relative' }}>
+
+      {/* ── Oaș ornament — header ── */}
+      <div style={{ marginBottom: '24px' }}>
+        <OasOrnament />
+      </div>
+
+      {/* ── Background layer (mesh + grid + curves) ── */}
+      <div style={{
+        position:      'absolute',
+        inset:         0,
+        pointerEvents: 'none',
+        overflow:      'hidden',
+        zIndex:        0,
+      }}>
+        {/* Blob 1 */}
+        <div style={{
+          position:     'absolute',
+          width:        '500px',
+          height:       '500px',
+          borderRadius: '50%',
+          background:   'radial-gradient(circle, rgba(196,30,58,0.06), transparent)',
+          filter:       'blur(100px)',
+          top:          '10%',
+          left:         '5%',
+          animation:    'c3d-float1 18s ease-in-out infinite',
+          transform:    `translate(${b1.x}px, ${b1.y}px)`,
+          transition:   'transform 0.1s linear',
+        }}/>
+
+        {/* Blob 2 */}
+        <div style={{
+          position:     'absolute',
+          width:        '400px',
+          height:       '400px',
+          borderRadius: '50%',
+          background:   'radial-gradient(circle, rgba(184,134,11,0.04), transparent)',
+          filter:       'blur(80px)',
+          bottom:       '10%',
+          right:        '10%',
+          animation:    'c3d-float2 22s ease-in-out infinite',
+          transform:    `translate(${b2.x}px, ${b2.y}px)`,
+          transition:   'transform 0.1s linear',
+        }}/>
+
+        {/* Blob 3 */}
+        <div style={{
+          position:     'absolute',
+          width:        '300px',
+          height:       '300px',
+          borderRadius: '50%',
+          background:   'radial-gradient(circle, rgba(26,21,32,0.04), transparent)',
+          filter:       'blur(60px)',
+          top:          '50%',
+          left:         '50%',
+          animation:    'c3d-float3 15s ease-in-out infinite',
+        }}/>
+
+        {/* Grid pattern */}
+        <div style={{
+          position:        'absolute',
+          inset:           0,
+          opacity:         0.3,
+          backgroundImage: `
+            repeating-linear-gradient(0deg,   rgba(26,21,32,0.015) 0 1px, transparent 1px 80px),
+            repeating-linear-gradient(90deg,  rgba(26,21,32,0.015) 0 1px, transparent 1px 80px)
+          `,
+        }}/>
+
+        {/* Decorative curve — left */}
+        <svg
+          style={{ position: 'absolute', left: 0, top: 0, height: '100%', width: '150px', opacity: 0.06 }}
+          viewBox="0 0 150 900"
+          preserveAspectRatio="none"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path d="M0,0 Q120,200 40,400 Q-40,600 80,900" stroke="#c41e3a" strokeWidth="1" fill="none"/>
+        </svg>
+
+        {/* Decorative curve — right (mirror) */}
+        <svg
+          style={{ position: 'absolute', right: 0, top: 0, height: '100%', width: '150px', opacity: 0.06, transform: 'scaleX(-1)' }}
+          viewBox="0 0 150 900"
+          preserveAspectRatio="none"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path d="M0,0 Q120,200 40,400 Q-40,600 80,900" stroke="#c41e3a" strokeWidth="1" fill="none"/>
+        </svg>
+      </div>
 
       {/* ── 3D scene ── */}
       <div
         style={{
-          position: 'relative',
-          height:   '450px',
+          position:    'relative',
+          height:      '450px',
           perspective: '1200px',
-          overflow: 'visible',
-          cursor:   isDragging ? 'grabbing' : 'grab',
+          overflow:    'visible',
+          cursor:      isDragging ? 'grabbing' : 'grab',
+          zIndex:      1,
         }}
         onMouseDown={(e) => onDragStart(e.clientX)}
         onMouseMove={(e) => onDragMove(e.clientX)}
@@ -193,15 +335,15 @@ export default function Carousel3D() {
                     {product.pieces}
                   </p>
                   <p style={{
-                    fontSize:          '12px',
-                    color:             'rgba(250,243,232,0.4)',
-                    lineHeight:        1.5,
-                    margin:            0,
-                    display:           '-webkit-box',
-                    WebkitLineClamp:   2,
-                    WebkitBoxOrient:   'vertical',
-                    overflow:          'hidden',
-                    flex:              1,
+                    fontSize:        '12px',
+                    color:           'rgba(250,243,232,0.4)',
+                    lineHeight:      1.5,
+                    margin:          0,
+                    display:         '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow:        'hidden',
+                    flex:            1,
                   }}>
                     {product.desc}
                   </p>
@@ -216,34 +358,16 @@ export default function Carousel3D() {
       </div>
 
       {/* ── Navigation (buttons + dots) ── */}
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '24px', marginTop: '32px' }}>
+      <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '24px', marginTop: '32px' }}>
 
-        {/* prev button */}
         <button
           onClick={prev}
-          style={{
-            width:        '48px',
-            height:       '48px',
-            borderRadius: '50%',
-            background:   'rgba(26,21,32,0.04)',
-            border:       '1px solid rgba(26,21,32,0.08)',
-            cursor:       'pointer',
-            fontSize:     '18px',
-            color:        '#1a1520',
-            display:      'flex',
-            alignItems:   'center',
-            justifyContent: 'center',
-            transition:   'all 0.3s',
-            flexShrink:   0,
-          }}
+          style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(26,21,32,0.04)', border: '1px solid rgba(26,21,32,0.08)', cursor: 'pointer', fontSize: '18px', color: '#1a1520', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.3s', flexShrink: 0 }}
           onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.15)'; e.currentTarget.style.background = 'rgba(196,30,58,0.1)' }}
           onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.background = 'rgba(26,21,32,0.04)' }}
           aria-label="Produs anterior"
-        >
-          ←
-        </button>
+        >←</button>
 
-        {/* dots */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           {PRODUCTS.map((_, i) => (
             <button
@@ -265,42 +389,19 @@ export default function Carousel3D() {
           ))}
         </div>
 
-        {/* next button */}
         <button
           onClick={next}
-          style={{
-            width:        '48px',
-            height:       '48px',
-            borderRadius: '50%',
-            background:   'rgba(26,21,32,0.04)',
-            border:       '1px solid rgba(26,21,32,0.08)',
-            cursor:       'pointer',
-            fontSize:     '18px',
-            color:        '#1a1520',
-            display:      'flex',
-            alignItems:   'center',
-            justifyContent: 'center',
-            transition:   'all 0.3s',
-            flexShrink:   0,
-          }}
+          style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(26,21,32,0.04)', border: '1px solid rgba(26,21,32,0.08)', cursor: 'pointer', fontSize: '18px', color: '#1a1520', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.3s', flexShrink: 0 }}
           onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.15)'; e.currentTarget.style.background = 'rgba(196,30,58,0.1)' }}
           onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)';    e.currentTarget.style.background = 'rgba(26,21,32,0.04)' }}
           aria-label="Produs următor"
-        >
-          →
-        </button>
+        >→</button>
       </div>
 
       {/* ── Active product detail ── */}
       <div
         key={activeIndex}
-        style={{
-          margin:    '32px auto 0',
-          maxWidth:  '500px',
-          padding:   '32px 24px',
-          textAlign: 'center',
-          animation: 'carousel3d-slideIn 0.5s ease',
-        }}
+        style={{ position: 'relative', zIndex: 1, margin: '32px auto 0', maxWidth: '500px', padding: '32px 24px', textAlign: 'center', animation: 'carousel3d-slideIn 0.5s ease' }}
       >
         <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: '28px', color: '#1a1520', margin: '0 0 10px' }}>
           {active.name}
@@ -313,8 +414,13 @@ export default function Carousel3D() {
         </p>
       </div>
 
+      {/* ── Oaș ornament — footer ── */}
+      <div style={{ position: 'relative', zIndex: 1, marginTop: '20px' }}>
+        <OasOrnament />
+      </div>
+
       {/* hint */}
-      <p style={{ textAlign: 'center', fontSize: '11px', color: 'rgba(138,126,109,0.5)', fontStyle: 'italic', marginTop: '12px' }}>
+      <p style={{ position: 'relative', zIndex: 1, textAlign: 'center', fontSize: '11px', color: 'rgba(138,126,109,0.5)', fontStyle: 'italic', marginTop: '12px' }}>
         Drag sau swipe pentru a explora
       </p>
 
