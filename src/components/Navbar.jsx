@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
 
 const links = [
   { label: 'Meniu',      id: 'meniu' },
@@ -29,6 +29,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
     window.addEventListener('scroll', onScroll)
@@ -37,12 +40,22 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Scroll progress bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left bg-[#c41e3a]"
+        style={{ scaleX }}
+      />
+
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-[#faf3e8]/95 backdrop-blur-xl' : 'bg-transparent'
+        scrolled ? 'bg-[#faf3e8]/95 backdrop-blur-xl shadow-[0_1px_0_rgba(26,21,32,0.05)]' : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <button onClick={() => scrollTo('hero')} className="flex items-center gap-2">
-            <FlameIcon />
+          <button onClick={() => scrollTo('hero')} className="flex items-center gap-2 group">
+            <motion.div
+              animate={{ rotate: [0, -5, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}>
+              <FlameIcon />
+            </motion.div>
             <span className="text-2xl" style={{ fontFamily: '"DM Serif Display", serif' }}>
               <span className="text-[#c41e3a]">Foc </span>
               <span className="text-[#1a1520]">și Gust</span>
@@ -72,15 +85,15 @@ export default function Navbar() {
 
       <AnimatePresence>
         {menuOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-[#1a1520]/95 backdrop-blur-2xl flex flex-col items-center justify-center">
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="fixed inset-0 z-40 bg-[#1a1520]/97 backdrop-blur-2xl flex flex-col items-center justify-center gap-2">
             {links.map((link, i) => (
               <motion.button key={link.id}
-                initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 12 }} transition={{ delay: i * 0.1, duration: 0.35 }}
+                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }} transition={{ delay: i * 0.08, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 onClick={() => { scrollTo(link.id); setMenuOpen(false) }}
-                className="text-3xl text-[#faf3e8] hover:text-[#c41e3a] transition-colors duration-300 py-4"
+                className="text-4xl text-[#faf3e8] hover:text-[#c41e3a] transition-colors duration-300 py-3 px-8"
                 style={{ fontFamily: '"DM Serif Display", serif' }}>
                 {link.label}
               </motion.button>

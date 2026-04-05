@@ -1,5 +1,5 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useRef, useCallback } from 'react'
+import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { GlassWater, Droplets, Beer } from 'lucide-react'
 
 const gratar = [
@@ -22,21 +22,45 @@ const combouri = [
   { name: 'Masa Mare', price: 75, items: 'Mici (6 buc) · Ceafă · Cartofi x2 · 2 Beri', note: '2 persoane' },
 ]
 
+function use3DTilt() {
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const rotateX = useSpring(useTransform(y, [-60, 60], [8, -8]), { stiffness: 300, damping: 25 })
+  const rotateY = useSpring(useTransform(x, [-60, 60], [-8, 8]), { stiffness: 300, damping: 25 })
+
+  const handleMouseMove = useCallback((e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    x.set(e.clientX - rect.left - rect.width / 2)
+    y.set(e.clientY - rect.top - rect.height / 2)
+  }, [x, y])
+
+  const handleMouseLeave = useCallback(() => {
+    x.set(0)
+    y.set(0)
+  }, [x, y])
+
+  return { rotateX, rotateY, handleMouseMove, handleMouseLeave }
+}
+
 function GratarCard({ item, index, inView }) {
+  const { rotateX, rotateY, handleMouseMove, handleMouseLeave } = use3DTilt()
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
-      className="group bg-white/80 border border-[#1a1520]/5 rounded-2xl overflow-hidden hover:border-[#c41e3a]/20 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(26,21,32,0.08)] transition-all duration-400">
-      {/* Image with hover zoom + overlay */}
+      style={{ rotateX, rotateY, transformStyle: 'preserve-3d', perspective: 800 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="group bg-white/80 border border-[#1a1520]/5 rounded-2xl overflow-hidden hover:border-[#c41e3a]/20 hover:shadow-[0_24px_48px_rgba(26,21,32,0.10)] transition-all duration-400 cursor-default">
+      {/* Image */}
       <div className="aspect-video overflow-hidden relative bg-[#1a1520]/5">
         <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-110">
           <p className="text-[#8a7e6d] text-xs text-center px-4">{item.img}</p>
         </div>
-        {/* Gradient overlay — fades on hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"/>
       </div>
-      <div className="p-6">
+      <div className="p-6" style={{ transform: 'translateZ(20px)' }}>
         <div className="flex items-start justify-between gap-4">
           <span className="text-[#1a1520] font-semibold text-lg leading-snug">{item.name}</span>
           <span
@@ -51,15 +75,20 @@ function GratarCard({ item, index, inView }) {
 }
 
 function ComboCard({ item, index, inView }) {
+  const { rotateX, rotateY, handleMouseMove, handleMouseLeave } = use3DTilt()
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
-      className="relative border border-[#c41e3a]/15 rounded-2xl p-6 hover:border-[#c41e3a]/40 hover:shadow-[0_0_40px_rgba(196,30,58,0.1)] transition-all duration-300 bg-[#c41e3a]/5">
+      style={{ rotateX, rotateY, transformStyle: 'preserve-3d', perspective: 800 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative border border-[#c41e3a]/15 rounded-2xl p-6 hover:border-[#c41e3a]/40 hover:shadow-[0_0_40px_rgba(196,30,58,0.12)] transition-all duration-300 bg-[#c41e3a]/5 cursor-default">
       <span className="absolute top-4 right-4 bg-[#c41e3a] text-white text-xs font-bold px-3 py-1 rounded-full">
         COMBO
       </span>
-      <h3 className="text-2xl text-[#c41e3a]" style={{ fontFamily: '"DM Serif Display", serif' }}>
+      <h3 className="text-2xl text-[#c41e3a]" style={{ fontFamily: '"DM Serif Display", serif', transform: 'translateZ(16px)' }}>
         {item.name}
         {item.note && <span className="text-[#8a7e6d] text-sm ml-2" style={{ fontFamily: '"DM Sans", sans-serif' }}>({item.note})</span>}
       </h3>
@@ -110,7 +139,7 @@ export default function MenuSection() {
         </div>
 
         {/* Grătar */}
-        <div ref={gratarRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <div ref={gratarRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16" style={{ perspective: '1000px' }}>
           {gratar.map((item, i) => (
             <GratarCard key={item.name} item={item} index={i} inView={gratarInView}/>
           ))}
@@ -145,7 +174,7 @@ export default function MenuSection() {
                 <motion.div key={b.name}
                   initial={{ opacity: 0, y: 20 }} animate={bauturiInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="bg-[#1a1520]/5 border border-[#1a1520]/5 rounded-xl p-5 text-center hover:border-[#c41e3a]/20 transition-all duration-300">
+                  className="bg-[#1a1520]/5 border border-[#1a1520]/5 rounded-xl p-5 text-center hover:border-[#c41e3a]/20 hover:-translate-y-1 transition-all duration-300">
                   <Icon size={22} className="text-[#c41e3a] mx-auto mb-3" strokeWidth={1.5}/>
                   <p className="text-[#1a1520] text-sm font-medium leading-snug">{b.name}</p>
                   <p className="text-[#8a7e6d] text-xs mt-1 mb-3">{b.detail}</p>
@@ -166,7 +195,7 @@ export default function MenuSection() {
             <h3 className="text-3xl text-[#1a1520]"
               style={{ fontFamily: '"DM Serif Display", serif' }}>Combo-uri</h3>
           </div>
-          <div ref={comboRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div ref={comboRef} className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{ perspective: '1000px' }}>
             {combouri.map((item, i) => (
               <ComboCard key={item.name} item={item} index={i} inView={comboInView}/>
             ))}
