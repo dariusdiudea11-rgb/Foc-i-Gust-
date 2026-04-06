@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import { storage } from '../utils/storage'
 
-const DEFAULT_PIN = '1234'
+const DEFAULT_PIN = '2801'
 
 export function useAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(
