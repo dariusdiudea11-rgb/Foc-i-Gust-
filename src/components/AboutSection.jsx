@@ -61,13 +61,14 @@ export default function AboutSection() {
             Din Țara <span className="text-[#c41e3a]">Oașului</span>,<br/>pentru toată lumea
           </h2>
           <p className="text-[#faf3e8]/70 text-lg leading-relaxed">
-            Suntem doi tineri din Țara Oașului care au crescut cu gustul micilor de la bunici.
-            Am transformat rețetele de familie în ceva ce vrem să împărțim cu toată lumea —
-            carne aleasă, pregătită pe cărbuni, cu dragoste și răbdare.
+            Suntem doi tineri din Țara Oașului care au crescut cu gustul preparatelor tradiționale.
+            Am transformat pasiunea pentru grătarul pe cărbuni în ceva ce vrem să împărțim cu toată lumea —
+            carne aleasă, pregătită cu dragoste și răbdare. Fiecare porție e făcută ca pentru ai noștri.
           </p>
           <p className="text-[#faf3e8]/70 text-lg leading-relaxed">
-            Carnea vine exclusiv de la carmangeria familiei — rețete proprii de mici și
-            cârnăciori pe care nu le găsești în comerț. Focul real dă gustul real.
+            Carnea provine de la persoane cu peste 10 ani experiență în domeniu, care folosesc produse
+            100% românești. Rețetele de mici și cârnăciori sunt proprii — nu le găsești în comerț.
+            Focul real dă gustul real.
           </p>
           <div className="flex gap-8 md:gap-12 mt-4 pt-10 border-t border-white/5">
             {statsDef.map((s) => (
