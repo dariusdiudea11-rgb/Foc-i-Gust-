@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Carousel3D from './components/Carousel3D'
@@ -12,8 +13,9 @@ import OasOrnament from './components/OasOrnament'
 import WatermarkBand from './components/WatermarkBand'
 import RedBand from './components/RedBand'
 import CustomCursor from './components/CustomCursor'
+import DashboardApp from './dashboard/DashboardApp'
 
-export default function App() {
+function Site() {
   return (
     <div className="bg-[#faf3e8] min-h-screen">
       <CustomCursor />
@@ -36,5 +38,14 @@ export default function App() {
       <ContactSection />
       <Footer />
     </div>
+  )
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/dashboard/*" element={<DashboardApp />} />
+      <Route path="/*" element={<Site />} />
+    </Routes>
   )
 }

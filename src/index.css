@@ -25,10 +25,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Hide default cursor on desktop */
+/* Hide default cursor on desktop — exclude dashboard */
 @media (pointer: fine) {
-  *, *::before, *::after {
+  *:not(.dashboard-root):not(.dashboard-root *),
+  *:not(.dashboard-root)::before,
+  *:not(.dashboard-root)::after {
     cursor: none !important;
+  }
+  .dashboard-root,
+  .dashboard-root * {
+    cursor: auto;
   }
 }
 
