@@ -73,7 +73,7 @@ export default function Navbar() {
           </div>
 
           <button className="md:hidden flex flex-col gap-[5px] p-2"
-            onClick={() => setMenuOpen(o => !o)} aria-label="Meniu">
+            onClick={() => setMenuOpen(o => !o)} aria-label="Meniu" aria-expanded={menuOpen}>
             <span className={`block h-px w-6 bg-[#1a1520] transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`}/>
             <span className={`block h-px w-6 bg-[#1a1520] transition-all duration-300 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`}/>
             <span className={`block h-px w-6 bg-[#1a1520] transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`}/>

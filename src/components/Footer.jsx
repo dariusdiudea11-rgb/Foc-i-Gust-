@@ -24,7 +24,7 @@ export default function Footer() {
       <p className="text-sm italic mb-6" style={{ color: 'rgba(250,243,232,0.3)' }}>
         Tradiția care arde, gustul care rămâne.
       </p>
-      <p className="text-xs" style={{ color: 'rgba(250,243,232,0.2)' }}>
+      <p className="text-xs" style={{ color: 'rgba(250,243,232,0.45)' }}>
         © 2026 Foc și Gust Tradițional · Toate drepturile rezervate.
       </p>
     </footer>

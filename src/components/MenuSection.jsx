@@ -166,7 +166,7 @@ export default function MenuSection() {
 
         {/* Băuturi */}
         <div className="mb-16">
-          <h3 className="text-[#1a1520]/30 text-xs tracking-[0.25em] uppercase mb-6">— Băuturi —</h3>
+          <h3 className="text-[#1a1520]/30 text-xs tracking-[0.3em] uppercase mb-6">— Băuturi —</h3>
           <div ref={bauturiRef} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {bauturi.map((b, i) => {
               const Icon = b.icon

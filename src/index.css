@@ -6,7 +6,7 @@
   --color-amber: #e8a838;
   --color-amber-dim: #c4882a;
   --color-amber-glow: #f5c563;
-  --color-fire: #c44a2a;
+  --color-fire: #c41e3a;
   --color-cream: #f0ece4;
   --color-muted: #7a7368;
 
@@ -76,4 +76,20 @@ body::after {
   animation: marquee 25s linear infinite;
   display: flex;
   width: max-content;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid #c41e3a;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

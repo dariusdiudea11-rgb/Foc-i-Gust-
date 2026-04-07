@@ -77,8 +77,9 @@ export default function Carousel3D() {
   const [autoOn, setAutoOn]       = useState(true)
   const [winW,   setWinW]         = useState(typeof window !== 'undefined' ? window.innerWidth : 1024)
   const [isDrag, setIsDrag]       = useState(false)
-  const autoRef  = useRef(true)
-  const dragRef  = useRef(null)
+  const autoRef   = useRef(true)
+  const pauseRef  = useRef(false)
+  const dragRef   = useRef(null)
   autoRef.current = autoOn
 
   const isMobile = winW < 640
@@ -106,8 +107,8 @@ export default function Carousel3D() {
   /* auto-advance */
   useEffect(() => {
     const t = setInterval(() => {
-      if (autoRef.current) setActive(p => (p + 1) % TOTAL)
-    }, 3800)
+      if (autoRef.current && !pauseRef.current) setActive(p => (p + 1) % TOTAL)
+    }, 4000)
     return () => clearInterval(t)
   }, [])
 
@@ -145,7 +146,7 @@ export default function Carousel3D() {
 
       {/* ── header ── */}
       <div style={{ textAlign: 'center', paddingTop: isMobile ? '56px' : '72px', paddingBottom: isMobile ? '36px' : '48px', position: 'relative', zIndex: 1 }}>
-        <p style={{ fontSize: '11px', letterSpacing: '5px', color: 'rgba(196,30,58,0.5)', textTransform: 'uppercase', margin: '0 0 14px', animation: 'cf-fadein 0.5s ease both' }}>
+        <p style={{ fontSize: '11px', letterSpacing: '3px', color: 'rgba(196,30,58,0.5)', textTransform: 'uppercase', margin: '0 0 14px', animation: 'cf-fadein 0.5s ease both' }}>
           Stand de grătar tradițional
         </p>
 
@@ -159,7 +160,7 @@ export default function Carousel3D() {
 
         <h2 style={{ fontFamily: '"DM Serif Display", serif', fontSize: `clamp(26px, 5.5vw, 50px)`, lineHeight: 1.05, margin: '0 0 10px', animation: 'cf-fadein 0.5s 0.15s ease both' }}>
           <span style={{ color: '#1a1520' }}>Meniul </span>
-          <span style={{ background: 'linear-gradient(90deg, #c41e3a, #e63950, #27ae60)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Nostru</span>
+          <span style={{ background: 'linear-gradient(90deg, #c41e3a, #e85068, #ff8c42)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Nostru</span>
         </h2>
         <p style={{ color: '#8a7e6d', fontSize: '13px', fontStyle: 'italic', margin: 0, animation: 'cf-fadein 0.5s 0.25s ease both' }}>
           Alege un produs — Țara Oașului · Satu Mare
@@ -169,10 +170,11 @@ export default function Carousel3D() {
       {/* ── coverflow scene ── */}
       <div
         style={{ position: 'relative', height: `${cH + 60}px`, perspective: '1100px', cursor: isDrag ? 'grabbing' : 'grab', touchAction: 'pan-y', zIndex: 1 }}
+        onMouseEnter={() => { pauseRef.current = true }}
+        onMouseLeave={() => { pauseRef.current = false; onEnd() }}
         onMouseDown={e => onStart(e.clientX)}
         onMouseMove={e => onMove(e.clientX)}
         onMouseUp={onEnd}
-        onMouseLeave={onEnd}
         onTouchStart={e => onStart(e.touches[0].clientX)}
         onTouchMove={e => onMove(e.touches[0].clientX)}
         onTouchEnd={onEnd}

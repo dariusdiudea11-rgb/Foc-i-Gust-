@@ -58,8 +58,8 @@ function MagneticButton({ children, className, onClick }) {
   const ref = useRef(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
-  const springX = useSpring(x, { stiffness: 300, damping: 20 })
-  const springY = useSpring(y, { stiffness: 300, damping: 20 })
+  const springX = useSpring(x, { stiffness: 180, damping: 28 })
+  const springY = useSpring(y, { stiffness: 180, damping: 28 })
 
   const handleMouseMove = (e) => {
     const rect = ref.current.getBoundingClientRect()
@@ -188,13 +188,13 @@ export default function Hero() {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35 }}
           className="flex flex-col items-center" style={{ transform: 'translateZ(40px)' }}>
-          <h1 className="leading-none text-[#c41e3a]"
-            style={{ fontFamily: '"DM Serif Display", serif', fontSize: 'clamp(56px, 12vw, 140px)', textShadow: '0 0 80px rgba(196,30,58,0.2)' }}>
+          <h1 className="text-[#c41e3a]"
+            style={{ fontFamily: '"DM Serif Display", serif', fontSize: 'clamp(56px, 12vw, 140px)', lineHeight: '0.92', textShadow: '0 0 80px rgba(196,30,58,0.2)' }}>
             Foc și{' '}
-            <span style={{ background: 'linear-gradient(90deg, #c41e3a, #e63950, #27ae60)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Gust</span>
+            <span style={{ background: 'linear-gradient(90deg, #c41e3a, #e85068, #ff8c42)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Gust</span>
           </h1>
-          <h2 className="leading-none text-[#1a1520] font-normal mt-2"
-            style={{ fontFamily: '"DM Serif Display", serif', fontSize: 'clamp(42px, 9vw, 100px)' }}>
+          <h2 className="text-[#1a1520] font-normal mt-2"
+            style={{ fontFamily: '"DM Serif Display", serif', fontSize: 'clamp(42px, 9vw, 100px)', lineHeight: '0.95' }}>
             Tradițional
           </h2>
         </motion.div>
