@@ -159,7 +159,7 @@ export default function Carousel3D() {
 
         <h2 style={{ fontFamily: '"DM Serif Display", serif', fontSize: `clamp(26px, 5.5vw, 50px)`, lineHeight: 1.05, margin: '0 0 10px', animation: 'cf-fadein 0.5s 0.15s ease both' }}>
           <span style={{ color: '#1a1520' }}>Meniul </span>
-          <span style={{ color: '#c41e3a' }}>Nostru</span>
+          <span style={{ background: 'linear-gradient(90deg, #c41e3a, #e63950, #27ae60)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Nostru</span>
         </h2>
         <p style={{ color: '#8a7e6d', fontSize: '13px', fontStyle: 'italic', margin: 0, animation: 'cf-fadein 0.5s 0.25s ease both' }}>
           Alege un produs — Țara Oașului · Satu Mare

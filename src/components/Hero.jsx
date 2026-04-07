@@ -188,12 +188,13 @@ export default function Hero() {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35 }}
           className="flex flex-col items-center" style={{ transform: 'translateZ(40px)' }}>
-          <h1 className="text-6xl md:text-8xl lg:text-9xl leading-none text-[#c41e3a]"
-            style={{ fontFamily: '"DM Serif Display", serif', textShadow: '0 0 80px rgba(196,30,58,0.25)' }}>
-            Foc și Gust
+          <h1 className="leading-none text-[#c41e3a]"
+            style={{ fontFamily: '"DM Serif Display", serif', fontSize: 'clamp(56px, 12vw, 140px)', textShadow: '0 0 80px rgba(196,30,58,0.2)' }}>
+            Foc și{' '}
+            <span style={{ background: 'linear-gradient(90deg, #c41e3a, #e63950, #27ae60)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Gust</span>
           </h1>
-          <h2 className="text-5xl md:text-7xl lg:text-8xl leading-none text-[#1a1520] font-normal mt-2"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>
+          <h2 className="leading-none text-[#1a1520] font-normal mt-2"
+            style={{ fontFamily: '"DM Serif Display", serif', fontSize: 'clamp(42px, 9vw, 100px)' }}>
             Tradițional
           </h2>
         </motion.div>

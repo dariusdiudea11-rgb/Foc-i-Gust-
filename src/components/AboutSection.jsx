@@ -56,9 +56,10 @@ export default function AboutSection() {
             <div className="w-12 h-px bg-[#c41e3a]"/>
             <span className="text-xs tracking-[0.3em] text-[#c41e3a] uppercase">Povestea noastră</span>
           </div>
-          <h2 className="text-4xl md:text-5xl text-[#faf3e8] leading-tight"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>
-            Din Țara <span className="text-[#c41e3a]">Oașului</span>,<br/>pentru toată lumea
+          <h2 className="text-[#faf3e8] leading-tight"
+            style={{ fontFamily: '"DM Serif Display", serif', fontSize: 'clamp(40px, 6vw, 72px)', letterSpacing: '-1px', marginBottom: '8px' }}>
+            Din Țara{' '}
+            <span style={{ background: 'linear-gradient(90deg, #c41e3a, #e63950, #27ae60)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Oașului</span>,<br/>pentru toată lumea
           </h2>
           <p className="text-[#faf3e8]/70 text-lg leading-relaxed">
             Suntem doi tineri din Țara Oașului care au crescut cu gustul preparatelor tradiționale.
