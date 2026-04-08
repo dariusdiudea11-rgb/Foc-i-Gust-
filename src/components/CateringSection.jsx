@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
+import StaggerText from './ui/StaggerText'
 
 const fieldClass =
   'w-full bg-transparent border-b border-white/10 focus:border-[#c41e3a] text-[#faf3e8] placeholder:text-[#7a7080] py-3 text-sm outline-none transition-colors duration-200'
@@ -41,8 +42,8 @@ export default function CateringSection() {
             <div className="w-12 h-px bg-[#c41e3a]"/>
             <span className="text-xs tracking-[0.3em] text-[#c41e3a] uppercase">Evenimente private</span>
           </div>
-          <h2 className="text-3xl md:text-4xl text-[#faf3e8] leading-tight"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>
+          <h2 className="text-[#faf3e8] leading-tight"
+            style={{ fontFamily: '"DM Serif Display", serif', fontSize: 'clamp(40px, 6vw, 72px)', letterSpacing: '-1px', marginBottom: '32px' }}>
             Grătar la evenimentul tău
           </h2>
           <p className="text-[#faf3e8]/70 text-lg leading-relaxed">
@@ -94,8 +95,8 @@ export default function CateringSection() {
               <input name="locatie" value={form.locatie} onChange={handle} placeholder="Locație eveniment" required className={fieldClass}/>
               <textarea name="mesaj" value={form.mesaj} onChange={handle} placeholder="Mesaj / cerințe speciale" rows={3} className={fieldClass + ' resize-none'}/>
               <button type="submit"
-                className="mt-2 w-full bg-[#c41e3a] text-white font-bold py-4 rounded-full text-sm uppercase tracking-wider hover:bg-[#9a1730] hover:shadow-[0_0_30px_rgba(196,30,58,0.35)] transition-all duration-300">
-                Trimite cererea →
+                className="btn-stagger mt-2 w-full bg-[#c41e3a] text-white font-bold py-4 rounded-full text-sm uppercase tracking-wider hover:bg-[#9a1730] hover:shadow-[0_0_30px_rgba(196,30,58,0.35)] transition-all duration-300">
+                <StaggerText text="Trimite cererea →" />
               </button>
             </form>
           </div>

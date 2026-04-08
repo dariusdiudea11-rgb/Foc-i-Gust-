@@ -72,7 +72,7 @@ export default function ContactSection() {
                 <motion.div
                   initial={{ opacity: 0, x: -24 }} animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: 'easeOut' }}
-                  className="group flex items-center gap-5 bg-white/80 border border-[#1a1520]/5 rounded-2xl p-6 hover:border-[#c41e3a]/25 hover:-translate-y-0.5 hover:shadow-[0_16px_32px_rgba(26,21,32,0.07)] transition-all duration-300">
+                  className="group flex items-center gap-5 bg-white/80 border border-[#1a1520]/5 rounded-2xl p-6 hover:border-[#c41e3a]/25 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(196,30,58,0.08)] transition-all duration-300">
                   <div className="w-12 h-12 rounded-xl bg-[#c41e3a]/8 flex items-center justify-center shrink-0 group-hover:bg-[#c41e3a]/15 transition-colors duration-300">
                     <Icon size={20} className="text-[#c41e3a]" strokeWidth={1.5}/>
                   </div>

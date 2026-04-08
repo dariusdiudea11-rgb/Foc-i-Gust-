@@ -56,18 +56,20 @@ export default function AboutSection() {
             <div className="w-12 h-px bg-[#c41e3a]"/>
             <span className="text-xs tracking-[0.3em] text-[#c41e3a] uppercase">Povestea noastră</span>
           </div>
-          <h2 className="text-4xl md:text-5xl text-[#faf3e8] leading-tight"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>
-            Din Țara <span className="text-[#c41e3a]">Oașului</span>,<br/>pentru toată lumea
+          <h2 className="text-[#faf3e8] leading-tight"
+            style={{ fontFamily: '"DM Serif Display", serif', fontSize: 'clamp(40px, 6vw, 72px)', letterSpacing: '-1px', marginBottom: '8px' }}>
+            Din Țara{' '}
+            <span style={{ background: 'linear-gradient(90deg, #c41e3a, #e63950, #27ae60)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Oașului</span>,<br/>pentru toată lumea
           </h2>
           <p className="text-[#faf3e8]/70 text-lg leading-relaxed">
-            Suntem doi tineri din Țara Oașului care au crescut cu gustul micilor de la bunici.
-            Am transformat rețetele de familie în ceva ce vrem să împărțim cu toată lumea —
-            carne aleasă, pregătită pe cărbuni, cu dragoste și răbdare.
+            Suntem doi tineri din Țara Oașului care au crescut cu gustul preparatelor tradiționale.
+            Am transformat pasiunea pentru grătarul pe cărbuni în ceva ce vrem să împărțim cu toată lumea —
+            carne aleasă, pregătită cu dragoste și răbdare. Fiecare porție e făcută ca pentru ai noștri.
           </p>
           <p className="text-[#faf3e8]/70 text-lg leading-relaxed">
-            Carnea vine exclusiv de la carmangeria familiei — rețete proprii de mici și
-            cârnăciori pe care nu le găsești în comerț. Focul real dă gustul real.
+            Carnea provine de la persoane cu peste 10 ani experiență în domeniu, care folosesc produse
+            100% românești. Rețetele de mici și cârnăciori sunt proprii — nu le găsești în comerț.
+            Focul real dă gustul real.
           </p>
           <div className="flex gap-8 md:gap-12 mt-4 pt-10 border-t border-white/5">
             {statsDef.map((s) => (
@@ -82,11 +84,14 @@ export default function AboutSection() {
           transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}>
           <div className="relative">
             <div className="absolute inset-0 border-2 border-[#c41e3a]/20 rounded-2xl translate-x-4 translate-y-4 pointer-events-none"/>
-            <div ref={imgRef} className="relative aspect-[3/4] bg-[#231e2a] rounded-2xl overflow-hidden flex items-center justify-center">
-              <motion.div style={{ y: imgY }} className="absolute inset-0 flex items-center justify-center">
-                <p className="text-[#7a7080] text-xs text-center px-6 leading-relaxed">
-                  [POZĂ: Noi doi la stand]
-                </p>
+            <div ref={imgRef} className="relative aspect-[3/4] bg-[#231e2a] rounded-2xl overflow-hidden">
+              <motion.div style={{ y: imgY }} className="absolute inset-0">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/IMG_6015.webp`}
+                  alt="Stand Foc și Gust Tradițional la eveniment"
+                  className="w-full h-full object-cover"
+                  onError={e => { e.target.style.display = 'none' }}
+                />
               </motion.div>
             </div>
             <div className="mt-3 px-4 py-2 bg-[#c41e3a]/10 rounded-lg inline-flex">

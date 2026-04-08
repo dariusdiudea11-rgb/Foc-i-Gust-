@@ -42,8 +42,8 @@ export default function CalendarSection() {
             <div className="w-12 h-px bg-[#c41e3a]"/>
             <span className="text-xs tracking-[0.3em] text-[#c41e3a] uppercase">Unde ne găsești</span>
           </div>
-          <h2 className="text-4xl md:text-5xl text-[#1a1520]"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>Sezon 2026</h2>
+          <h2 className="text-[#1a1520]"
+            style={{ fontFamily: '"DM Serif Display", serif', fontSize: 'clamp(40px, 6vw, 72px)', letterSpacing: '-1px', marginBottom: '32px' }}>Sezon 2026</h2>
         </div>
 
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 gap-4">

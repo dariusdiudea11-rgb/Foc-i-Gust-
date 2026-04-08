@@ -93,7 +93,7 @@ function ComboCard({ item, index, inView }) {
         {item.note && <span className="text-[#8a7e6d] text-sm ml-2" style={{ fontFamily: '"DM Sans", sans-serif' }}>({item.note})</span>}
       </h3>
       <p className="text-[#1a1520]/60 text-sm mt-2 mb-4">{item.items}</p>
-      <p className="text-3xl text-[#1a1520]" style={{ fontFamily: '"DM Serif Display", serif' }}>
+      <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: '30px', margin: 0, background: 'linear-gradient(90deg, #c41e3a, #e63950, #27ae60)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
         {item.price} lei
       </p>
     </motion.div>
@@ -133,8 +133,8 @@ export default function MenuSection() {
             <div className="w-12 h-px bg-[#c41e3a]"/>
             <span className="text-xs tracking-[0.3em] text-[#c41e3a] uppercase">Ce punem pe foc</span>
           </div>
-          <h2 className="text-4xl md:text-5xl text-[#1a1520] mb-3"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>Meniul nostru</h2>
+          <h2 className="text-[#1a1520] mb-8"
+            style={{ fontFamily: '"DM Serif Display", serif', fontSize: 'clamp(40px, 6vw, 72px)', letterSpacing: '-1px' }}>Meniul nostru</h2>
           <p className="text-sm text-[#8a7e6d]">Toate prețurile includ pâine tradițională și muștar</p>
         </div>
 
@@ -166,7 +166,7 @@ export default function MenuSection() {
 
         {/* Băuturi */}
         <div className="mb-16">
-          <h3 className="text-[#1a1520]/30 text-xs tracking-[0.25em] uppercase mb-6">— Băuturi —</h3>
+          <h3 className="text-[#1a1520]/30 text-xs tracking-[0.3em] uppercase mb-6">— Băuturi —</h3>
           <div ref={bauturiRef} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {bauturi.map((b, i) => {
               const Icon = b.icon
