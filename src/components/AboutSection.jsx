@@ -87,7 +87,7 @@ export default function AboutSection() {
             <div ref={imgRef} className="relative aspect-[3/4] bg-[#231e2a] rounded-2xl overflow-hidden">
               <motion.div style={{ y: imgY }} className="absolute inset-0">
                 <img
-                  src={`${import.meta.env.BASE_URL}images/stand.jpg`}
+                  src={`${import.meta.env.BASE_URL}images/IMG_6015.webp`}
                   alt="Stand Foc și Gust Tradițional la eveniment"
                   className="w-full h-full object-cover"
                   onError={e => { e.target.style.display = 'none' }}
