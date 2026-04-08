@@ -229,15 +229,15 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.75, duration: 0.6, ease: 'easeOut' }}
-            style={{ display: 'flex', gap: '16px', marginTop: '36px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '36px', alignItems: 'center', width: '100%', maxWidth: '340px', padding: '0 24px', boxSizing: 'border-box' }}>
             <MagneticButton
               onClick={() => scrollTo('meniu')}
-              className="btn-stagger px-8 py-4 bg-[#c41e3a] text-white font-bold text-sm uppercase tracking-wider rounded-full hover:shadow-[0_0_40px_rgba(196,30,58,0.4)] transition-shadow duration-300">
+              className="btn-stagger w-full py-4 bg-[#c41e3a] text-white font-bold text-sm uppercase tracking-wider rounded-full hover:shadow-[0_0_40px_rgba(196,30,58,0.4)] transition-shadow duration-300">
               <StaggerText text="Vezi meniul" />
             </MagneticButton>
             <MagneticButton
               onClick={() => scrollTo('catering')}
-              className="btn-stagger px-8 py-4 border border-[#c41e3a]/40 text-[#c41e3a] text-sm uppercase tracking-wider rounded-full hover:bg-[#c41e3a]/8 hover:border-[#c41e3a] transition-all duration-300">
+              className="btn-stagger w-full py-4 border border-[#c41e3a]/40 text-[#c41e3a] text-sm uppercase tracking-wider rounded-full hover:bg-[#c41e3a]/8 hover:border-[#c41e3a] transition-all duration-300">
               <StaggerText text="Rezervă eveniment" />
             </MagneticButton>
           </motion.div>
