@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import StaggerText from './ui/StaggerText'
 
 const PRODUCTS = [
   {
@@ -300,10 +301,11 @@ export default function Carousel3D() {
         </p>
 
         <button onClick={scrollToMenu}
+          className="btn-stagger"
           style={{ background: '#c41e3a', color: '#fff', border: 'none', padding: '13px 38px', borderRadius: '50px', fontSize: '12px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', boxShadow: '0 8px 28px rgba(196,30,58,0.3)', cursor: 'pointer', transition: 'transform 0.25s, box-shadow 0.25s', fontFamily: 'inherit' }}
           onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.06)'; e.currentTarget.style.boxShadow = '0 12px 36px rgba(196,30,58,0.42)' }}
           onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(196,30,58,0.3)' }}>
-          Vezi meniul complet
+          <StaggerText text="Vezi meniul complet" />
         </button>
       </div>
 

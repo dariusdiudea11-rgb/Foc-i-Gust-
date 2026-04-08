@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
+import StaggerText from './ui/StaggerText'
 
 function OasDecor() {
   return (
@@ -216,13 +217,13 @@ export default function Hero() {
           className="mt-10 flex flex-col sm:flex-row gap-4">
           <MagneticButton
             onClick={() => scrollTo('meniu')}
-            className="px-8 py-4 bg-[#c41e3a] text-white font-bold text-sm uppercase tracking-wider rounded-full hover:shadow-[0_0_40px_rgba(196,30,58,0.45)] transition-shadow duration-300">
-            Vezi meniul
+            className="btn-stagger px-8 py-4 bg-[#c41e3a] text-white font-bold text-sm uppercase tracking-wider rounded-full hover:shadow-[0_0_40px_rgba(196,30,58,0.45)] transition-shadow duration-300">
+            <StaggerText text="Vezi meniul" />
           </MagneticButton>
           <MagneticButton
             onClick={() => scrollTo('catering')}
-            className="px-8 py-4 border border-[#c41e3a]/40 text-[#c41e3a] text-sm uppercase tracking-wider rounded-full hover:bg-[#c41e3a]/10 hover:border-[#c41e3a] transition-all duration-300">
-            Rezervă eveniment
+            className="btn-stagger px-8 py-4 border border-[#c41e3a]/40 text-[#c41e3a] text-sm uppercase tracking-wider rounded-full hover:bg-[#c41e3a]/10 hover:border-[#c41e3a] transition-all duration-300">
+            <StaggerText text="Rezervă eveniment" />
           </MagneticButton>
         </motion.div>
 

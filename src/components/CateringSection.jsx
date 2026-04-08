@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
+import StaggerText from './ui/StaggerText'
 
 const fieldClass =
   'w-full bg-transparent border-b border-white/10 focus:border-[#c41e3a] text-[#faf3e8] placeholder:text-[#7a7080] py-3 text-sm outline-none transition-colors duration-200'
@@ -94,8 +95,8 @@ export default function CateringSection() {
               <input name="locatie" value={form.locatie} onChange={handle} placeholder="Locație eveniment" required className={fieldClass}/>
               <textarea name="mesaj" value={form.mesaj} onChange={handle} placeholder="Mesaj / cerințe speciale" rows={3} className={fieldClass + ' resize-none'}/>
               <button type="submit"
-                className="mt-2 w-full bg-[#c41e3a] text-white font-bold py-4 rounded-full text-sm uppercase tracking-wider hover:bg-[#9a1730] hover:shadow-[0_0_30px_rgba(196,30,58,0.35)] transition-all duration-300">
-                Trimite cererea →
+                className="btn-stagger mt-2 w-full bg-[#c41e3a] text-white font-bold py-4 rounded-full text-sm uppercase tracking-wider hover:bg-[#9a1730] hover:shadow-[0_0_30px_rgba(196,30,58,0.35)] transition-all duration-300">
+                <StaggerText text="Trimite cererea →" />
               </button>
             </form>
           </div>
