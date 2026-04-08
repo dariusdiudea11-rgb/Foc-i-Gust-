@@ -92,7 +92,7 @@ export default function Hero() {
             style={{
               width: '100%', height: '100%',
               objectFit: 'cover',
-              opacity: 0.18,
+              opacity: 0.45,
               /* Placeholder vizibil dacă imaginea lipsește ↓ */
               background: 'repeating-conic-gradient(#c41e3a22 0% 25%, transparent 0% 50%) 0 0 / 40px 40px',
             }}
@@ -261,7 +261,7 @@ export default function Hero() {
               position: 'absolute', inset: 0,
               width: '100%', height: '100%',
               objectFit: 'cover',
-              opacity: 0.35,
+              opacity: 0.50,
               /* Arată doar marginile, ascunde centrul */
               WebkitMaskImage: `radial-gradient(ellipse 55% 55% at 50% 50%, transparent 40%, black 100%)`,
               maskImage:       `radial-gradient(ellipse 55% 55% at 50% 50%, transparent 40%, black 100%)`,
