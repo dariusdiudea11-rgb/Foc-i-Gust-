@@ -86,28 +86,11 @@ export default function Hero() {
             willChange: 'transform',
           }}>
           <img
-            src="/images/layer-1.png"
+            src={`${import.meta.env.BASE_URL}images/layer-1.svg`}
             alt=""
             aria-hidden="true"
-            style={{
-              width: '100%', height: '100%',
-              objectFit: 'cover',
-              opacity: 0.45,
-              /* Placeholder vizibil dacă imaginea lipsește ↓ */
-              background: 'repeating-conic-gradient(#c41e3a22 0% 25%, transparent 0% 50%) 0 0 / 40px 40px',
-            }}
-            onError={e => { e.target.style.opacity = '0' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.45 }}
           />
-          {/* Overlay CSS dacă imaginea lipsește — pattern geometric */}
-          <div aria-hidden="true" style={{
-            position: 'absolute', inset: 0,
-            backgroundImage: `
-              repeating-linear-gradient(0deg,   rgba(196,30,58,0.03) 0 1px, transparent 1px 60px),
-              repeating-linear-gradient(90deg,  rgba(196,30,58,0.03) 0 1px, transparent 1px 60px),
-              repeating-linear-gradient(45deg,  rgba(26,21,32,0.02) 0 1px, transparent 1px 84px),
-              repeating-linear-gradient(-45deg, rgba(26,21,32,0.02) 0 1px, transparent 1px 84px)
-            `,
-          }} />
         </motion.div>
 
         {/* ── STRAT 2 — ceață / vigneta centrală ── */}
@@ -255,7 +238,7 @@ export default function Hero() {
           }}>
           {/* Colțuri decorative cu pattern-ul ie-ului */}
           <img
-            src="/images/layer-1.png"
+            src={`${import.meta.env.BASE_URL}images/layer-1.svg`}
             alt="" aria-hidden="true"
             style={{
               position: 'absolute', inset: 0,
@@ -266,7 +249,6 @@ export default function Hero() {
               WebkitMaskImage: `radial-gradient(ellipse 55% 55% at 50% 50%, transparent 40%, black 100%)`,
               maskImage:       `radial-gradient(ellipse 55% 55% at 50% 50%, transparent 40%, black 100%)`,
             }}
-            onError={e => { e.target.style.opacity = '0' }}
           />
           {/* Glow roșu subtil la baza prim-planului */}
           <div style={{
