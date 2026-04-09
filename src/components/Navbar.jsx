@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useSpring, useReducedMotion } from 'framer-motion'
 
 const links = [
   { label: 'Meniu',      id: 'meniu' },
@@ -28,6 +28,7 @@ function FlameIcon() {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const reducedMotion = useReducedMotion()
 
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
@@ -50,9 +51,9 @@ export default function Navbar() {
         scrolled ? 'bg-[#faf3e8]/95 backdrop-blur-xl shadow-[0_1px_0_rgba(26,21,32,0.05)]' : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <button onClick={() => scrollTo('hero')} className="flex items-center gap-2 group">
+          <button onClick={() => scrollTo('hero')} className="flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c41e3a] focus-visible:ring-offset-2 rounded-sm">
             <motion.div
-              animate={{ rotate: [0, -5, 5, 0] }}
+              animate={reducedMotion ? {} : { rotate: [0, -5, 5, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}>
               <FlameIcon />
             </motion.div>
@@ -65,9 +66,9 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             {links.map((link) => (
               <button key={link.id} onClick={() => scrollTo(link.id)}
-                className="relative text-sm tracking-wider uppercase text-[#1a1520]/60 hover:text-[#c41e3a] transition-colors duration-300 group py-1">
+                className="relative text-sm tracking-wider uppercase text-[#1a1520]/60 hover:text-[#c41e3a] transition-colors duration-300 group py-1 focus-visible:outline-none focus-visible:text-[#c41e3a]">
                 {link.label}
-                <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c41e3a] group-hover:w-full transition-all duration-300"/>
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-[#c41e3a] group-hover:w-full group-focus-visible:w-full transition-all duration-300"/>
               </button>
             ))}
           </div>

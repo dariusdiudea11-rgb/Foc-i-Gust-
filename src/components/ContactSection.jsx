@@ -98,14 +98,16 @@ export default function ContactSection() {
                 Urmărește-ne pe rețelele sociale pentru programul actualizat, locații noi și surprize culinare.
               </p>
               <div className="flex gap-4">
-                <a href="#"
-                  className="flex-1 flex items-center justify-center gap-2.5 bg-white/[0.06] border border-white/[0.08] text-[#faf3e8]/70 hover:text-[#faf3e8] hover:border-[#c41e3a]/30 hover:bg-[#c41e3a]/10 rounded-xl py-3 text-sm font-medium transition-all duration-300">
+                <div role="button" aria-disabled="true" aria-label="Facebook — Em curând"
+                  className="relative flex-1 flex items-center justify-center gap-2.5 bg-white/[0.06] border border-white/[0.08] text-[#faf3e8]/40 rounded-xl py-3 text-sm font-medium cursor-default select-none">
                   <FbIcon/> Facebook
-                </a>
-                <a href="#"
-                  className="flex-1 flex items-center justify-center gap-2.5 bg-white/[0.06] border border-white/[0.08] text-[#faf3e8]/70 hover:text-[#faf3e8] hover:border-[#c41e3a]/30 hover:bg-[#c41e3a]/10 rounded-xl py-3 text-sm font-medium transition-all duration-300">
+                  <span className="absolute -top-2 -right-1 bg-[#c41e3a]/80 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider">Em curând</span>
+                </div>
+                <div role="button" aria-disabled="true" aria-label="Instagram — Em curând"
+                  className="relative flex-1 flex items-center justify-center gap-2.5 bg-white/[0.06] border border-white/[0.08] text-[#faf3e8]/40 rounded-xl py-3 text-sm font-medium cursor-default select-none">
                   <IgIcon/> Instagram
-                </a>
+                  <span className="absolute -top-2 -right-1 bg-[#c41e3a]/80 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider">Em curând</span>
+                </div>
               </div>
             </div>
 

@@ -11,6 +11,12 @@ export default function useCountUp(target, duration = 2000) {
     if (!inView || started.current) return
     started.current = true
 
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reducedMotion) {
+      setCount(target)
+      return
+    }
+
     const start = performance.now()
 
     function tick(now) {
