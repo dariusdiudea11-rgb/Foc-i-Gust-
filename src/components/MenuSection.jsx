@@ -3,10 +3,10 @@ import { motion, useInView, useMotionValue, useSpring, useTransform } from 'fram
 import { GlassWater, Droplets, Beer, Flame } from 'lucide-react'
 
 const gratar = [
-  { name: 'Mici tradițional (3 buc)',       price: 25, desc: 'Rețetă de familie, carne de vită și porc, pe cărbuni',   accent: 'from-[#c41e3a]/20 to-[#e85068]/10' },
-  { name: 'Ceafă de porc (200g)',            price: 30, desc: 'Ceafă marinată, gătită lent pe cărbuni',                 accent: 'from-[#9a1730]/20 to-[#c41e3a]/10' },
-  { name: 'Piept de pui (200g)',             price: 25, desc: 'Piept suculent, condimentat tradițional',                accent: 'from-[#c41e3a]/15 to-[#ff8c42]/10' },
-  { name: 'Cârnăciori tradiționali (3 buc)', price: 20, desc: 'Condimente naturale, rețetă proprie',                    accent: 'from-[#e63950]/20 to-[#9a1730]/10' },
+  { name: 'Mici tradițional (3 buc)',       price: 25, desc: 'Rețetă de familie, carne de vită și porc, pe cărbuni',   accent: 'from-[#c41e3a]/20 to-[#e85068]/10', img: 'https://images.pexels.com/photos/162753/pexels-photo-162753.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Ceafă de porc (200g)',            price: 30, desc: 'Ceafă marinată, gătită lent pe cărbuni',                 accent: 'from-[#9a1730]/20 to-[#c41e3a]/10', img: 'https://images.pexels.com/photos/3997609/pexels-photo-3997609.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Piept de pui (200g)',             price: 25, desc: 'Piept suculent, condimentat tradițional',                accent: 'from-[#c41e3a]/15 to-[#ff8c42]/10', img: 'https://images.pexels.com/photos/262945/pexels-photo-262945.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Cârnăciori tradiționali (3 buc)', price: 20, desc: 'Condimente naturale, rețetă proprie',                    accent: 'from-[#e63950]/20 to-[#9a1730]/10', img: 'https://images.pexels.com/photos/1275692/pexels-photo-1275692.jpeg?auto=compress&cs=tinysrgb&w=800' },
 ]
 
 const bauturi = [
@@ -55,9 +55,18 @@ function GratarCard({ item, index, inView }) {
       className="group bg-white/80 border border-[#1a1520]/5 rounded-2xl overflow-hidden hover:border-[#c41e3a]/20 hover:shadow-[0_24px_48px_rgba(26,21,32,0.10)] transition-all duration-400 cursor-default">
       {/* Image */}
       <div className={`aspect-video overflow-hidden relative bg-gradient-to-br ${item.accent}`}>
-        <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-110">
-          <Flame size={36} className="text-[#c41e3a]/30" strokeWidth={1}/>
-        </div>
+        {item.img ? (
+          <img
+            src={item.img}
+            alt={item.name}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+            loading="lazy"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-110">
+            <Flame size={36} className="text-[#c41e3a]/30" strokeWidth={1}/>
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"/>
       </div>
       <div className="p-6" style={{ transform: 'translateZ(20px)' }}>
@@ -150,8 +159,13 @@ export default function MenuSection() {
           initial={{ opacity: 0, y: 24 }} animate={garniturInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
           className="bg-white/80 border border-[#1a1520]/5 rounded-2xl overflow-hidden flex flex-col sm:flex-row hover:border-[#c41e3a]/20 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(26,21,32,0.08)] transition-all duration-400 mb-16">
-          <div className="sm:w-2/5 aspect-video sm:aspect-auto flex items-center justify-center bg-gradient-to-br from-[#ff8c42]/15 to-[#c41e3a]/8">
-            <Flame size={36} className="text-[#c41e3a]/30" strokeWidth={1}/>
+          <div className="sm:w-2/5 aspect-video sm:aspect-auto overflow-hidden relative bg-gradient-to-br from-[#ff8c42]/15 to-[#c41e3a]/8">
+            <img
+              src="https://images.pexels.com/photos/2962450/pexels-photo-2962450.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt="Cartofi prăjiți"
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+            />
           </div>
           <div className="sm:w-3/5 p-6 flex flex-col justify-center">
             <p className="text-[#8a7e6d] text-xs uppercase tracking-widest mb-2">Garnitură</p>

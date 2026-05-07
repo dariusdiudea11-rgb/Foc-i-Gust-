@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion'
-import { CheckCircle, Flame } from 'lucide-react'
+import { CheckCircle } from 'lucide-react'
 import StaggerText from './ui/StaggerText'
 
 const fieldClass =
@@ -62,10 +62,16 @@ export default function CateringSection() {
               </li>
             ))}
           </ul>
-          <div ref={imgRef} className="aspect-[4/3] bg-gradient-to-br from-[#c41e3a]/15 to-[#231e2a] rounded-2xl overflow-hidden border border-white/[0.05] mt-2 relative">
-            <motion.div style={{ y: imgY }} className="absolute inset-0 flex items-center justify-center">
-              <Flame size={48} className="text-[#c41e3a]/25" strokeWidth={0.8}/>
+          <div ref={imgRef} className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.05] mt-2 relative">
+            <motion.div style={{ y: imgY }} className="absolute inset-0">
+              <img
+                src="https://images.pexels.com/photos/94440/pexels-photo-94440.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Catering la grătar"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
             </motion.div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none rounded-2xl"/>
           </div>
         </motion.div>
 

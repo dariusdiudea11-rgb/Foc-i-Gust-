@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { Flame } from 'lucide-react'
 import useCountUp from '../hooks/useCountUp'
 
 const statsDef = [
@@ -83,10 +84,11 @@ export default function AboutSection() {
           <div className="relative">
             <div className="absolute inset-0 border-2 border-[#c41e3a]/20 rounded-2xl translate-x-4 translate-y-4 pointer-events-none"/>
             <div ref={imgRef} className="relative aspect-[3/4] bg-[#231e2a] rounded-2xl overflow-hidden flex items-center justify-center">
-              <motion.div style={{ y: imgY }} className="absolute inset-0 flex items-center justify-center">
-                <p className="text-[#7a7080] text-xs text-center px-6 leading-relaxed">
-                  [POZĂ: Noi doi la stand]
-                </p>
+              <motion.div style={{ y: imgY }} className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                <div className="w-16 h-16 rounded-full border border-[#c41e3a]/20 flex items-center justify-center">
+                  <Flame size={24} className="text-[#c41e3a]/30" strokeWidth={1}/>
+                </div>
+                <p className="text-[#4a4050] text-xs tracking-widest uppercase">Fotografie în curând</p>
               </motion.div>
             </div>
             <div className="mt-3 px-4 py-2 bg-[#c41e3a]/10 rounded-lg inline-flex">
