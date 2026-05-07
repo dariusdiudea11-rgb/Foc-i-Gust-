@@ -3,7 +3,7 @@ import { motion, useInView, useMotionValue, useSpring, useTransform } from 'fram
 import { GlassWater, Droplets, Beer, Flame } from 'lucide-react'
 
 const gratar = [
-  { name: 'Mici tradițional (3 buc)',       price: 25, desc: 'Rețetă de familie, carne de vită și porc, pe cărbuni',   accent: 'from-[#c41e3a]/20 to-[#e85068]/10', img: 'https://images.pexels.com/photos/2935022/pexels-photo-2935022.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Mici tradițional (3 buc)',       price: 25, desc: 'Rețetă de familie, carne de vită și porc, pe cărbuni',   accent: 'from-[#c41e3a]/20 to-[#e85068]/10', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Mititei-Mici.jpg/800px-Mititei-Mici.jpg' },
   { name: 'Ceafă de porc (200g)',            price: 30, desc: 'Ceafă marinată, gătită lent pe cărbuni',                 accent: 'from-[#9a1730]/20 to-[#c41e3a]/10', img: 'https://images.pexels.com/photos/3997609/pexels-photo-3997609.jpeg?auto=compress&cs=tinysrgb&w=800' },
   { name: 'Piept de pui (200g)',             price: 25, desc: 'Piept suculent, condimentat tradițional',                accent: 'from-[#c41e3a]/15 to-[#ff8c42]/10', img: 'https://images.pexels.com/photos/262945/pexels-photo-262945.jpeg?auto=compress&cs=tinysrgb&w=800' },
   { name: 'Cârnăciori tradiționali (3 buc)', price: 20, desc: 'Condimente naturale, rețetă proprie',                    accent: 'from-[#e63950]/20 to-[#9a1730]/10', img: 'https://images.pexels.com/photos/1857732/pexels-photo-1857732.jpeg?auto=compress&cs=tinysrgb&w=800' },
