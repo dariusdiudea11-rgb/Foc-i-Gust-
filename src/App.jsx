@@ -4,7 +4,6 @@ import Hero from './components/Hero'
 import Carousel3D from './components/Carousel3D'
 import AboutSection from './components/AboutSection'
 import MenuSection from './components/MenuSection'
-import CalendarSection from './components/CalendarSection'
 import CateringSection from './components/CateringSection'
 import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
@@ -29,7 +28,6 @@ function Site() {
       <MenuSection />
       <RedBand />
       <WatermarkBand variant="dark" text="TRADIȚIA CARE ARDE GUSTUL CARE RĂMÂNE" />
-      <CalendarSection />
       <OasOrnament variant="light" />
       <CateringSection />
       <OasOrnament variant="dark" />

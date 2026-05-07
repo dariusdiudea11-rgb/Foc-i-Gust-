@@ -3,8 +3,7 @@ import { motion, AnimatePresence, useScroll, useSpring, useReducedMotion } from 
 
 const links = [
   { label: 'Meniu',    id: 'meniu' },
-  { label: 'Calendar', id: 'calendar' },
-  { label: 'Catering',   id: 'catering' },
+  { label: 'Catering', id: 'catering' },
   { label: 'Contact',    id: 'contact' },
 ]
 
