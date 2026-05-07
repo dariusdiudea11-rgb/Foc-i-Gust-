@@ -4,7 +4,6 @@ import Hero from './components/Hero'
 import Carousel3D from './components/Carousel3D'
 import AboutSection from './components/AboutSection'
 import MenuSection from './components/MenuSection'
-import EquipmentSection from './components/EquipmentSection'
 import CalendarSection from './components/CalendarSection'
 import CateringSection from './components/CateringSection'
 import ContactSection from './components/ContactSection'
@@ -29,7 +28,6 @@ function Site() {
       <WatermarkBand variant="dark" text="FOCUL REAL DĂ GUSTUL REAL" />
       <MenuSection />
       <RedBand />
-      <EquipmentSection />
       <WatermarkBand variant="dark" text="TRADIȚIA CARE ARDE GUSTUL CARE RĂMÂNE" />
       <CalendarSection />
       <OasOrnament variant="light" />

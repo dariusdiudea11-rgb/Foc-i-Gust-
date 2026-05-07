@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useSpring, useReducedMotion } from 'framer-motion'
 
 const links = [
-  { label: 'Meniu',      id: 'meniu' },
-  { label: 'Echipament', id: 'echipament' },
-  { label: 'Calendar',   id: 'calendar' },
+  { label: 'Meniu',    id: 'meniu' },
+  { label: 'Calendar', id: 'calendar' },
   { label: 'Catering',   id: 'catering' },
   { label: 'Contact',    id: 'contact' },
 ]
