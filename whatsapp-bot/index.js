@@ -36,9 +36,10 @@ const SELF_JID = `${OWNER_PHONE}@s.whatsapp.net`
 
 if (!existsSync(AUTH_PATH)) mkdirSync(AUTH_PATH, { recursive: true })
 
-// ── HTTP Health Server ─────────────────────────────────────────────
+// ── HTTP Server ────────────────────────────────────────────────────
 
 let isConnected = false
+let currentPairingCode = null
 
 const server = http.createServer((req, res) => {
   if (req.url === '/health') {
@@ -46,6 +47,32 @@ const server = http.createServer((req, res) => {
     res.end(JSON.stringify({ status: 'ok', connected: isConnected }))
     return
   }
+
+  if (req.url === '/cod') {
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+    if (isConnected) {
+      res.end(`<!DOCTYPE html><html><body style="font-family:sans-serif;text-align:center;padding:60px;background:#0a0a0a;color:#25D366">
+        <h1>✅ Bot conectat!</h1>
+        <p style="color:#aaa">WhatsApp este conectat cu succes. Poți folosi botul din Mesaje Salvate.</p>
+      </body></html>`)
+    } else if (currentPairingCode) {
+      res.end(`<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="refresh" content="30"></head>
+        <body style="font-family:sans-serif;text-align:center;padding:60px;background:#0a0a0a;color:white">
+        <h2 style="color:#aaa">Cod asociere WhatsApp</h2>
+        <div style="font-size:52px;font-weight:bold;letter-spacing:10px;color:#25D366;background:#111;padding:30px;border-radius:16px;margin:30px auto;max-width:400px">${currentPairingCode}</div>
+        <p>WhatsApp → <b>Dispozitive conectate</b> → <b>Conectează un dispozitiv</b><br>→ <b>Asociază cu numărul de telefon</b> → introdu codul</p>
+        <p style="color:#555;font-size:13px">Pagina se reîmprospătează automat la 30s</p>
+      </body></html>`)
+    } else {
+      res.end(`<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="refresh" content="5"></head>
+        <body style="font-family:sans-serif;text-align:center;padding:60px;background:#0a0a0a;color:white">
+        <h2>Se generează codul...</h2>
+        <p style="color:#aaa">Reîmprospătează pagina în câteva secunde.</p>
+      </body></html>`)
+    }
+    return
+  }
+
   res.writeHead(404)
   res.end('Not found')
 })
@@ -86,9 +113,10 @@ async function connectToWhatsApp() {
     await new Promise(r => setTimeout(r, 3000))
     try {
       const code = await sock.requestPairingCode(OWNER_PHONE)
+      currentPairingCode = code
       logger.info('════════════════════════════════════════')
       logger.info(`COD ASOCIERE WHATSAPP: ${code}`)
-      logger.info('Mergi în WhatsApp → Dispozitive conectate → Conectează un dispozitiv → Asociază cu numărul de telefon → introdu codul de mai sus')
+      logger.info('Deschide URL-ul public al botului + /cod pentru a vedea codul (ex: https://bot.railway.app/cod)')
       logger.info('════════════════════════════════════════')
     } catch (err) {
       logger.error({ err }, 'Nu am putut genera codul de asociere')
