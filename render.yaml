@@ -1,0 +1,22 @@
+services:
+  - type: worker
+    name: foc-gust-telegram-bot
+    runtime: node
+    rootDir: telegram-bot
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: OWNER_TELEGRAM_ID
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: DB_PATH
+        value: /data/db.json
+    disk:
+      name: bot-data
+      mountPath: /data
+      sizeGB: 1
