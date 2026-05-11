@@ -107,20 +107,27 @@ async function connectToWhatsApp() {
     generateHighQualityLinkPreview: false,
   })
 
-  // Folosim Pairing Code în loc de QR — mai ușor pe telefon
+  // Folosim Pairing Code în loc de QR — reînnoit automat la fiecare 25s
   if (!state.creds.registered) {
-    // Așteaptă puțin ca socket-ul să fie gata
     await new Promise(r => setTimeout(r, 3000))
-    try {
-      const code = await sock.requestPairingCode(OWNER_PHONE)
-      currentPairingCode = code
-      logger.info('════════════════════════════════════════')
-      logger.info(`COD ASOCIERE WHATSAPP: ${code}`)
-      logger.info('Deschide URL-ul public al botului + /cod pentru a vedea codul (ex: https://bot.railway.app/cod)')
-      logger.info('════════════════════════════════════════')
-    } catch (err) {
-      logger.error({ err }, 'Nu am putut genera codul de asociere')
+
+    const requestCode = async () => {
+      if (isConnected) return
+      try {
+        const code = await sock.requestPairingCode(OWNER_PHONE)
+        currentPairingCode = code
+        logger.info(`COD ASOCIERE WHATSAPP: ${code} — vizibil la /cod`)
+      } catch (err) {
+        logger.warn({ err }, 'Nu am putut genera codul (va reîncerca)')
+      }
     }
+
+    await requestCode()
+
+    const codeInterval = setInterval(async () => {
+      if (isConnected) { clearInterval(codeInterval); return }
+      await requestCode()
+    }, 25_000)
   }
 
   sock.ev.on('connection.update', async update => {
