@@ -80,11 +80,26 @@ async function connectToWhatsApp() {
     generateHighQualityLinkPreview: false,
   })
 
+  // Folosim Pairing Code în loc de QR — mai ușor pe telefon
+  if (!state.creds.registered) {
+    // Așteaptă puțin ca socket-ul să fie gata
+    await new Promise(r => setTimeout(r, 3000))
+    try {
+      const code = await sock.requestPairingCode(OWNER_PHONE)
+      logger.info('════════════════════════════════════════')
+      logger.info(`COD ASOCIERE WHATSAPP: ${code}`)
+      logger.info('Mergi în WhatsApp → Dispozitive conectate → Conectează un dispozitiv → Asociază cu numărul de telefon → introdu codul de mai sus')
+      logger.info('════════════════════════════════════════')
+    } catch (err) {
+      logger.error({ err }, 'Nu am putut genera codul de asociere')
+    }
+  }
+
   sock.ev.on('connection.update', async update => {
     const { connection, lastDisconnect, qr } = update
 
     if (qr) {
-      logger.info('─── Scanează QR-ul de mai jos în WhatsApp → Dispozitive conectate → Conectează un dispozitiv ───')
+      logger.info('(QR disponibil dacă preferi să scanezi în loc de cod)')
       QRCode.generate(qr, { small: true })
     }
 
