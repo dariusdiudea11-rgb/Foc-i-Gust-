@@ -1,0 +1,10 @@
+[build]
+builder = "nixpacks"
+buildCommand = "cd whatsapp-bot && npm install"
+
+[deploy]
+startCommand = "cd whatsapp-bot && node index.js"
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 5
