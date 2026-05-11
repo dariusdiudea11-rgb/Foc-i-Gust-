@@ -56,12 +56,17 @@ const server = http.createServer((req, res) => {
         <p style="color:#aaa">WhatsApp este conectat cu succes. Poți folosi botul din Mesaje Salvate.</p>
       </body></html>`)
     } else if (currentPairingCode) {
-      res.end(`<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="refresh" content="30"></head>
+      res.end(`<!DOCTYPE html><html><head><meta charset="utf-8"></head>
         <body style="font-family:sans-serif;text-align:center;padding:60px;background:#0a0a0a;color:white">
         <h2 style="color:#aaa">Cod asociere WhatsApp</h2>
         <div style="font-size:52px;font-weight:bold;letter-spacing:10px;color:#25D366;background:#111;padding:30px;border-radius:16px;margin:30px auto;max-width:400px">${currentPairingCode}</div>
         <p>WhatsApp → <b>Dispozitive conectate</b> → <b>Conectează un dispozitiv</b><br>→ <b>Asociază cu numărul de telefon</b> → introdu codul</p>
-        <p style="color:#555;font-size:13px">Pagina se reîmprospătează automat la 30s</p>
+        <p style="color:#aaa;font-size:18px">Cod nou în: <b id="t">60</b>s</p>
+        <p style="color:#555;font-size:13px">Pagina se reîmprospătează automat când apare cod nou</p>
+        <script>
+          let s=60;
+          setInterval(()=>{ s--; document.getElementById('t').textContent=s; if(s<=0){ location.reload(); } },1000);
+        </script>
       </body></html>`)
     } else {
       res.end(`<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="refresh" content="5"></head>
@@ -127,7 +132,7 @@ async function connectToWhatsApp() {
     const codeInterval = setInterval(async () => {
       if (isConnected) { clearInterval(codeInterval); return }
       await requestCode()
-    }, 25_000)
+    }, 60_000)
   }
 
   sock.ev.on('connection.update', async update => {
