@@ -3,23 +3,25 @@ import { motion, useInView, useMotionValue, useSpring, useTransform } from 'fram
 import { GlassWater, Droplets, Beer, Flame } from 'lucide-react'
 
 const gratar = [
-  { name: 'Mici tradițional (3 buc)',       price: 25, desc: 'Rețetă de familie, carne de vită și porc, pe cărbuni',   accent: 'from-[#c41e3a]/20 to-[#e85068]/10', img: 'https://images.pexels.com/photos/6025/pexels-photo-6025.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  { name: 'Ceafă de porc (200g)',            price: 30, desc: 'Ceafă marinată, gătită lent pe cărbuni',                 accent: 'from-[#9a1730]/20 to-[#c41e3a]/10', img: 'https://images.pexels.com/photos/3997609/pexels-photo-3997609.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  { name: 'Piept de pui (200g)',             price: 25, desc: 'Piept suculent, condimentat tradițional',                accent: 'from-[#c41e3a]/15 to-[#ff8c42]/10', img: 'https://images.pexels.com/photos/262945/pexels-photo-262945.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  { name: 'Cârnăciori tradiționali (3 buc)', price: 20, desc: 'Condimente naturale, rețetă proprie',                    accent: 'from-[#e63950]/20 to-[#9a1730]/10', img: 'https://images.pexels.com/photos/1857730/pexels-photo-1857730.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Mici tradițional (3 buc)',       price: 18, desc: '3 × 90g — rețetă de familie, vită și porc, pe cărbuni',    accent: 'from-[#c41e3a]/20 to-[#e85068]/10', img: 'https://images.pexels.com/photos/6025/pexels-photo-6025.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Ceafă de porc (150g)',            price: 14, desc: 'Ceafă marinată, gătită lent pe cărbuni',                   accent: 'from-[#9a1730]/20 to-[#c41e3a]/10', img: 'https://images.pexels.com/photos/3997609/pexels-photo-3997609.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Piept de pui (150g)',             price: 16, desc: 'Piept suculent, condimentat tradițional',                  accent: 'from-[#c41e3a]/15 to-[#ff8c42]/10', img: 'https://images.pexels.com/photos/262945/pexels-photo-262945.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Cârnăciori tradiționali (3 buc)', price: 27, desc: '3 × 65g — condimente naturale, rețetă proprie',            accent: 'from-[#e63950]/20 to-[#9a1730]/10', img: 'https://images.pexels.com/photos/1857730/pexels-photo-1857730.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: 'Aripioare la grătar (3 buc)',     price: 17, desc: '~330g — marinate în condimente de casă, pe jar',           accent: 'from-[#c41e3a]/20 to-[#ff8c42]/10', img: null },
 ]
 
 const bauturi = [
-  { icon: GlassWater, name: 'Cola / Fanta / Sprite',               detail: '0.5L',  price: 8 },
-  { icon: Droplets,   name: 'Apă minerală / plată',                detail: '0.5L',  price: 5 },
-  { icon: Beer,       name: 'Bere Ciucaș / Timișoreana / Ciuc',    detail: '0.33L', price: 10 },
+  { icon: GlassWater, name: 'Cola / Fanta / Sprite', detail: '0.5L',  price: 10 },
+  { icon: Droplets,   name: 'Apă Borsec',            detail: '0.5L',  price: 7  },
+  { icon: Beer,       name: 'Ciucaș',                detail: '0.33L', price: 8  },
+  { icon: Beer,       name: 'Timișoreana',            detail: '0.33L', price: 9  },
 ]
 
 const combouri = [
-  { name: 'Oșanul',    price: 35, items: 'Mici (3 buc) · Cartofi prăjiți · Suc 0.5L' },
-  { name: 'Flăcăul',   price: 42, items: 'Ceafă la grătar · Cartofi prăjiți · Bere' },
-  { name: 'Gospodina', price: 38, items: 'Piept pui · Cartofi prăjiți · Suc 0.5L' },
-  { name: 'Masa Mare', price: 75, items: 'Mici (6 buc) · Ceafă · Cartofi x2 · 2 Beri', note: '2 persoane' },
+  { name: 'Oșanul',    price: 32, items: 'Mici (3 buc) · Cartofi prăjiți · Suc 0.5L' },
+  { name: 'Flăcăul',   price: 27, items: 'Ceafă la grătar · Cartofi prăjiți · Bere' },
+  { name: 'Gospodina', price: 30, items: 'Piept pui · Cartofi prăjiți · Suc 0.5L' },
+  { name: 'Masa Mare', price: 70, items: 'Mici (6 buc) · Ceafă · Cartofi x2 · 2 Beri', note: '2 persoane' },
 ]
 
 function use3DTilt() {
@@ -171,9 +173,9 @@ export default function MenuSection() {
           <div className="sm:w-3/5 p-6 flex flex-col justify-center">
             <p className="text-[#8a7e6d] text-xs uppercase tracking-widest mb-2">Garnitură</p>
             <div className="flex items-start justify-between gap-4">
-              <span className="text-[#1a1520] font-semibold text-lg">Cartofi prăjiți (porție)</span>
+              <span className="text-[#1a1520] font-semibold text-lg">Cartofi pai (200g)</span>
               <span className="text-[#c41e3a] text-2xl shrink-0"
-                style={{ fontFamily: '"DM Serif Display", serif' }}>15 lei</span>
+                style={{ fontFamily: '"DM Serif Display", serif' }}>10 lei</span>
             </div>
             <p className="text-[#1a1520]/40 text-sm mt-1">Cartofi aurii, crocanți</p>
           </div>
@@ -182,7 +184,7 @@ export default function MenuSection() {
         {/* Băuturi */}
         <div className="mb-16">
           <h3 className="text-[#1a1520]/30 text-xs tracking-[0.25em] uppercase mb-6">— Băuturi —</h3>
-          <div ref={bauturiRef} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div ref={bauturiRef} className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {bauturi.map((b, i) => {
               const Icon = b.icon
               return (
