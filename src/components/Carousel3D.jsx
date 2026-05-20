@@ -1,45 +1,41 @@
 import { useState, useEffect, useRef } from 'react'
 
 const PRODUCTS = [
-  { name: "Mici Tradițional",  pieces: "3 bucăți",             price: "25 lei", desc: "Rețetă de familie, carne de vită și porc, preparați pe cărbuni",    emoji: "🔥" },
-  { name: "Ceafă de Porc",     pieces: "200g",                 price: "30 lei", desc: "Ceafă marinată, gătită lent pe cărbuni cu condimente naturale",      emoji: "🥩" },
-  { name: "Piept de Pui",      pieces: "200g",                 price: "25 lei", desc: "Piept suculent, condimentat tradițional pe jar de cărbuni",          emoji: "🍗" },
-  { name: "Cârnăciori",        pieces: "3 bucăți",             price: "20 lei", desc: "Cârnăciori cu condimente naturale, rețetă proprie de familie",       emoji: "🌭" },
-  { name: "Cartofi Prăjiți",   pieces: "porție",               price: "15 lei", desc: "Cartofi aurii, crocanți, porție generoasă",                          emoji: "🍟" },
-  { name: "Combo Oșanul",      pieces: "mici + cartofi + suc", price: "35 lei", desc: "Mici tradițional, cartofi prăjiți și suc la alegere",                emoji: "⭐" },
+  { name: 'Mici Tradițional',    pieces: '3 × 90g',               price: '18 lei', desc: 'Rețetă de familie, carne de vită și porc, preparați pe cărbuni',  category: 'GRĂTAR'    },
+  { name: 'Ceafă de Porc',       pieces: '150g',                  price: '14 lei', desc: 'Ceafă marinată, gătită lent pe cărbuni cu condimente naturale',    category: 'GRĂTAR'    },
+  { name: 'Piept de Pui',        pieces: '150g',                  price: '16 lei', desc: 'Piept suculent, condimentat tradițional pe jar de cărbuni',        category: 'GRĂTAR'    },
+  { name: 'Cârnăciori',          pieces: '3 × 65g',               price: '27 lei', desc: 'Cârnăciori cu condimente naturale, rețetă proprie de familie',     category: 'GRĂTAR'    },
+  { name: 'Aripioare la Grătar', pieces: '3 buc · ~330g',         price: '17 lei', desc: 'Aripioare marinate în condimente de casă, gătite pe jar',          category: 'GRĂTAR'    },
+  { name: 'Cartofi Pai',         pieces: '200g',                  price: '10 lei', desc: 'Cartofi aurii, crocanți — garnitura perfectă la orice grătar',     category: 'GARNITURĂ' },
+  { name: 'Combo Oșanul',        pieces: 'Mici · Cartofi · Suc', price: '32 lei', desc: 'Mici tradițional, cartofi prăjiți și suc la alegere',              category: 'COMBO'     },
 ]
 
 const TOTAL = PRODUCTS.length
 const STEP  = 360 / TOTAL
 
-/* ─── sub-components ─── */
+const ACCENT = {
+  'GRĂTAR':    { line: '#c41e3a', text: 'rgba(196,30,58,0.65)'  },
+  'GARNITURĂ': { line: '#d07030', text: 'rgba(208,112,48,0.65)' },
+  'COMBO':     { line: '#a07820', text: 'rgba(160,120,32,0.65)' },
+}
 
 function FlameIcon() {
   return (
     <svg width="12" height="18" viewBox="0 0 12 18" fill="none" aria-hidden="true">
-      <path
-        d="M6 0C6 0 10 4 10 7C10 7 8.5 6 7.5 5C7.5 5 9 8 7 10C7 10 7 8.5 5.5 7.5C5.5 7.5 6.5 11 4 13C4 13 4.5 10.5 3 10C3 10 1 12.5 2.5 15C2.5 15 0 13.5 0 10.5C0 7.5 2 6 2 6C2 6 1.5 9 3 10C3 10 2 6 6 0Z"
-        fill="#c41e3a"
-        opacity="0.5"
-      />
+      <path d="M6 0C6 0 10 4 10 7C10 7 8.5 6 7.5 5C7.5 5 9 8 7 10C7 10 7 8.5 5.5 7.5C5.5 7.5 6.5 11 4 13C4 13 4.5 10.5 3 10C3 10 1 12.5 2.5 15C2.5 15 0 13.5 0 10.5C0 7.5 2 6 2 6C2 6 1.5 9 3 10C3 10 2 6 6 0Z" fill="#c41e3a" opacity="0.5"/>
     </svg>
   )
 }
 
 function OasOrnament() {
   return (
-    <svg viewBox="0 0 120 16" width="120" fill="none" aria-hidden="true"
-      style={{ display: 'block', margin: '0 auto' }}>
+    <svg viewBox="0 0 120 16" width="120" fill="none" aria-hidden="true" style={{ display: 'block', margin: '0 auto' }}>
       {[0, 25, 50, 75, 100].map((x) => (
-        <path key={x}
-          d={`M${x+10} 8L${x} 0L${x+10} 8L${x+20} 0L${x+10} 8L${x+20} 16L${x+10} 8L${x} 16L${x+10} 8Z`}
-          stroke="rgba(196,30,58,0.15)" strokeWidth="0.8" fill="none" />
+        <path key={x} d={`M${x+10} 8L${x} 0L${x+10} 8L${x+20} 0L${x+10} 8L${x+20} 16L${x+10} 8L${x} 16L${x+10} 8Z`} stroke="rgba(196,30,58,0.15)" strokeWidth="0.8" fill="none"/>
       ))}
     </svg>
   )
 }
-
-/* ─── main component ─── */
 
 export default function Carousel3D() {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -57,20 +53,17 @@ export default function Carousel3D() {
   const isMobile = winW < 768
   const isLarge  = winW >= 1200
 
-  /* responsive card dimensions */
-  const cardW    = isMobile ? 200 : isLarge ? 260 : 240
-  const cardH    = isMobile ? 300 : isLarge ? 360 : 350
-  const radius   = isMobile ? 250 : isLarge ? 380 : 320
-  const sceneH   = isMobile ? 380 : isLarge ? 500 : 450
+  const cardW  = isMobile ? 200 : isLarge ? 260 : 240
+  const cardH  = isMobile ? 310 : isLarge ? 370 : 360
+  const radius = isMobile ? 300 : isLarge ? 440 : 380
+  const sceneH = isMobile ? 390 : isLarge ? 510 : 460
 
-  /* ── inject keyframes once ── */
   useEffect(() => {
     const id = 'carousel3d-styles'
     if (!document.getElementById(id)) {
       const style = document.createElement('style')
       style.id = id
       style.textContent = `
-        @keyframes carousel3d-spin    { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
         @keyframes carousel3d-slideIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         @keyframes c3d-float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(25px,-15px)} }
         @keyframes c3d-float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,20px)} }
@@ -80,14 +73,12 @@ export default function Carousel3D() {
     }
   }, [])
 
-  /* ── window resize ── */
   useEffect(() => {
     const onResize = () => setWinW(window.innerWidth)
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  /* ── auto-rotate ── */
   useEffect(() => {
     const interval = setInterval(() => {
       if (autoRef.current) setActiveIndex(prev => (prev + 1) % TOTAL)
@@ -95,7 +86,6 @@ export default function Carousel3D() {
     return () => clearInterval(interval)
   }, [])
 
-  /* ── mouse parallax ── */
   useEffect(() => {
     const onMove = (e) => setMouse({
       x: (e.clientX / window.innerWidth)  * 2 - 1,
@@ -105,12 +95,10 @@ export default function Carousel3D() {
     return () => window.removeEventListener('mousemove', onMove)
   }, [])
 
-  /* ── navigation ── */
   const goTo = (i) => { setActiveIndex((i + TOTAL) % TOTAL); setAutoRotate(false) }
   const prev = () => goTo(activeIndex - 1)
   const next = () => goTo(activeIndex + 1)
 
-  /* ── drag / swipe ── */
   const onDragStart = (clientX) => { setIsDragging(true); dragStartX.current = clientX; setAutoRotate(false) }
   const onDragMove  = (clientX) => {
     if (!isDragging || dragStartX.current === null) return
@@ -125,25 +113,23 @@ export default function Carousel3D() {
   }
 
   const active = PRODUCTS[activeIndex]
+  const accent = ACCENT[active.category]
   const b1 = { x: mouse.x * 15, y: mouse.y * 10 }
   const b2 = { x: mouse.x * -10, y: mouse.y * -8 }
 
-  /* shared fade-in style builder */
-  const fadeIn = (delay = 0) => ({
-    animation: `carousel3d-slideIn 0.6s ease ${delay}s both`,
-  })
+  const fadeIn = (delay = 0) => ({ animation: `carousel3d-slideIn 0.6s ease ${delay}s both` })
 
   return (
     <div style={{
-      position:   'relative',
-      overflow:   'hidden',
-      background: '#faf3e8',
-      fontFamily: '"DM Sans", sans-serif',
+      position:      'relative',
+      overflow:      'hidden',
+      background:    '#faf3e8',
+      fontFamily:    '"DM Sans", sans-serif',
       paddingTop:    isMobile ? '60px' : '80px',
       paddingBottom: isMobile ? '60px' : '80px',
     }}>
 
-      {/* ══ Background layer ══ */}
+      {/* Background */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden', zIndex: 0 }}>
         <div style={{ position: 'absolute', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(196,30,58,0.06), transparent)', filter: 'blur(100px)', top: '10%', left: '5%', animation: 'c3d-float1 18s ease-in-out infinite', transform: `translate(${b1.x}px,${b1.y}px)`, transition: 'transform 0.1s linear' }}/>
         <div style={{ position: 'absolute', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(184,134,11,0.04), transparent)', filter: 'blur(80px)', bottom: '10%', right: '10%', animation: 'c3d-float2 22s ease-in-out infinite', transform: `translate(${b2.x}px,${b2.y}px)`, transition: 'transform 0.1s linear' }}/>
@@ -157,39 +143,23 @@ export default function Carousel3D() {
         </svg>
       </div>
 
-      {/* ══ Header ══ */}
+      {/* Header */}
       <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', marginBottom: isMobile ? '40px' : '56px', userSelect: 'none' }}>
-
-        {/* mini logo */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginBottom: '8px', ...fadeIn(0) }}>
           <span style={{ fontFamily: '"DM Serif Display", serif', fontSize: '18px', color: '#c41e3a' }}>Foc</span>
           <FlameIcon />
           <span style={{ fontFamily: '"DM Serif Display", serif', fontSize: '18px', color: '#1a1520' }}>Gust</span>
         </div>
-
-        {/* tagline */}
         <p style={{ fontSize: '11px', letterSpacing: '5px', color: 'rgba(196,30,58,0.5)', textTransform: 'uppercase', margin: '0 0 20px', ...fadeIn(0.1) }}>
           Stand de grătar tradițional
         </p>
-
-        {/* Oaș ornament */}
         <div style={{ marginBottom: '20px', ...fadeIn(0.2) }}>
           <OasOrnament />
         </div>
-
-        {/* title */}
-        <h2 style={{
-          fontFamily: '"DM Serif Display", serif',
-          fontSize:   `clamp(28px, 6vw, 52px)`,
-          lineHeight: 1.1,
-          margin:     '0 0 10px',
-          ...fadeIn(0.3),
-        }}>
+        <h2 style={{ fontFamily: '"DM Serif Display", serif', fontSize: 'clamp(28px, 6vw, 52px)', lineHeight: 1.1, margin: '0 0 10px', ...fadeIn(0.3) }}>
           <span style={{ color: '#1a1520' }}>Meniul </span>
           <span style={{ color: '#c41e3a' }}>Nostru</span>
         </h2>
-
-        {/* subtitle */}
         <p style={{ color: '#8a7e6d', fontSize: '14px', fontStyle: 'italic', margin: '0 0 6px', ...fadeIn(0.4) }}>
           Selectează un produs pentru detalii
         </p>
@@ -198,7 +168,7 @@ export default function Carousel3D() {
         </p>
       </div>
 
-      {/* ══ 3D carousel scene ══ */}
+      {/* 3D Carousel */}
       <div
         style={{ position: 'relative', height: `${sceneH}px`, perspective: '1200px', overflow: 'visible', cursor: isDragging ? 'grabbing' : 'grab', zIndex: 1, userSelect: 'none' }}
         onMouseDown={(e) => onDragStart(e.clientX)}
@@ -221,6 +191,7 @@ export default function Carousel3D() {
         }}>
           {PRODUCTS.map((product, i) => {
             const isActive = i === activeIndex
+            const cat = ACCENT[product.category]
             return (
               <div key={product.name}
                 onClick={() => { setActiveIndex(i); setAutoRotate(false) }}
@@ -231,10 +202,10 @@ export default function Carousel3D() {
                   left:           `${-cardW / 2}px`,
                   top:            `${-cardH / 2}px`,
                   transform:      `rotateY(${i * STEP}deg) translateZ(${radius}px)`,
-                  borderRadius:   '20px',
-                  background:     'linear-gradient(135deg, rgba(26,21,32,0.95), rgba(26,21,32,0.85))',
-                  border:         isActive ? '1px solid rgba(196,30,58,0.4)' : '1px solid rgba(255,255,255,0.06)',
-                  boxShadow:      isActive ? '0 30px 80px rgba(196,30,58,0.2), 0 0 40px rgba(196,30,58,0.1)' : 'none',
+                  borderRadius:   '16px',
+                  background:     'linear-gradient(160deg, rgba(26,21,32,0.97) 0%, rgba(30,24,36,0.96) 100%)',
+                  border:         isActive ? `1px solid ${cat.line}50` : '1px solid rgba(255,255,255,0.05)',
+                  boxShadow:      isActive ? `0 32px 80px rgba(0,0,0,0.4), 0 0 0 1px ${cat.line}20` : '0 8px 32px rgba(0,0,0,0.25)',
                   backdropFilter: 'blur(20px)',
                   overflow:       'hidden',
                   cursor:         isDragging ? 'grabbing' : 'pointer',
@@ -242,25 +213,57 @@ export default function Carousel3D() {
                   display:        'flex',
                   flexDirection:  'column',
                 }}>
-                {/* top reflection */}
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '80px', background: 'linear-gradient(180deg, rgba(255,255,255,0.04), transparent)', pointerEvents: 'none', zIndex: 3, borderRadius: '20px 20px 0 0' }}/>
 
-                {/* icon area */}
-                <div style={{ height: isMobile ? '110px' : '140px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', flexShrink: 0 }}>
-                  <div style={{ position: 'absolute', width: '120px', height: '120px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(196,30,58,0.12), transparent)', filter: 'blur(30px)' }}/>
-                  {isActive && <div style={{ position: 'absolute', width: '90px', height: '90px', border: '1px solid rgba(196,30,58,0.1)', borderRadius: '50%', animation: 'carousel3d-spin 20s linear infinite' }}/>}
-                  <span style={{ fontSize: isMobile ? '40px' : '52px', position: 'relative', zIndex: 2, filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.3))', lineHeight: 1 }}>
-                    {product.emoji}
+                {/* top accent bar */}
+                <div style={{ height: '3px', background: `linear-gradient(90deg, ${cat.line}, ${cat.line}20)`, flexShrink: 0 }}/>
+
+                {/* card body */}
+                <div style={{ padding: isMobile ? '16px 16px 14px' : '20px 20px 18px', flex: 1, display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
+
+                  {/* watermark number */}
+                  <span style={{
+                    position:      'absolute',
+                    right:         '-6px',
+                    bottom:        '-14px',
+                    fontFamily:    '"DM Serif Display", serif',
+                    fontSize:      isMobile ? '88px' : '108px',
+                    lineHeight:    1,
+                    color:         'rgba(250,243,232,0.025)',
+                    userSelect:    'none',
+                    pointerEvents: 'none',
+                  }}>
+                    {String(i + 1).padStart(2, '0')}
                   </span>
-                </div>
 
-                {/* text area */}
-                <div style={{ padding: '0 16px 16px', flex: 1, display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                  <div style={{ width: '30px', height: '2px', background: 'rgba(196,30,58,0.5)', marginBottom: '4px', flexShrink: 0 }}/>
-                  <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: isMobile ? '16px' : '20px', color: '#faf3e8', margin: 0, lineHeight: 1.2 }}>{product.name}</p>
-                  <p style={{ fontSize: '10px', color: 'rgba(250,243,232,0.35)', letterSpacing: '1px', textTransform: 'uppercase', margin: 0 }}>{product.pieces}</p>
-                  <p style={{ fontSize: '11px', color: 'rgba(250,243,232,0.4)', lineHeight: 1.5, margin: 0, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', flex: 1 }}>{product.desc}</p>
-                  <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: isMobile ? '22px' : '26px', color: '#c41e3a', textShadow: '0 0 20px rgba(196,30,58,0.3)', margin: '2px 0 0', lineHeight: 1 }}>{product.price}</p>
+                  {/* category label */}
+                  <p style={{ fontSize: '9px', letterSpacing: '3px', textTransform: 'uppercase', color: cat.text, margin: '0 0 8px', fontWeight: 600, flexShrink: 0 }}>
+                    {product.category}
+                  </p>
+
+                  {/* accent dash */}
+                  <div style={{ width: '20px', height: '1px', background: cat.line, opacity: 0.5, marginBottom: '10px', flexShrink: 0 }}/>
+
+                  {/* product name */}
+                  <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: isMobile ? '17px' : '20px', color: '#faf3e8', margin: '0 0 5px', lineHeight: 1.25, flexShrink: 0 }}>
+                    {product.name}
+                  </p>
+
+                  {/* gramaj / pieces */}
+                  <p style={{ fontSize: '10px', color: 'rgba(250,243,232,0.28)', letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 10px', flexShrink: 0 }}>
+                    {product.pieces}
+                  </p>
+
+                  {/* description */}
+                  <p style={{ fontSize: '11px', color: 'rgba(250,243,232,0.38)', lineHeight: 1.6, margin: 0, flex: 1, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                    {product.desc}
+                  </p>
+
+                  {/* price row */}
+                  <div style={{ marginTop: '14px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.06)', flexShrink: 0 }}>
+                    <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: isMobile ? '24px' : '30px', color: cat.line, margin: 0, lineHeight: 1, textShadow: `0 0 24px ${cat.line}50` }}>
+                      {product.price}
+                    </p>
+                  </div>
                 </div>
               </div>
             )
@@ -268,10 +271,9 @@ export default function Carousel3D() {
         </div>
       </div>
 
-      {/* ══ Navigation: buttons + dots ══ */}
+      {/* Navigation */}
       <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '24px', marginTop: '32px', userSelect: 'none' }}>
-          <NavBtn label="←" onClick={prev} size={isMobile ? 40 : 48} aria="Produs anterior" />
-
+        <NavBtn label="←" onClick={prev} size={isMobile ? 40 : 48} aria="Produs anterior" />
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           {PRODUCTS.map((_, i) => (
             <button key={i} onClick={() => goTo(i)}
@@ -280,18 +282,27 @@ export default function Carousel3D() {
             />
           ))}
         </div>
-
         <NavBtn label="→" onClick={next} size={isMobile ? 40 : 48} aria="Produs următor" />
       </div>
 
-      {/* ══ Active product detail ══ */}
+      {/* Active product detail panel */}
       <div key={activeIndex}
         style={{ position: 'relative', zIndex: 1, margin: '32px auto 0', maxWidth: '500px', padding: isMobile ? '24px 16px' : '32px 24px', textAlign: 'center', animation: 'carousel3d-slideIn 0.5s ease', userSelect: 'none' }}>
-        <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: isMobile ? '22px' : '28px', color: '#1a1520', margin: '0 0 10px' }}>{active.name}</p>
-        <p style={{ color: '#8a7e6d', fontSize: '14px', lineHeight: 1.6, margin: '0 0 16px' }}>{active.desc}</p>
-        <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: isMobile ? '28px' : '36px', color: '#c41e3a', textShadow: '0 0 30px rgba(196,30,58,0.15)', margin: '0 0 24px' }}>{active.price}</p>
-
-        {/* CTA button */}
+        <p style={{ fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', color: accent.text, margin: '0 0 8px', fontWeight: 600 }}>
+          {active.category}
+        </p>
+        <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: isMobile ? '22px' : '28px', color: '#1a1520', margin: '0 0 4px' }}>
+          {active.name}
+        </p>
+        <p style={{ fontSize: '11px', color: '#8a7e6d', textTransform: 'uppercase', letterSpacing: '2px', margin: '0 0 14px' }}>
+          {active.pieces}
+        </p>
+        <p style={{ color: '#8a7e6d', fontSize: '14px', lineHeight: 1.65, margin: '0 0 18px' }}>
+          {active.desc}
+        </p>
+        <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: isMobile ? '28px' : '36px', color: '#c41e3a', textShadow: '0 0 30px rgba(196,30,58,0.15)', margin: '0 0 24px' }}>
+          {active.price}
+        </p>
         <button
           onClick={scrollToMenu}
           style={{ background: '#c41e3a', color: 'white', border: 'none', padding: '14px 40px', borderRadius: '50px', fontSize: '13px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', boxShadow: '0 8px 30px rgba(196,30,58,0.3)', cursor: 'pointer', transition: 'transform 0.3s ease, box-shadow 0.3s ease', fontFamily: '"DM Sans", sans-serif' }}
@@ -302,7 +313,7 @@ export default function Carousel3D() {
         </button>
       </div>
 
-      {/* ══ Footer ornament ══ */}
+      {/* Footer ornament */}
       <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', marginTop: isMobile ? '40px' : '52px', userSelect: 'none' }}>
         <OasOrnament />
         <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: '14px', color: 'rgba(196,30,58,0.3)', fontStyle: 'italic', marginTop: '12px' }}>
@@ -310,7 +321,6 @@ export default function Carousel3D() {
         </p>
       </div>
 
-      {/* hint */}
       <p style={{ position: 'relative', zIndex: 1, textAlign: 'center', fontSize: '11px', color: 'rgba(138,126,109,0.5)', fontStyle: 'italic', marginTop: '12px' }}>
         Drag sau swipe pentru a explora
       </p>
@@ -318,7 +328,6 @@ export default function Carousel3D() {
   )
 }
 
-/* ── Nav button helper ── */
 function NavBtn({ label, onClick, size, aria }) {
   return (
     <button
