@@ -12,7 +12,7 @@ export default function TargCard({ targ, onDelete }) {
 
   return (
     <div style={{
-      background:   '#1a1a1a',
+      background:   '#2E2A24',
       border:       '1px solid rgba(255,255,255,0.06)',
       borderRadius: '12px',
       padding:      '20px',
@@ -23,13 +23,13 @@ export default function TargCard({ targ, onDelete }) {
       gap:          '14px',
     }}
     onClick={() => navigate(`/dashboard/targuri/${targ.id}`)}
-    onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(196,30,58,0.3)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+    onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(142,31,27,0.3)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
     onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(0)' }}>
 
       {/* Header row */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' }}>
         <div style={{ minWidth: 0 }}>
-          <p style={{ fontSize: '15px', fontWeight: 700, color: '#f5f5f5', margin: '0 0 4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          <p style={{ fontSize: '15px', fontWeight: 700, color: '#F5EFE3', margin: '0 0 4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             {targ.nume}
           </p>
           <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', margin: 0 }}>
@@ -45,11 +45,11 @@ export default function TargCard({ targ, onDelete }) {
       {hasData ? (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
           {[
-            { label: 'Venituri',  value: fmtRON(ven),  color: '#10b981' },
-            { label: 'Costuri',   value: fmtRON(cost), color: '#f59e0b' },
-            { label: 'Profit',    value: fmtRON(prof), color: prof >= 0 ? '#c41e3a' : '#ef4444' },
+            { label: 'Venituri',  value: fmtRON(ven),  color: '#5B7A45' },
+            { label: 'Costuri',   value: fmtRON(cost), color: '#D69A2D' },
+            { label: 'Profit',    value: fmtRON(prof), color: prof >= 0 ? '#8E1F1B' : '#9E2B12' },
           ].map(({ label, value, color }) => (
-            <div key={label} style={{ background: '#0f0f0f', borderRadius: '8px', padding: '10px 8px', textAlign: 'center' }}>
+            <div key={label} style={{ background: '#211E18', borderRadius: '8px', padding: '10px 8px', textAlign: 'center' }}>
               <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', margin: '0 0 3px' }}>{label}</p>
               <p style={{ fontSize: '13px', fontWeight: 700, color, margin: 0 }}>{value}</p>
             </div>
@@ -67,7 +67,7 @@ export default function TargCard({ targ, onDelete }) {
         <button
           onClick={() => onDelete(targ.id)}
           style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.2)', fontSize: '12px', padding: '2px 6px', transition: 'color 0.2s' }}
-          onMouseEnter={e => e.currentTarget.style.color = '#c41e3a'}
+          onMouseEnter={e => e.currentTarget.style.color = '#8E1F1B'}
           onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.2)'}
         >
           Șterge

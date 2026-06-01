@@ -10,7 +10,7 @@ export default function Sidebar({ onLogout, collapsed, onToggle }) {
     <aside style={{
       width:      collapsed ? '56px' : '220px',
       minHeight:  '100vh',
-      background: '#111',
+      background: '#211E18',
       borderRight:'1px solid rgba(255,255,255,0.06)',
       display:    'flex',
       flexDirection: 'column',
@@ -28,7 +28,7 @@ export default function Sidebar({ onLogout, collapsed, onToggle }) {
           ☰
         </button>
         {!collapsed && (
-          <span style={{ fontFamily: '"DM Serif Display", serif', fontSize: '15px', color: '#c41e3a', whiteSpace: 'nowrap', overflow: 'hidden' }}>
+          <span style={{ fontFamily: '"Bitter", serif', fontSize: '15px', color: '#8E1F1B', whiteSpace: 'nowrap', overflow: 'hidden' }}>
             Foc și Gust
           </span>
         )}
@@ -47,9 +47,9 @@ export default function Sidebar({ onLogout, collapsed, onToggle }) {
               textDecoration: 'none',
               fontSize:     '13px',
               fontWeight:   isActive ? 600 : 400,
-              color:        isActive ? '#c41e3a' : 'rgba(255,255,255,0.5)',
-              background:   isActive ? 'rgba(196,30,58,0.08)' : 'transparent',
-              borderLeft:   isActive ? '2px solid #c41e3a' : '2px solid transparent',
+              color:        isActive ? '#8E1F1B' : 'rgba(255,255,255,0.5)',
+              background:   isActive ? 'rgba(142,31,27,0.08)' : 'transparent',
+              borderLeft:   isActive ? '2px solid #8E1F1B' : '2px solid transparent',
               transition:   'all 0.15s',
               whiteSpace:   'nowrap',
             })}>
@@ -78,7 +78,7 @@ export default function Sidebar({ onLogout, collapsed, onToggle }) {
             padding:        collapsed ? '8px 0' : '8px 0',
             transition:     'color 0.2s',
           }}
-          onMouseEnter={e => e.currentTarget.style.color = '#c41e3a'}
+          onMouseEnter={e => e.currentTarget.style.color = '#8E1F1B'}
           onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.3)'}
         >
           <span style={{ fontSize: '16px', flexShrink: 0 }}>⏻</span>

@@ -19,10 +19,10 @@ export default function Button({ children, variant = 'primary', size = 'md', onC
     lg: { padding: '12px 24px', fontSize: '14px' },
   }
   const variants = {
-    primary: { background: '#c41e3a', color: '#fff' },
+    primary: { background: '#8E1F1B', color: '#F5EFE3' },
     ghost:   { background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.8)', border: '1px solid rgba(255,255,255,0.08)' },
-    danger:  { background: 'rgba(196,30,58,0.12)', color: '#c41e3a', border: '1px solid rgba(196,30,58,0.2)' },
-    success: { background: 'rgba(16,185,129,0.12)', color: '#10b981', border: '1px solid rgba(16,185,129,0.2)' },
+    danger:  { background: 'rgba(142,31,27,0.12)', color: '#8E1F1B', border: '1px solid rgba(142,31,27,0.2)' },
+    success: { background: 'rgba(91,122,69,0.12)', color: '#5B7A45', border: '1px solid rgba(91,122,69,0.2)' },
   }
 
   return (

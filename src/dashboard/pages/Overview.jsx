@@ -17,10 +17,10 @@ export default function Overview({ targuri }) {
 
       {/* Stat cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
-        <StatCard label="Venituri sezon"  value={totale.venituri} suffix=" lei" color="#10b981" icon="💰" />
-        <StatCard label="Costuri sezon"   value={totale.costuri}  suffix=" lei" color="#f59e0b" icon="📦" />
-        <StatCard label="Profit net"      value={totale.profit}   suffix=" lei" color={totale.profit >= 0 ? '#c41e3a' : '#ef4444'} icon="📈" />
-        <StatCard label="Târguri sezon"   value={total}           color="#818cf8" icon="🏪"
+        <StatCard label="Venituri sezon"  value={totale.venituri} suffix=" lei" color="#5B7A45" icon="💰" />
+        <StatCard label="Costuri sezon"   value={totale.costuri}  suffix=" lei" color="#D69A2D" icon="📦" />
+        <StatCard label="Profit net"      value={totale.profit}   suffix=" lei" color={totale.profit >= 0 ? '#8E1F1B' : '#9E2B12'} icon="📈" />
+        <StatCard label="Târguri sezon"   value={total}           color="#C2611E" icon="🏪"
           trend={total > 0 ? ((finalizate / total) * 100 - 50) : undefined} />
       </div>
 
@@ -29,7 +29,7 @@ export default function Overview({ targuri }) {
 
       {/* Top 3 */}
       {top3.length > 0 && (
-        <div style={{ background: '#1a1a1a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '20px' }}>
+        <div style={{ background: '#2E2A24', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '20px' }}>
           <h3 style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.8px', margin: '0 0 16px' }}>
             Top târguri după profit
           </h3>
@@ -40,11 +40,11 @@ export default function Overview({ targuri }) {
                 style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '12px', borderRadius: '8px', cursor: 'pointer', transition: 'background 0.15s' }}
                 onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                <span style={{ fontSize: '18px', fontWeight: 800, color: i === 0 ? '#f59e0b' : 'rgba(255,255,255,0.2)', width: '24px', textAlign: 'center' }}>
+                <span style={{ fontSize: '18px', fontWeight: 800, color: i === 0 ? '#D69A2D' : 'rgba(255,255,255,0.2)', width: '24px', textAlign: 'center' }}>
                   {i + 1}
                 </span>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontSize: '14px', fontWeight: 600, color: '#f5f5f5', margin: '0 0 2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <p style={{ fontSize: '14px', fontWeight: 600, color: '#F5EFE3', margin: '0 0 2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {targ.nume}
                   </p>
                   <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', margin: 0 }}>
@@ -52,7 +52,7 @@ export default function Overview({ targuri }) {
                   </p>
                 </div>
                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                  <p style={{ fontSize: '15px', fontWeight: 700, color: '#c41e3a', margin: '0 0 2px', fontFamily: '"DM Serif Display", serif' }}>
+                  <p style={{ fontSize: '15px', fontWeight: 700, color: '#8E1F1B', margin: '0 0 2px', fontFamily: '"Bitter", serif' }}>
                     {fmtRON(profit(targ))}
                   </p>
                   <Badge status={targ.status} />
@@ -65,7 +65,7 @@ export default function Overview({ targuri }) {
 
       {/* Empty state */}
       {targuri.length === 0 && (
-        <div style={{ textAlign: 'center', padding: '60px 20px', background: '#1a1a1a', borderRadius: '12px', border: '1px dashed rgba(255,255,255,0.08)' }}>
+        <div style={{ textAlign: 'center', padding: '60px 20px', background: '#2E2A24', borderRadius: '12px', border: '1px dashed rgba(255,255,255,0.08)' }}>
           <p style={{ fontSize: '32px', margin: '0 0 12px' }}>🏪</p>
           <p style={{ fontSize: '16px', fontWeight: 600, color: 'rgba(255,255,255,0.5)', margin: '0 0 6px' }}>Niciun târg înregistrat</p>
           <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.25)', margin: 0 }}>

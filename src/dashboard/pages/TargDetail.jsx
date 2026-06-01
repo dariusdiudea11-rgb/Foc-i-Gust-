@@ -59,7 +59,7 @@ export default function TargDetail({ targuri, onUpdate, onDelete }) {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <h2 style={{ fontSize: '22px', fontWeight: 700, color: '#f5f5f5', margin: '0 0 6px' }}>{targ.nume}</h2>
+            <h2 style={{ fontSize: '22px', fontWeight: 700, color: '#F5EFE3', margin: '0 0 6px' }}>{targ.nume}</h2>
             <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', margin: '0 0 8px' }}>
               {targ.locatie} · {fmtDate(targ.data)}
             </p>
@@ -70,7 +70,7 @@ export default function TargDetail({ targuri, onUpdate, onDelete }) {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '4px', marginBottom: '20px', background: '#1a1a1a', padding: '4px', borderRadius: '10px', width: 'fit-content', border: '1px solid rgba(255,255,255,0.06)' }}>
+      <div style={{ display: 'flex', gap: '4px', marginBottom: '20px', background: '#2E2A24', padding: '4px', borderRadius: '10px', width: 'fit-content', border: '1px solid rgba(255,255,255,0.06)' }}>
         {TABS.map(t => (
           <button key={t.id} onClick={() => setTab(t.id)}
             style={{
@@ -78,9 +78,9 @@ export default function TargDetail({ targuri, onUpdate, onDelete }) {
               borderRadius: '7px',
               fontSize:     '13px',
               fontWeight:   tab === t.id ? 600 : 400,
-              background:   tab === t.id ? 'rgba(196,30,58,0.15)' : 'transparent',
-              border:       `1px solid ${tab === t.id ? 'rgba(196,30,58,0.25)' : 'transparent'}`,
-              color:        tab === t.id ? '#c41e3a' : 'rgba(255,255,255,0.45)',
+              background:   tab === t.id ? 'rgba(142,31,27,0.15)' : 'transparent',
+              border:       `1px solid ${tab === t.id ? 'rgba(142,31,27,0.25)' : 'transparent'}`,
+              color:        tab === t.id ? '#8E1F1B' : 'rgba(255,255,255,0.45)',
               cursor:       'pointer',
               transition:   'all 0.15s',
               fontFamily:   'inherit',
@@ -95,7 +95,7 @@ export default function TargDetail({ targuri, onUpdate, onDelete }) {
         <FinanciarForm targ={targ} onSave={handleSaveFinanciar} />
       )}
       {tab === 'detalii' && (
-        <div style={{ background: '#1a1a1a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '24px', maxWidth: '480px' }}>
+        <div style={{ background: '#2E2A24', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '24px', maxWidth: '480px' }}>
           <TargForm initial={targ} onSave={handleSaveDetalii} submitLabel="Actualizează" />
         </div>
       )}

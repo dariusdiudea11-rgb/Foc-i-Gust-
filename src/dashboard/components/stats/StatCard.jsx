@@ -20,13 +20,13 @@ function useCountUp(target, duration = 1000) {
   return val
 }
 
-export default function StatCard({ label, value, prefix = '', suffix = '', color = '#c41e3a', icon, trend }) {
+export default function StatCard({ label, value, prefix = '', suffix = '', color = '#8E1F1B', icon, trend }) {
   const animated = useCountUp(typeof value === 'number' ? value : 0)
   const display  = typeof value === 'number' ? animated : value
 
   return (
     <div style={{
-      background:   '#1a1a1a',
+      background:   '#2E2A24',
       border:       '1px solid rgba(255,255,255,0.06)',
       borderRadius: '12px',
       padding:      '20px 22px',
@@ -45,12 +45,12 @@ export default function StatCard({ label, value, prefix = '', suffix = '', color
         {icon && <span style={{ fontSize: '18px', opacity: 0.5 }}>{icon}</span>}
       </div>
 
-      <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: '28px', fontWeight: 700, color, margin: 0, lineHeight: 1 }}>
+      <p style={{ fontFamily: '"Bitter", serif', fontSize: '28px', fontWeight: 700, color, margin: 0, lineHeight: 1 }}>
         {prefix}{display.toLocaleString('ro-RO')}{suffix}
       </p>
 
       {trend !== undefined && (
-        <p style={{ fontSize: '12px', color: trend >= 0 ? '#10b981' : '#ef4444', margin: 0 }}>
+        <p style={{ fontSize: '12px', color: trend >= 0 ? '#5B7A45' : '#9E2B12', margin: 0 }}>
           {trend >= 0 ? '↑' : '↓'} {Math.abs(trend).toFixed(1)}% față de medie
         </p>
       )}
