@@ -1,0 +1,358 @@
+#!/usr/bin/env bash
+# Reface skill-ul foc-si-gust-design (nucleul: reguli + tokeni).
+# Rulezi din radacina repo-ului site-ului:  bash setup.sh
+set -e
+DIR=".claude/skills/foc-si-gust-design"   # global: DIR="$HOME/.claude/skills/foc-si-gust-design"
+mkdir -p "$DIR/assets"
+
+cat > "$DIR/SKILL.md" << 'FG_SKILL_EOF'
+---
+name: foc-si-gust-design
+description: Use this skill to generate well-branded interfaces and assets for Foc Și Gust Tradițional (Diudea Grup S.R.L.), a Romanian traditional-food brand serving fairs and private events — either for production or throwaway prototypes/mocks. Contains essential design guidelines, colors, type, fonts, brand assets, and a website UI kit for prototyping.
+user-invocable: true
+---
+
+Read the `README.md` file within this skill, and explore the other available files.
+
+If creating visual artifacts (slides, mocks, throwaway prototypes, social posts, signage, menus), copy assets out of `assets/` and create static HTML files for the user to view. If working on production code, copy assets and read the rules here to become an expert in designing with this brand.
+
+Key files:
+- `README.md` — full brand context, content fundamentals, visual foundations, iconography, and index.
+- `colors_and_type.css` — all design tokens (color, type, spacing, radii, shadow, motion) + semantic helper classes. Import this first in any artifact.
+- `assets/logo-full.png`, `assets/emblem.png` — brand logo + standalone flame mark.
+- `preview/*.html` — design-system specimen cards (colors, type, spacing, components, brand).
+- `ui_kits/website/` — interactive marketing-website recreation with reusable JSX components.
+
+Core rules to honor:
+- **Colors** come from the logo: charcoal `#2E2A24`, paprika `#8E1F1B` (primary), flame orange `#C2611E`→`#D56E34`, plus appetizing honey `#D69A2D` and fresh green `#5B7A45` on warm parchment `#F5EFE3`.
+- **Type:** Bitter (slab serif display) + Hanken Grotesk (clean sans body/UI). Big things serif, working text sans.
+- **Voice:** Romanian, warm host register, no emoji. *"O tradiție care merge mai departe."*
+- **Motion:** moderate and classy — gentle fades + rise, soft hover lifts. Respect `prefers-reduced-motion`.
+- **Ornament:** the folk lozenge (romb) motif as restrained dividers; real warm food/fire photography for imagery (use placeholders if none provided).
+
+If the user invokes this skill without other guidance, ask what they want to build or design, ask a few clarifying questions, and act as an expert designer who outputs HTML artifacts _or_ production code, depending on the need.
+FG_SKILL_EOF
+
+cat > "$DIR/README.md" << 'FG_README_EOF'
+# Foc Și Gust Tradițional — Design System
+
+> **Diudea Grup S.R.L.** · Romanian traditional food, served at fairs and private events.
+> *"O tradiție care merge mai departe" — a tradition that goes on.*
+
+This repository is the single source of truth for the brand's visual and verbal identity. It exists so any designer or agent can produce on-brand interfaces, social posts, signage, menus and decks without re-deriving the look from scratch.
+
+---
+
+## 1. Company context
+
+**Foc Și Gust Tradițional** ("Fire and Taste, Traditional") is the consumer brand of **Diudea Grup S.R.L.** They cook and sell Romanian traditional food — the kind made over open fire — at public fairs (*târguri*) and at private gatherings and catered events.
+
+- **What they sell:** authentic Romanian dishes; fire-cooked, hearty, homemade in spirit.
+- **Where:** fairs, markets, festivals + private/catered events and celebrations.
+- **Who for:** ordinary people who love good food and don't care about fancy locations — families, festival-goers, and hosts booking food for a celebration.
+- **The feeling:** warmth, heritage, generosity. *A tradition that goes on.* Grandmother's table, but proud and contemporary.
+
+### Sources used
+- **Brand logo** — uploaded by the client (`assets/logo-full.png`). The entire palette and type direction is derived from it.
+- No existing website, codebase, Figma, or deck was provided. The marketing-website UI kit, social/print templates and component set in this system are **new work** built on the logo's foundations. They are proposals to react to, not recreations of an existing product.
+
+> ⚠️ If you have an existing website, menu, social page or photography, share it — the UI kits should converge on the real thing.
+
+---
+
+## 2. CONTENT FUNDAMENTALS — voice & copy
+
+**Language:** Romanian only (sample copy). Always render diacritics correctly: **ă î â ș ț** (note: *ș* and *ț* use the comma-below form, U+0219/U+021B — not the cedilla). The brand name is always **Foc Și Gust Tradițional**.
+
+**Tone:** warm, proud, plainspoken, unpretentious. We speak like a generous host, not a luxury restaurant. Heritage without nostalgia-kitsch; confident without showing off.
+
+**Person & address:** speak *to* the guest with the warm, inclusive **"noi/voi"** register — *"Vă așteptăm la masă"* ("We're waiting for you at the table"). First-person plural for the family business ("Gătim", "Servim"). Friendly second person, never cold corporate.
+
+**Casing:** Sentence case for body and most headlines. Display headlines may use Title Case sparingly for menu names. Short uppercase **eyebrows/labels** with wide letter-spacing (e.g. `MENIU`, `EVENIMENTE PRIVATE`) — used as small kickers, never for long text.
+
+**Casing of the name:** "Foc Și Gust" — note the capital **Și**, matching the logo lockup.
+
+**Length & rhythm:** short, declarative sentences. Lead with the food and the feeling, not adjectives. Verbs of craft: *gătit pe foc, afumat, copt, frământat, la ceaun.*
+
+**Emoji:** **No emoji** in brand copy. Warmth comes from words, type and the flame mark — not emoji. A single flame glyph from the logo is the only "emoji-like" element, and it's a brand asset, not a Unicode emoji.
+
+**Examples (do / don't):**
+- ✅ *"Gătit pe foc, ca acasă."* (Cooked over fire, like home.)
+- ✅ *"Vă aducem gustul tradiției la târg și la masa voastră."*
+- ✅ *"Rezervați-ne pentru evenimentul vostru."*
+- ❌ *"Cea mai bună mâncare premium de lux!!!"* (overhyped, wrong register)
+- ❌ *"Experience our culinary journey 🔥😋"* (English + emoji + corporate)
+
+**Recurring phrases / motifs:** *Foc · Gust · Tradiție.* The triad (fire, taste, tradition) is the verbal spine — useful as section labels, taglines, and rhythm in copy.
+
+---
+
+## 3. VISUAL FOUNDATIONS
+
+The look is **rustic heritage made modern**: warm parchment, charcoal ink, fire-orange and paprika-red, lifted by appetizing mustard and fresh green. Clean layouts, generous whitespace, a strong slab-serif voice, and Romanian folk geometry used as restrained ornament.
+
+### Color
+- **Sampled from the logo:** charcoal `#2E2A24`, paprika red `#8E1F1B` (primary), flame orange `#C2611E`→`#D56E34` (secondary), ember `#9E2B12`.
+- **Appetizing extensions** (folk-complementary, not in the logo but harmonized): honey mustard `#D69A2D`, fresh green `#5B7A45`.
+- **Warm neutrals:** parchment background `#F5EFE3`, surface `#FDFBF6`, hairline `#E5DAC6`.
+- **Usage:** paprika = primary actions, links, the "Tradițional" voice. Flame orange = energy, highlights, the fire motif (fills and accents, *not* body text — low contrast). Honey + green = supporting accents, tags, categories, freshness. Ink = text and dark sections.
+- **Vibe of imagery:** warm, golden-hour, slightly smoky. Real fire, ceaun (cauldron), wood, hands at work. Never cool, never clinical. A touch of grain is welcome.
+
+### Type
+- **Display:** **Bitter** (slab serif) — mirrors the logo wordmark. Weights 600–800 for headlines. Warm, sturdy, heritage.
+- **UI / body:** **Hanken Grotesk** (clean geometric-humanist sans) — mirrors the "Diudea Grup S.R.L." subtitle. Highly readable; weights 400–700.
+- **Pairing rule:** big things are serif, working text is sans. Don't set long body copy in the slab.
+- **Scale:** 1.250 major-third (see `colors_and_type.css`). Slides ≥24px; print ≥12pt; tap targets ≥44px.
+- **Substitution flag:** Bitter and Hanken Grotesk are loaded from Google Fonts as close matches to the logo lettering. If you have the exact licensed wordmark fonts, drop them in `fonts/` and update the `@import`.
+
+### Spacing & layout
+- 4px base; tokens `--space-1…10`. Sections breathe (64–128px vertical rhythm on web).
+- Generous margins; content max-width ~1200px. Asymmetry and editorial layouts encouraged over rigid centered stacks.
+
+### Backgrounds
+- Default **flat parchment** `#F5EFE3` (warm, paper-like), alt sections in `#EFE7D7` or ink `#2E2A24`.
+- **Folk-geometry border** (the diamond/lozenge motif from the logo medallion) used as a thin divider or framing rule — sparingly, like a textile selvage. Never wallpaper the whole page with it.
+- Full-bleed warm food/fire photography for heroes. No purple/blue gradients, ever.
+
+### Animation (moderate, classy)
+- **Easing:** `--ease-out` (cubic-bezier(0.22,1,0.36,1)) for entrances; `--ease-soft` for state changes.
+- **Entrances:** gentle fade + 12–20px rise, staggered ~60ms. Durations 260–480ms.
+- **Hero flair:** a slow, subtle flame flicker/parallax on the emblem; image ken-burns at low amplitude. Nothing bouncy or playful-cartoonish.
+- **Respect** `prefers-reduced-motion` — drop to simple fades.
+
+### Interaction states
+- **Hover:** primary buttons darken paprika→`--paprika-deep`; surfaces lift one shadow step + 1–2px rise; links gain underline. Subtle.
+- **Press:** scale to ~0.98 and settle; no color flashes.
+- **Focus:** 2px paprika ring at 2px offset (visible, accessible).
+- **Disabled:** 40% opacity, no shadow.
+
+### Borders, radii, shadows
+- **Radii:** 6/10/16/24 + pill. Buttons pill or 10px; cards 16px; images 16–24px.
+- **Borders:** 1px hairline `#E5DAC6` on cards; thicker `#D8CAB2` for emphasis. Occasionally a 2px ink rule for an editorial, "menu card" feel.
+- **Shadows:** warm-tinted (brown, not gray), soft and low. Cards rest on `--shadow-sm`, lift to `--shadow-md`. An optional ember-tinted glow `--shadow-ember` for primary CTAs.
+- **Cards:** parchment-white surface, 16px radius, hairline border, soft warm shadow. Calm, generous padding.
+
+### Transparency & blur
+- Used sparingly: a translucent ink scrim over hero photos for legibility; a subtly blurred sticky header (`backdrop-filter`) over content. Avoid frosted-glass everywhere — keep it material and warm.
+
+### Protection gradients
+- Photo overlays use a bottom-up **ink protection gradient** (transparent → `rgba(46,42,36,.7)`) so white text stays legible — not a decorative gradient, a functional one.
+
+---
+
+## 4. ICONOGRAPHY
+
+- **Brand mark:** the **flame-in-medallion emblem** (`assets/emblem.png`) is the hero icon — used as favicon, app/nav mark, and section ornament. The full lockup is `assets/logo-full.png`.
+- **Folk motif:** the **diamond/lozenge (romb) border** from the medallion is the signature decorative element — used as dividers, frames and texture accents. Treat it as a textile selvage, applied with restraint.
+- **UI icon set:** **Lucide** (via CDN) — thin, rounded, 1.75–2px stroke. Chosen because its warm, simple line style sits comfortably beside the slab serif and folk ornament without competing. Use at 20–24px, `currentColor`, in ink or paprika.
+  - *Substitution flag:* the brand had no icon set of its own, so Lucide is a proposal. If you adopt a different set, keep a consistent single-line style and stroke weight.
+- **Emoji / Unicode as icons:** **never.** No emoji in product or marketing. The flame mark covers any "fire" semantics.
+- **Rule:** never hand-draw bespoke SVG icons that compete with Lucide's style; never mix filled and outline icon systems on one surface.
+
+---
+
+## 5. INDEX — what's in this system
+
+**Root**
+- `README.md` — this file.
+- `colors_and_type.css` — all design tokens (color, type, spacing, radii, shadow, motion) + semantic helper classes. Import this first.
+- `SKILL.md` — agent-skill manifest (for use as a downloadable Claude Skill).
+
+**assets/**
+- `logo-full.png` — full logo lockup (emblem + wordmark).
+- `emblem.png` — flame-in-medallion mark, square, for favicons / nav / ornament.
+
+**preview/** — Design System tab cards (colors, type, spacing, components, brand). Open `preview/*.html`.
+
+**ui_kits/website/** — marketing-website UI kit: `index.html` (interactive multi-screen prototype: Home · Meniu · Evenimente · Despre) + JSX components. See its own `README.md`.
+
+**fonts/** — drop self-hosted webfonts here if you replace the Google Fonts CDN.
+
+---
+
+*Built from the brand logo. Everything here is a starting point — react to it and we'll tune it to the real Foc Și Gust.*
+FG_README_EOF
+
+cat > "$DIR/colors_and_type.css" << 'FG_CSS_EOF'
+/* ============================================================
+   FOC ȘI GUST TRADIȚIONAL — Design Tokens
+   Diudea Grup S.R.L. · Romanian traditional food
+   Colors sampled from the brand logo. Type mirrors the
+   wordmark (slab serif) + subtitle (clean geometric sans).
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+:root {
+  /* ---- Brand core (straight from the logo) ---- */
+  --ink:            #2E2A24;  /* charcoal wordmark + medallion */
+  --paprika:        #8E1F1B;  /* "Tradițional" deep red — PRIMARY */
+  --paprika-deep:   #6F1714;  /* pressed / hover-dark */
+  --flame:          #C2611E;  /* flame orange — SECONDARY */
+  --flame-bright:   #D56E34;  /* brightest flame highlight */
+  --ember:          #9E2B12;  /* red-orange transition in flame */
+
+  /* ---- Appetizing extensions (folk palette, complementary) ---- */
+  --honey:          #D69A2D;  /* mustard / honey gold */
+  --honey-soft:     #E8C879;  /* light gold tint */
+  --herb:           #5B7A45;  /* fresh green */
+  --herb-deep:      #3E5A30;
+
+  /* ---- Warm neutrals ---- */
+  --parchment:      #F5EFE3;  /* page background */
+  --parchment-2:    #EFE7D7;  /* alt section background */
+  --surface:        #FDFBF6;  /* cards / raised surfaces */
+  --cream-line:     #E5DAC6;  /* hairline borders */
+  --cream-line-2:   #D8CAB2;  /* stronger border */
+
+  /* ---- Text on light ---- */
+  --fg-1:           #2E2A24;  /* primary text */
+  --fg-2:           #6E6357;  /* secondary text */
+  --fg-3:           #9A8E7D;  /* muted / captions */
+  --fg-on-dark:     #F5EFE3;  /* text on ink/paprika */
+  --fg-on-dark-2:   #C9BCA8;  /* secondary on dark */
+
+  /* ---- Semantic ---- */
+  --success:        #5B7A45;
+  --warning:        #D69A2D;
+  --danger:         #8E1F1B;
+  --link:           #8E1F1B;
+
+  /* ---- Type families ---- */
+  --font-display:   'Bitter', Georgia, 'Times New Roman', serif;
+  --font-sans:      'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* ---- Type scale (1.250 major-third, 16px base) ---- */
+  --text-xs:    0.75rem;   /* 12 */
+  --text-sm:    0.875rem;  /* 14 */
+  --text-base:  1rem;      /* 16 */
+  --text-md:    1.25rem;   /* 20 */
+  --text-lg:    1.563rem;  /* 25 */
+  --text-xl:    1.953rem;  /* 31 */
+  --text-2xl:   2.441rem;  /* 39 */
+  --text-3xl:   3.052rem;  /* 49 */
+  --text-4xl:   3.815rem;  /* 61 */
+  --text-5xl:   4.768rem;  /* 76 */
+
+  --leading-tight:   1.08;
+  --leading-snug:    1.25;
+  --leading-normal:  1.55;
+  --leading-relaxed: 1.7;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-caps:   0.14em;  /* eyebrows / labels */
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1: 4px;   --space-2: 8px;   --space-3: 12px;  --space-4: 16px;
+  --space-5: 24px;  --space-6: 32px;  --space-7: 48px;  --space-8: 64px;
+  --space-9: 96px;  --space-10: 128px;
+
+  /* ---- Radii ---- */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-pill: 999px;
+
+  /* ---- Warm-tinted shadows ---- */
+  --shadow-xs: 0 1px 2px rgba(46,42,36,0.06);
+  --shadow-sm: 0 2px 6px rgba(46,42,36,0.08);
+  --shadow-md: 0 8px 20px -6px rgba(46,42,36,0.14);
+  --shadow-lg: 0 18px 40px -12px rgba(46,42,36,0.22);
+  --shadow-ember: 0 10px 30px -8px rgba(142,31,27,0.30);
+
+  /* ---- Motion (moderate, classy) ---- */
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft:  cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast:   160ms;
+  --dur-base:   260ms;
+  --dur-slow:   480ms;
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT STYLES
+   ============================================================ */
+
+.fg-display { font-family: var(--font-display); }
+.fg-sans    { font-family: var(--font-sans); }
+
+/* Eyebrow / kicker label */
+.fg-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--paprika);
+}
+
+/* Display headline */
+.fg-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, var(--text-5xl));
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+}
+.fg-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, var(--text-3xl));
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+}
+.fg-h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: var(--fg-1);
+}
+.fg-h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-md);
+  line-height: var(--leading-snug);
+  color: var(--fg-1);
+}
+
+/* Lead paragraph */
+.fg-lead {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-2);
+}
+/* Body */
+.fg-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--fg-1);
+}
+.fg-small {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--fg-2);
+}
+.fg-caption {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--fg-3);
+}
+FG_CSS_EOF
+
+echo ""
+echo "OK Skill scris in: $DIR"
+echo "-> Pune logo-full.png si emblem.png in $DIR/assets/ (din zip sau fisierele tale)."
+echo "-> Porneste o sesiune noua Claude Code, apoi /skills ca sa confirmi."
