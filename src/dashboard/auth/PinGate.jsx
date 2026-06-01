@@ -48,17 +48,17 @@ export default function PinGate({ onLogin }) {
   return (
     <div style={{
       minHeight:      '100vh',
-      background:     '#0f0f0f',
+      background:     '#211E18',
       display:        'flex',
       alignItems:     'center',
       justifyContent: 'center',
-      fontFamily:     '"DM Sans", system-ui, sans-serif',
+      fontFamily:     '"Hanken Grotesk", system-ui, sans-serif',
       cursor:         'auto',
     }}>
       <div style={{ textAlign: 'center', width: '320px' }}>
         {/* Logo */}
         <div style={{ marginBottom: '32px' }}>
-          <p style={{ fontFamily: '"DM Serif Display", serif', fontSize: '24px', color: '#c41e3a', margin: '0 0 4px' }}>
+          <p style={{ fontFamily: '"Bitter", serif', fontSize: '24px', color: '#8E1F1B', margin: '0 0 4px' }}>
             Foc și Gust
           </p>
           <p style={{ fontSize: '11px', letterSpacing: '4px', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', margin: 0 }}>
@@ -68,8 +68,8 @@ export default function PinGate({ onLogin }) {
 
         {/* PIN box */}
         <div style={{
-          background:   '#1a1a1a',
-          border:       `1px solid ${error ? 'rgba(196,30,58,0.4)' : 'rgba(255,255,255,0.06)'}`,
+          background:   '#2E2A24',
+          border:       `1px solid ${error ? 'rgba(142,31,27,0.4)' : 'rgba(255,255,255,0.06)'}`,
           borderRadius: '16px',
           padding:      '32px 24px',
           transition:   'border-color 0.3s',
@@ -96,22 +96,22 @@ export default function PinGate({ onLogin }) {
                   textAlign:   'center',
                   fontSize:    '24px',
                   fontWeight:  700,
-                  background:  '#0f0f0f',
-                  border:      `1px solid ${error ? 'rgba(196,30,58,0.5)' : 'rgba(255,255,255,0.1)'}`,
+                  background:  '#211E18',
+                  border:      `1px solid ${error ? 'rgba(142,31,27,0.5)' : 'rgba(255,255,255,0.1)'}`,
                   borderRadius:'10px',
-                  color:       '#fff',
+                  color:       '#F5EFE3',
                   outline:     'none',
                   cursor:      'auto',
                   transition:  'border-color 0.2s',
                 }}
-                onFocus={e => e.target.style.borderColor = '#c41e3a'}
-                onBlur={e  => e.target.style.borderColor = error ? 'rgba(196,30,58,0.5)' : 'rgba(255,255,255,0.1)'}
+                onFocus={e => e.target.style.borderColor = '#8E1F1B'}
+                onBlur={e  => e.target.style.borderColor = error ? 'rgba(142,31,27,0.5)' : 'rgba(255,255,255,0.1)'}
               />
             ))}
           </div>
 
           {error && (
-            <p style={{ color: '#c41e3a', fontSize: '12px', marginTop: 0, marginBottom: '8px' }}>
+            <p style={{ color: '#8E1F1B', fontSize: '12px', marginTop: 0, marginBottom: '8px' }}>
               PIN incorect. Încearcă din nou.
             </p>
           )}

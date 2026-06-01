@@ -52,12 +52,12 @@ export default function TargForm({ initial = {}, onSave, onCancel, submitLabel =
           value={form.status}
           onChange={e => set('status', e.target.value)}
           style={{
-            background:   '#0f0f0f',
+            background:   '#211E18',
             border:       '1px solid rgba(255,255,255,0.1)',
             borderRadius: '8px',
             padding:      '9px 12px',
             fontSize:     '14px',
-            color:        '#f5f5f5',
+            color:        '#F5EFE3',
             outline:      'none',
             cursor:       'pointer',
             fontFamily:   'inherit',

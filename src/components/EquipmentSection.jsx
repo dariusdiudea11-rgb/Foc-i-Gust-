@@ -42,13 +42,13 @@ function EquipCard({ item, index, inView }) {
       style={{ rotateX, rotateY, transformStyle: 'preserve-3d', perspective: 800 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="group bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-2xl p-8 hover:border-[#c41e3a]/25 hover:bg-white/[0.07] hover:shadow-[0_25px_50px_rgba(0,0,0,0.5)] transition-all duration-500 cursor-default">
+      className="group bg-[#FDFBF6]/[0.04] backdrop-blur-md border border-white/[0.08] rounded-2xl p-8 hover:border-[#8E1F1B]/25 hover:bg-[#FDFBF6]/[0.07] hover:shadow-[0_25px_50px_rgba(46,42,36,0.5)] transition-all duration-500 cursor-default">
       <motion.div style={{ transform: 'translateZ(24px)' }}>
-        <Icon size={48} className="text-[#c41e3a] mb-4 group-hover:scale-110 transition-transform duration-500" strokeWidth={1.2}/>
+        <Icon size={48} className="text-[#8E1F1B] mb-4 group-hover:scale-110 transition-transform duration-500" strokeWidth={1.2}/>
       </motion.div>
-      <div className="w-12 h-0.5 bg-[#c41e3a]/50 mb-6"/>
-      <h3 className="text-[#faf3e8] font-bold text-lg leading-snug mb-3" style={{ transform: 'translateZ(12px)' }}>{item.name}</h3>
-      <p className="text-[#faf3e8]/50 text-sm leading-relaxed">{item.desc}</p>
+      <div className="w-12 h-0.5 bg-[#8E1F1B]/50 mb-6"/>
+      <h3 className="text-[#F5EFE3] font-bold text-lg leading-snug mb-3" style={{ transform: 'translateZ(12px)' }}>{item.name}</h3>
+      <p className="text-[#F5EFE3]/50 text-sm leading-relaxed">{item.desc}</p>
     </motion.div>
   )
 }
@@ -58,19 +58,19 @@ export default function EquipmentSection() {
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section id="echipament" className="relative py-32 px-6 bg-[#1a1520]">
+    <section id="echipament" className="relative py-32 px-6 bg-[#2E2A24]">
       {/* Subtle red glow top right */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top right, rgba(196,30,58,0.07) 0%, transparent 65%)' }}/>
+        style={{ background: 'radial-gradient(ellipse at top right, rgba(142,31,27,0.07) 0%, transparent 65%)' }}/>
 
       <div className="max-w-5xl mx-auto">
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-5">
-            <div className="w-12 h-px bg-[#c41e3a]"/>
-            <span className="text-xs tracking-[0.3em] text-[#c41e3a] uppercase">Cu ce lucrăm</span>
+            <div className="w-12 h-px bg-[#8E1F1B]"/>
+            <span className="text-xs tracking-[0.3em] text-[#8E1F1B] uppercase">Cu ce lucrăm</span>
           </div>
-          <h2 className="text-4xl md:text-5xl text-[#faf3e8]"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>
+          <h2 className="text-4xl md:text-5xl text-[#F5EFE3]"
+            style={{ fontFamily: '"Bitter", serif' }}>
             Echipament profesional
           </h2>
         </div>

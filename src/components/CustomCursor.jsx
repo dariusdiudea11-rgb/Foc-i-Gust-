@@ -56,10 +56,10 @@ export default function CustomCursor() {
         animate={{
           width: isPointer ? 40 : 20,
           height: isPointer ? 40 : 20,
-          backgroundColor: isPointer ? 'rgba(196,30,58,0.12)' : 'transparent',
+          backgroundColor: isPointer ? 'rgba(142,31,27,0.12)' : 'transparent',
         }}
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-        className="rounded-full border-2 border-[#c41e3a]"
+        className="rounded-full border-2 border-[#8E1F1B]"
       />
     </motion.div>
   )

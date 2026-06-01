@@ -7,7 +7,7 @@ export default function DashboardLayout({ onLogout }) {
   const [collapsed, setCollapsed] = useState(false)
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#0f0f0f', fontFamily: '"DM Sans", system-ui, sans-serif', cursor: 'auto' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: '#211E18', fontFamily: '"Hanken Grotesk", system-ui, sans-serif', cursor: 'auto' }}>
       <Sidebar onLogout={onLogout} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', minWidth: 0 }}>
         <TopBar />

@@ -1,8 +1,8 @@
 export default function WatermarkBand({ text = 'FOCUL REAL DĂ GUSTUL REAL', variant = 'light' }) {
   const textColor =
     variant === 'light'
-      ? 'text-[#c41e3a]/[0.04]'
-      : 'text-[#faf3e8]/[0.03]'
+      ? 'text-[#8E1F1B]/[0.04]'
+      : 'text-[#F5EFE3]/[0.03]'
 
   const repeated = `${text} · ${text} · ${text} · ${text} · `
 
@@ -13,7 +13,7 @@ export default function WatermarkBand({ text = 'FOCUL REAL DĂ GUSTUL REAL', var
           <span
             key={i}
             className={`text-[4rem] md:text-[8rem] lg:text-[10rem] whitespace-nowrap uppercase ${textColor}`}
-            style={{ fontFamily: '"DM Serif Display", serif', lineHeight: 1 }}
+            style={{ fontFamily: '"Bitter", serif', lineHeight: 1 }}
           >
             {repeated}
           </span>

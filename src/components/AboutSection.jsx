@@ -14,12 +14,12 @@ function StatItem({ target, suffix, label }) {
   return (
     <div ref={ref} className="flex flex-col gap-1">
       <span
-        className="text-4xl md:text-5xl text-[#c41e3a]"
-        style={{ fontFamily: '"DM Serif Display", serif' }}
+        className="text-4xl md:text-5xl text-[#8E1F1B]"
+        style={{ fontFamily: '"Bitter", serif' }}
       >
         {count}{suffix}
       </span>
-      <span className="text-xs text-[#faf3e8]/40 uppercase tracking-wider">{label}</span>
+      <span className="text-xs text-[#F5EFE3]/40 uppercase tracking-wider">{label}</span>
     </div>
   )
 }
@@ -34,10 +34,10 @@ export default function AboutSection() {
   const imgY = useTransform(scrollYProgress, [0, 1], [-30, 30])
 
   return (
-    <section id="despre" ref={sectionRef} className="relative py-32 px-6 overflow-hidden bg-[#1a1520]">
+    <section id="despre" ref={sectionRef} className="relative py-32 px-6 overflow-hidden bg-[#2E2A24]">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[600px] h-[600px]"
-          style={{ background: 'radial-gradient(ellipse at top right, rgba(196,30,58,0.05) 0%, transparent 65%)' }}/>
+          style={{ background: 'radial-gradient(ellipse at top right, rgba(142,31,27,0.05) 0%, transparent 65%)' }}/>
         <div className="absolute inset-0"
           style={{
             backgroundImage: `
@@ -54,19 +54,19 @@ export default function AboutSection() {
           initial={{ opacity: 0, x: -40 }} animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7, ease: 'easeOut' }}>
           <div className="flex items-center gap-3">
-            <div className="w-12 h-px bg-[#c41e3a]"/>
-            <span className="text-xs tracking-[0.3em] text-[#c41e3a] uppercase">Povestea noastră</span>
+            <div className="w-12 h-px bg-[#8E1F1B]"/>
+            <span className="text-xs tracking-[0.3em] text-[#8E1F1B] uppercase">Povestea noastră</span>
           </div>
-          <h2 className="text-4xl md:text-5xl text-[#faf3e8] leading-tight"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>
-            Din Țara <span className="text-[#c41e3a]">Oașului</span>,<br/>pentru toată lumea
+          <h2 className="text-4xl md:text-5xl text-[#F5EFE3] leading-tight"
+            style={{ fontFamily: '"Bitter", serif' }}>
+            Din Țara <span className="text-[#8E1F1B]">Oașului</span>,<br/>pentru toată lumea
           </h2>
-          <p className="text-[#faf3e8]/70 text-lg leading-relaxed">
+          <p className="text-[#F5EFE3]/70 text-lg leading-relaxed">
             Suntem doi tineri din Țara Oașului care au crescut cu gustul micilor de la bunici.
             Am transformat rețetele de familie în ceva ce vrem să împărțim cu toată lumea —
             carne aleasă, pregătită pe cărbuni, cu dragoste și răbdare.
           </p>
-          <p className="text-[#faf3e8]/70 text-lg leading-relaxed">
+          <p className="text-[#F5EFE3]/70 text-lg leading-relaxed">
             Carnea vine exclusiv de la carmangeria familiei — rețete proprii de mici și
             cârnăciori pe care nu le găsești în comerț. Focul real dă gustul real.
           </p>
@@ -82,17 +82,17 @@ export default function AboutSection() {
           initial={{ opacity: 0, x: 40 }} animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}>
           <div className="relative">
-            <div className="absolute inset-0 border-2 border-[#c41e3a]/20 rounded-2xl translate-x-4 translate-y-4 pointer-events-none"/>
-            <div ref={imgRef} className="relative aspect-[3/4] bg-[#231e2a] rounded-2xl overflow-hidden flex items-center justify-center">
+            <div className="absolute inset-0 border-2 border-[#8E1F1B]/20 rounded-2xl translate-x-4 translate-y-4 pointer-events-none"/>
+            <div ref={imgRef} className="relative aspect-[3/4] bg-[#2E2A24] rounded-2xl overflow-hidden flex items-center justify-center">
               <motion.div style={{ y: imgY }} className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                <div className="w-16 h-16 rounded-full border border-[#c41e3a]/20 flex items-center justify-center">
-                  <Flame size={24} className="text-[#c41e3a]/30" strokeWidth={1}/>
+                <div className="w-16 h-16 rounded-full border border-[#8E1F1B]/20 flex items-center justify-center">
+                  <Flame size={24} className="text-[#8E1F1B]/30" strokeWidth={1}/>
                 </div>
-                <p className="text-[#4a4050] text-xs tracking-widest uppercase">Fotografie în curând</p>
+                <p className="text-[#9A8E7D] text-xs tracking-widest uppercase">Fotografie în curând</p>
               </motion.div>
             </div>
-            <div className="mt-3 px-4 py-2 bg-[#c41e3a]/10 rounded-lg inline-flex">
-              <span className="text-xs text-[#c41e3a] tracking-wider">Est. 2026 · Negrești-Oaș</span>
+            <div className="mt-3 px-4 py-2 bg-[#8E1F1B]/10 rounded-lg inline-flex">
+              <span className="text-xs text-[#8E1F1B] tracking-wider">Est. 2026 · Negrești-Oaș</span>
             </div>
           </div>
         </motion.div>

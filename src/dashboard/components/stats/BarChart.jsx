@@ -14,7 +14,7 @@ export default function BarChart({ targuri }) {
 
   if (finished.length === 0) {
     return (
-      <div style={{ background: '#1a1a1a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '40px', textAlign: 'center' }}>
+      <div style={{ background: '#2E2A24', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '40px', textAlign: 'center' }}>
         <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: '13px', fontStyle: 'italic', margin: 0 }}>
           Nicio dată financiară disponibilă pentru grafic
         </p>
@@ -34,7 +34,7 @@ export default function BarChart({ targuri }) {
   const barH = (val) => (Math.abs(val) / maxAbs) * (CHART_H / 2)
 
   return (
-    <div style={{ background: '#1a1a1a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '20px', position: 'relative', overflowX: 'auto' }}>
+    <div style={{ background: '#2E2A24', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '20px', position: 'relative', overflowX: 'auto' }}>
       <h3 style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.8px', margin: '0 0 16px' }}>
         Profit per târg
       </h3>
@@ -65,7 +65,7 @@ export default function BarChart({ targuri }) {
           const x    = barX(i)
           const isPos = val >= 0
           const y    = isPos ? zeroY - h : zeroY
-          const color = isPos ? '#c41e3a' : '#ef4444'
+          const color = isPos ? '#8E1F1B' : '#9E2B12'
 
           return (
             <g key={targ.id}
@@ -95,8 +95,8 @@ export default function BarChart({ targuri }) {
           return (
             <g>
               <rect x={tx} y={PADDING.top} width={120} height={70}
-                fill="#111" rx="6" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-              <text x={tx + 8} y={PADDING.top + 16} fontSize="11" fill="#f5f5f5" fontWeight="600">
+                fill="#211E18" rx="6" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+              <text x={tx + 8} y={PADDING.top + 16} fontSize="11" fill="#F5EFE3" fontWeight="600">
                 {tooltip.targ.nume.slice(0, 16)}{tooltip.targ.nume.length > 16 ? '…' : ''}
               </text>
               <text x={tx + 8} y={PADDING.top + 32} fontSize="10" fill="rgba(255,255,255,0.4)">
@@ -106,7 +106,7 @@ export default function BarChart({ targuri }) {
                 Costuri: {fmtRON(totalCosturi(tooltip.targ))}
               </text>
               <text x={tx + 8} y={PADDING.top + 62} fontSize="11"
-                fill={tooltip.val >= 0 ? '#c41e3a' : '#ef4444'} fontWeight="700">
+                fill={tooltip.val >= 0 ? '#8E1F1B' : '#9E2B12'} fontWeight="700">
                 Profit: {fmtRON(tooltip.val)}
               </text>
             </g>

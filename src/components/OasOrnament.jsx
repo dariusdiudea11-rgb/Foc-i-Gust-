@@ -1,5 +1,5 @@
 export default function OasOrnament({ variant = 'light' }) {
-  const strokeColor = variant === 'light' ? 'rgba(196,30,58,0.2)' : 'rgba(196,30,58,0.15)'
+  const strokeColor = variant === 'light' ? 'rgba(142,31,27,0.2)' : 'rgba(142,31,27,0.15)'
   return (
     <div className="flex justify-center py-2">
       <svg viewBox="0 0 220 20" fill="none" xmlns="http://www.w3.org/2000/svg"

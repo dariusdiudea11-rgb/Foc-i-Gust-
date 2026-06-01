@@ -1,7 +1,7 @@
 const STYLES = {
-  confirmat:    { bg: 'rgba(16,185,129,0.12)',  color: '#10b981', border: 'rgba(16,185,129,0.25)' },
-  in_asteptare: { bg: 'rgba(245,158,11,0.12)',  color: '#f59e0b', border: 'rgba(245,158,11,0.25)' },
-  finalizat:    { bg: 'rgba(99,102,241,0.12)',  color: '#818cf8', border: 'rgba(99,102,241,0.25)' },
+  confirmat:    { bg: 'rgba(91,122,69,0.12)',  color: '#5B7A45', border: 'rgba(91,122,69,0.25)' },
+  in_asteptare: { bg: 'rgba(214,154,45,0.12)',  color: '#D69A2D', border: 'rgba(214,154,45,0.25)' },
+  finalizat:    { bg: 'rgba(194,97,30,0.12)',  color: '#C2611E', border: 'rgba(194,97,30,0.25)' },
 }
 
 const LABELS = {

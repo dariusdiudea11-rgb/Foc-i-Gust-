@@ -1,23 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { motion, useScroll, useTransform, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
 import StaggerText from './ui/StaggerText'
-
-function OasDecor() {
-  return (
-    <svg viewBox="0 0 120 16" fill="none" xmlns="http://www.w3.org/2000/svg"
-      className="w-[120px] mx-auto mb-8" aria-hidden="true">
-      {[0, 44, 88].map((x, i) => (
-        <motion.g key={x} transform={`translate(${x},0)`}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.4, scale: 1 }}
-          transition={{ delay: 0.3 + i * 0.15, duration: 0.5, ease: 'backOut' }}>
-          <path d="M16 1 L31 8 L16 15 L1 8 Z" stroke="#c41e3a" strokeWidth="1" fill="none"/>
-          <circle cx="16" cy="8" r="1.5" fill="#c41e3a"/>
-        </motion.g>
-      ))}
-    </svg>
-  )
-}
+import emblem from '../assets/brand/emblem.png'
 
 function CurveLeft() {
   return (
@@ -26,13 +10,13 @@ function CurveLeft() {
       fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <motion.path
         d="M 380 0 C 300 150, 50 200, 80 400 C 110 600, 320 650, 380 800"
-        stroke="#c41e3a" strokeWidth="1" strokeOpacity="0.15" fill="none"
+        stroke="#8E1F1B" strokeWidth="1" strokeOpacity="0.15" fill="none"
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
         transition={{ duration: 2, delay: 0.5, ease: 'easeInOut' }}
       />
       <path d="M 350 0 C 250 200, 10 250, 30 450 C 50 650, 280 700, 350 800"
-        stroke="#c41e3a" strokeWidth="0.5" strokeOpacity="0.07" fill="none"/>
+        stroke="#8E1F1B" strokeWidth="0.5" strokeOpacity="0.07" fill="none"/>
     </svg>
   )
 }
@@ -44,13 +28,13 @@ function CurveRight() {
       fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <motion.path
         d="M 20 0 C 100 150, 350 200, 320 400 C 290 600, 80 650, 20 800"
-        stroke="#c41e3a" strokeWidth="1" strokeOpacity="0.15" fill="none"
+        stroke="#8E1F1B" strokeWidth="1" strokeOpacity="0.15" fill="none"
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
         transition={{ duration: 2, delay: 0.7, ease: 'easeInOut' }}
       />
       <path d="M 50 0 C 150 200, 390 250, 370 450 C 350 650, 120 700, 50 800"
-        stroke="#c41e3a" strokeWidth="0.5" strokeOpacity="0.07" fill="none"/>
+        stroke="#8E1F1B" strokeWidth="0.5" strokeOpacity="0.07" fill="none"/>
     </svg>
   )
 }
@@ -130,7 +114,7 @@ export default function Hero() {
 
   return (
     <section id="hero" ref={heroRef}
-      className="relative min-h-screen overflow-hidden flex items-center justify-center bg-[#faf3e8]"
+      className="relative min-h-screen overflow-hidden flex items-center justify-center bg-[#F5EFE3]"
       style={{ perspective: '1200px' }}>
 
       {/* Floating gradient mesh */}
@@ -138,21 +122,21 @@ export default function Hero() {
         <div className="absolute w-[500px] h-[500px] rounded-full"
           style={{
             top: '20%', left: '10%',
-            background: 'rgba(196,30,58,0.07)',
+            background: 'rgba(142,31,27,0.07)',
             filter: 'blur(120px)',
             animation: 'float1 20s ease-in-out infinite',
           }}/>
         <div className="absolute w-[400px] h-[400px] rounded-full"
           style={{
             bottom: '20%', right: '15%',
-            background: 'rgba(196,30,58,0.04)',
+            background: 'rgba(142,31,27,0.04)',
             filter: 'blur(120px)',
             animation: 'float2 25s ease-in-out infinite',
           }}/>
         <div className="absolute w-[300px] h-[300px] rounded-full"
           style={{
             top: '50%', left: '50%',
-            background: 'rgba(254,243,199,0.05)',
+            background: 'rgba(232,200,121,0.05)',
             filter: 'blur(100px)',
             animation: 'float3 15s ease-in-out infinite',
           }}/>
@@ -160,14 +144,14 @@ export default function Hero() {
 
       {/* Radial warm glow */}
       <div className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at center, rgba(196,30,58,0.06) 0%, transparent 65%)' }}/>
+        style={{ background: 'radial-gradient(ellipse at center, rgba(142,31,27,0.06) 0%, transparent 65%)' }}/>
 
       {/* Grid pattern */}
       <div className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: `
-            repeating-linear-gradient(0deg, rgba(26,21,32,0.03) 0px, rgba(26,21,32,0.03) 1px, transparent 1px, transparent 60px),
-            repeating-linear-gradient(90deg, rgba(26,21,32,0.03) 0px, rgba(26,21,32,0.03) 1px, transparent 1px, transparent 60px)
+            repeating-linear-gradient(0deg, rgba(46,42,36,0.03) 0px, rgba(46,42,36,0.03) 1px, transparent 1px, transparent 60px),
+            repeating-linear-gradient(90deg, rgba(46,42,36,0.03) 0px, rgba(46,42,36,0.03) 1px, transparent 1px, transparent 60px)
           `,
         }}/>
 
@@ -179,23 +163,29 @@ export default function Hero() {
         style={{ y: contentY, rotateX, rotateY, transformStyle: 'preserve-3d' }}
         className="relative z-10 flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto w-full">
 
-        <OasDecor/>
+        <motion.img
+          src={emblem}
+          alt="Foc și Gust Tradițional"
+          initial={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.85, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="w-24 h-24 md:w-28 md:h-28 object-contain mx-auto mb-7"/>
 
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-xs tracking-[0.4em] text-[#c41e3a]/70 uppercase mb-4">
+          className="text-xs tracking-[0.4em] text-[#8E1F1B]/70 uppercase mb-4">
           Stand de grătar tradițional
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35 }}
           className="flex flex-col items-center" style={{ transform: 'translateZ(40px)' }}>
-          <h1 className="text-6xl md:text-8xl lg:text-9xl leading-none text-[#c41e3a]"
-            style={{ fontFamily: '"DM Serif Display", serif', textShadow: '0 0 80px rgba(196,30,58,0.25)' }}>
+          <h1 className="text-6xl md:text-8xl lg:text-9xl leading-none text-[#8E1F1B]"
+            style={{ fontFamily: '"Bitter", serif', textShadow: '0 0 80px rgba(142,31,27,0.25)' }}>
             Foc și Gust
           </h1>
-          <h2 className="text-5xl md:text-7xl lg:text-8xl leading-none text-[#1a1520] font-normal mt-2"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>
+          <h2 className="text-5xl md:text-7xl lg:text-8xl leading-none text-[#2E2A24] font-normal mt-2"
+            style={{ fontFamily: '"Bitter", serif' }}>
             Tradițional
           </h2>
         </motion.div>
@@ -203,11 +193,11 @@ export default function Hero() {
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.55 }}
           className="mt-6 flex flex-col items-center gap-2">
-          <p className="text-lg md:text-xl text-[#1a1520]/50 italic"
-            style={{ fontFamily: '"DM Sans", sans-serif' }}>
+          <p className="text-lg md:text-xl text-[#2E2A24]/50 italic"
+            style={{ fontFamily: '"Hanken Grotesk", sans-serif' }}>
             „Tradiția care arde, gustul care rămâne."
           </p>
-          <p className="text-sm text-[#8a7e6d] tracking-wider">
+          <p className="text-sm text-[#6E6357] tracking-wider">
             Țara Oașului · Județul Satu Mare
           </p>
         </motion.div>
@@ -217,12 +207,12 @@ export default function Hero() {
           className="mt-10 flex flex-col sm:flex-row gap-4">
           <MagneticButton
             onClick={() => scrollTo('meniu')}
-            className="btn-stagger px-8 py-4 bg-[#c41e3a] text-white font-bold text-sm uppercase tracking-wider rounded-full hover:shadow-[0_0_40px_rgba(196,30,58,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c41e3a] transition-shadow duration-300">
+            className="btn-stagger px-8 py-4 bg-[#8E1F1B] text-white font-bold text-sm uppercase tracking-wider rounded-full hover:shadow-[0_0_40px_rgba(142,31,27,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8E1F1B] transition-shadow duration-300">
             <StaggerText text="Vezi meniul" />
           </MagneticButton>
           <MagneticButton
             onClick={() => scrollTo('catering')}
-            className="btn-stagger px-8 py-4 border border-[#c41e3a]/40 text-[#c41e3a] text-sm uppercase tracking-wider rounded-full hover:bg-[#c41e3a]/10 hover:border-[#c41e3a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c41e3a] transition-all duration-300">
+            className="btn-stagger px-8 py-4 border border-[#8E1F1B]/40 text-[#8E1F1B] text-sm uppercase tracking-wider rounded-full hover:bg-[#8E1F1B]/10 hover:border-[#8E1F1B] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8E1F1B] transition-all duration-300">
             <StaggerText text="Rezervă eveniment" />
           </MagneticButton>
         </motion.div>
@@ -233,7 +223,7 @@ export default function Hero() {
             animate={reducedMotion ? {} : { y: [0, 14, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
             className="w-px h-[60px] mx-auto"
-            style={{ background: 'linear-gradient(to bottom, #c41e3a, transparent)' }}/>
+            style={{ background: 'linear-gradient(to bottom, #8E1F1B, transparent)' }}/>
         </motion.div>
       </motion.div>
     </section>

@@ -35,18 +35,18 @@ function NumberInput({ label, value, onChange }) {
           onChange={e => onChange(Number(e.target.value) || 0)}
           style={{
             width:        '100px',
-            background:   '#0f0f0f',
+            background:   '#211E18',
             border:       '1px solid rgba(255,255,255,0.08)',
             borderRadius: '6px',
             padding:      '6px 8px',
             fontSize:     '13px',
-            color:        '#f5f5f5',
+            color:        '#F5EFE3',
             textAlign:    'right',
             outline:      'none',
             fontFamily:   'inherit',
             cursor:       'auto',
           }}
-          onFocus={e => e.target.style.borderColor = '#c41e3a'}
+          onFocus={e => e.target.style.borderColor = '#8E1F1B'}
           onBlur={e  => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
         />
         <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)', width: '28px' }}>lei</span>
@@ -55,7 +55,7 @@ function NumberInput({ label, value, onChange }) {
   )
 }
 
-function SectionTotal({ label, value, color = '#f5f5f5' }) {
+function SectionTotal({ label, value, color = '#F5EFE3' }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderTop: '1px solid rgba(255,255,255,0.08)', marginTop: '4px' }}>
       <span style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.7)' }}>{label}</span>
@@ -88,40 +88,40 @@ export default function FinanciarForm({ targ, onSave }) {
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
 
       {/* Venituri */}
-      <div style={{ background: '#1a1a1a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '20px' }}>
-        <h3 style={{ fontSize: '13px', fontWeight: 700, color: '#10b981', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 16px' }}>
+      <div style={{ background: '#2E2A24', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '20px' }}>
+        <h3 style={{ fontSize: '13px', fontWeight: 700, color: '#5B7A45', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 16px' }}>
           Venituri
         </h3>
         {VENITURI_FIELDS.map(f => (
           <NumberInput key={f.key} label={f.label} value={venituri[f.key]} onChange={v => setV(f.key, v)} />
         ))}
-        <SectionTotal label="Total venituri" value={ven} color="#10b981" />
+        <SectionTotal label="Total venituri" value={ven} color="#5B7A45" />
       </div>
 
       {/* Costuri */}
-      <div style={{ background: '#1a1a1a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '20px' }}>
-        <h3 style={{ fontSize: '13px', fontWeight: 700, color: '#f59e0b', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 16px' }}>
+      <div style={{ background: '#2E2A24', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '20px' }}>
+        <h3 style={{ fontSize: '13px', fontWeight: 700, color: '#D69A2D', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 16px' }}>
           Costuri
         </h3>
         {COSTURI_FIELDS.map(f => (
           <NumberInput key={f.key} label={f.label} value={costuri[f.key]} onChange={v => setC(f.key, v)} />
         ))}
-        <SectionTotal label="Total costuri" value={cost} color="#f59e0b" />
+        <SectionTotal label="Total costuri" value={cost} color="#D69A2D" />
       </div>
 
       {/* Profit summary + save */}
       <div style={{ gridColumn: '1 / -1' }}>
-        <div style={{ background: '#1a1a1a', border: `1px solid ${prof >= 0 ? 'rgba(196,30,58,0.2)' : 'rgba(239,68,68,0.2)'}`, borderRadius: '12px', padding: '20px', display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ background: '#2E2A24', border: `1px solid ${prof >= 0 ? 'rgba(142,31,27,0.2)' : 'rgba(158,43,18,0.2)'}`, borderRadius: '12px', padding: '20px', display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
             {[
-              { label: 'Venituri totale', value: fmtRON(ven),  color: '#10b981' },
-              { label: 'Costuri totale',  value: fmtRON(cost), color: '#f59e0b' },
-              { label: 'Profit net',      value: fmtRON(prof), color: prof >= 0 ? '#c41e3a' : '#ef4444' },
-              { label: 'Marjă profit',    value: fmtPct(marja),color: prof >= 0 ? '#818cf8' : '#ef4444' },
+              { label: 'Venituri totale', value: fmtRON(ven),  color: '#5B7A45' },
+              { label: 'Costuri totale',  value: fmtRON(cost), color: '#D69A2D' },
+              { label: 'Profit net',      value: fmtRON(prof), color: prof >= 0 ? '#8E1F1B' : '#9E2B12' },
+              { label: 'Marjă profit',    value: fmtPct(marja),color: prof >= 0 ? '#C2611E' : '#9E2B12' },
             ].map(({ label, value, color }) => (
               <div key={label}>
                 <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', margin: '0 0 3px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{label}</p>
-                <p style={{ fontSize: '22px', fontWeight: 700, color, margin: 0, fontFamily: '"DM Serif Display", serif' }}>{value}</p>
+                <p style={{ fontSize: '22px', fontWeight: 700, color, margin: 0, fontFamily: '"Bitter", serif' }}>{value}</p>
               </div>
             ))}
           </div>

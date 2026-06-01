@@ -15,7 +15,7 @@ import DashboardApp from './dashboard/DashboardApp'
 
 function Site() {
   return (
-    <div className="bg-[#faf3e8] min-h-screen">
+    <div className="bg-[#F5EFE3] min-h-screen">
       <CustomCursor />
       <Navbar />
       <Hero />

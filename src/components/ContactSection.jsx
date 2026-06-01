@@ -32,16 +32,16 @@ export default function ContactSection() {
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section id="contact" className="relative py-32 px-6 bg-[#faf3e8] overflow-hidden">
+    <section id="contact" className="relative py-32 px-6 bg-[#F5EFE3] overflow-hidden">
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px]"
-          style={{ background: 'radial-gradient(ellipse at bottom right, rgba(196,30,58,0.05) 0%, transparent 65%)' }}/>
+          style={{ background: 'radial-gradient(ellipse at bottom right, rgba(142,31,27,0.05) 0%, transparent 65%)' }}/>
         <div className="absolute inset-0"
           style={{
             backgroundImage: `
-              repeating-linear-gradient(0deg, rgba(26,21,32,0.025) 0px, rgba(26,21,32,0.025) 1px, transparent 1px, transparent 60px),
-              repeating-linear-gradient(90deg, rgba(26,21,32,0.025) 0px, rgba(26,21,32,0.025) 1px, transparent 1px, transparent 60px)
+              repeating-linear-gradient(0deg, rgba(46,42,36,0.025) 0px, rgba(46,42,36,0.025) 1px, transparent 1px, transparent 60px),
+              repeating-linear-gradient(90deg, rgba(46,42,36,0.025) 0px, rgba(46,42,36,0.025) 1px, transparent 1px, transparent 60px)
             `,
           }}/>
       </div>
@@ -53,12 +53,12 @@ export default function ContactSection() {
           transition={{ duration: 0.7, ease: 'easeOut' }}
           className="mb-16">
           <div className="flex items-center gap-3 mb-5">
-            <div className="w-12 h-px bg-[#c41e3a]"/>
-            <span className="text-xs tracking-[0.3em] text-[#c41e3a] uppercase">Suntem la dispoziția ta</span>
+            <div className="w-12 h-px bg-[#8E1F1B]"/>
+            <span className="text-xs tracking-[0.3em] text-[#8E1F1B] uppercase">Suntem la dispoziția ta</span>
           </div>
-          <h2 className="text-4xl md:text-6xl text-[#1a1520] leading-tight max-w-2xl"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>
-            Vino să guști <span className="text-[#c41e3a]">tradiția</span>
+          <h2 className="text-4xl md:text-6xl text-[#2E2A24] leading-tight max-w-2xl"
+            style={{ fontFamily: '"Bitter", serif' }}>
+            Vino să guști <span className="text-[#8E1F1B]">tradiția</span>
           </h2>
         </motion.div>
 
@@ -72,13 +72,13 @@ export default function ContactSection() {
                 <motion.div
                   initial={{ opacity: 0, x: -24 }} animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: 'easeOut' }}
-                  className="group flex items-center gap-5 bg-white/80 border border-[#1a1520]/5 rounded-2xl p-6 hover:border-[#c41e3a]/25 hover:-translate-y-0.5 hover:shadow-[0_16px_32px_rgba(26,21,32,0.07)] transition-all duration-300">
-                  <div className="w-12 h-12 rounded-xl bg-[#c41e3a]/8 flex items-center justify-center shrink-0 group-hover:bg-[#c41e3a]/15 transition-colors duration-300">
-                    <Icon size={20} className="text-[#c41e3a]" strokeWidth={1.5}/>
+                  className="group flex items-center gap-5 bg-[#FDFBF6]/80 border border-[#2E2A24]/5 rounded-2xl p-6 hover:border-[#8E1F1B]/25 hover:-translate-y-0.5 hover:shadow-[0_16px_32px_rgba(46,42,36,0.07)] transition-all duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-[#8E1F1B]/8 flex items-center justify-center shrink-0 group-hover:bg-[#8E1F1B]/15 transition-colors duration-300">
+                    <Icon size={20} className="text-[#8E1F1B]" strokeWidth={1.5}/>
                   </div>
                   <div>
-                    <p className="text-[#1a1520] font-semibold text-sm">{label}</p>
-                    <p className="text-[#8a7e6d] text-xs mt-0.5">{note}</p>
+                    <p className="text-[#2E2A24] font-semibold text-sm">{label}</p>
+                    <p className="text-[#6E6357] text-xs mt-0.5">{note}</p>
                   </div>
                 </motion.div>
               )
@@ -93,33 +93,33 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: 24 }} animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
             className="flex flex-col justify-between gap-8">
-            <div className="bg-[#1a1520] rounded-2xl p-8">
-              <p className="text-[#faf3e8]/70 text-sm leading-relaxed mb-6">
+            <div className="bg-[#2E2A24] rounded-2xl p-8">
+              <p className="text-[#F5EFE3]/70 text-sm leading-relaxed mb-6">
                 Urmărește-ne pe rețelele sociale pentru programul actualizat, locații noi și surprize culinare.
               </p>
               <div className="flex gap-4">
                 <div role="button" aria-disabled="true" aria-label="Facebook — Em curând"
-                  className="relative flex-1 flex items-center justify-center gap-2.5 bg-white/[0.06] border border-white/[0.08] text-[#faf3e8]/40 rounded-xl py-3 text-sm font-medium cursor-default select-none">
+                  className="relative flex-1 flex items-center justify-center gap-2.5 bg-[#FDFBF6]/[0.06] border border-white/[0.08] text-[#F5EFE3]/40 rounded-xl py-3 text-sm font-medium cursor-default select-none">
                   <FbIcon/> Facebook
-                  <span className="absolute -top-2 -right-1 bg-[#c41e3a]/80 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider">Em curând</span>
+                  <span className="absolute -top-2 -right-1 bg-[#8E1F1B]/80 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider">Em curând</span>
                 </div>
                 <div role="button" aria-disabled="true" aria-label="Instagram — Em curând"
-                  className="relative flex-1 flex items-center justify-center gap-2.5 bg-white/[0.06] border border-white/[0.08] text-[#faf3e8]/40 rounded-xl py-3 text-sm font-medium cursor-default select-none">
+                  className="relative flex-1 flex items-center justify-center gap-2.5 bg-[#FDFBF6]/[0.06] border border-white/[0.08] text-[#F5EFE3]/40 rounded-xl py-3 text-sm font-medium cursor-default select-none">
                   <IgIcon/> Instagram
-                  <span className="absolute -top-2 -right-1 bg-[#c41e3a]/80 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider">Em curând</span>
+                  <span className="absolute -top-2 -right-1 bg-[#8E1F1B]/80 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider">Em curând</span>
                 </div>
               </div>
             </div>
 
             {/* Quote card */}
-            <div className="border border-[#c41e3a]/20 rounded-2xl p-8 bg-[#c41e3a]/[0.03]">
-              <p className="text-2xl text-[#1a1520] leading-snug italic"
-                style={{ fontFamily: '"DM Serif Display", serif' }}>
+            <div className="border border-[#8E1F1B]/20 rounded-2xl p-8 bg-[#8E1F1B]/[0.03]">
+              <p className="text-2xl text-[#2E2A24] leading-snug italic"
+                style={{ fontFamily: '"Bitter", serif' }}>
                 „Focul real dă gustul real."
               </p>
               <div className="mt-4 flex items-center gap-3">
-                <div className="w-8 h-px bg-[#c41e3a]"/>
-                <span className="text-xs text-[#c41e3a] tracking-wider uppercase">Est. 2026 · Negrești-Oaș</span>
+                <div className="w-8 h-px bg-[#8E1F1B]"/>
+                <span className="text-xs text-[#8E1F1B] tracking-wider uppercase">Est. 2026 · Negrești-Oaș</span>
               </div>
             </div>
           </motion.div>

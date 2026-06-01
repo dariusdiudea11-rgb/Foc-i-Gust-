@@ -15,7 +15,7 @@ const events = [
 
 const badgeClass = {
   confirmed: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
-  pending:   'bg-[#c41e3a]/5 text-[#c41e3a] border border-[#c41e3a]/20',
+  pending:   'bg-[#8E1F1B]/5 text-[#8E1F1B] border border-[#8E1F1B]/20',
 }
 const badgeLabel = {
   confirmed: 'Confirmat',
@@ -27,23 +27,23 @@ export default function CalendarSection() {
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section id="calendar" className="relative py-32 px-6 bg-[#faf3e8]">
+    <section id="calendar" className="relative py-32 px-6 bg-[#F5EFE3]">
       <div className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: `
-            repeating-linear-gradient(0deg, rgba(26,21,32,0.025) 0px, rgba(26,21,32,0.025) 1px, transparent 1px, transparent 60px),
-            repeating-linear-gradient(90deg, rgba(26,21,32,0.025) 0px, rgba(26,21,32,0.025) 1px, transparent 1px, transparent 60px)
+            repeating-linear-gradient(0deg, rgba(46,42,36,0.025) 0px, rgba(46,42,36,0.025) 1px, transparent 1px, transparent 60px),
+            repeating-linear-gradient(90deg, rgba(46,42,36,0.025) 0px, rgba(46,42,36,0.025) 1px, transparent 1px, transparent 60px)
           `,
         }}/>
 
       <div className="relative max-w-5xl mx-auto">
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-5">
-            <div className="w-12 h-px bg-[#c41e3a]"/>
-            <span className="text-xs tracking-[0.3em] text-[#c41e3a] uppercase">Unde ne găsești</span>
+            <div className="w-12 h-px bg-[#8E1F1B]"/>
+            <span className="text-xs tracking-[0.3em] text-[#8E1F1B] uppercase">Unde ne găsești</span>
           </div>
-          <h2 className="text-4xl md:text-5xl text-[#1a1520]"
-            style={{ fontFamily: '"DM Serif Display", serif' }}>Sezon 2026</h2>
+          <h2 className="text-4xl md:text-5xl text-[#2E2A24]"
+            style={{ fontFamily: '"Bitter", serif' }}>Sezon 2026</h2>
         </div>
 
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -51,16 +51,16 @@ export default function CalendarSection() {
             <motion.div key={i}
               initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.45, delay: i * 0.07, ease: 'easeOut' }}
-              className="group bg-white/80 border border-[#1a1520]/5 rounded-2xl p-6 hover:border-[#c41e3a]/20 hover:scale-[1.02] transition-all duration-300 cursor-default">
+              className="group bg-[#FDFBF6]/80 border border-[#2E2A24]/5 rounded-2xl p-6 hover:border-[#8E1F1B]/20 hover:scale-[1.02] transition-all duration-300 cursor-default">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[#c41e3a] text-xl"
-                  style={{ fontFamily: '"DM Serif Display", serif' }}>{ev.date}</span>
+                <span className="text-[#8E1F1B] text-xl"
+                  style={{ fontFamily: '"Bitter", serif' }}>{ev.date}</span>
                 <span className={`text-xs px-3 py-1 rounded-full ${badgeClass[ev.status]}`}>
                   {badgeLabel[ev.status]}
                 </span>
               </div>
-              <p className="text-[#1a1520] font-semibold text-lg leading-snug mb-2">{ev.name}</p>
-              <div className="flex items-center gap-1.5 text-[#8a7e6d] text-sm">
+              <p className="text-[#2E2A24] font-semibold text-lg leading-snug mb-2">{ev.name}</p>
+              <div className="flex items-center gap-1.5 text-[#6E6357] text-sm">
                 <MapPin size={13} strokeWidth={1.5}/>
                 {ev.location}
               </div>
@@ -68,7 +68,7 @@ export default function CalendarSection() {
           ))}
         </div>
 
-        <p className="text-sm text-[#8a7e6d] text-center mt-12 leading-relaxed">
+        <p className="text-sm text-[#6E6357] text-center mt-12 leading-relaxed">
           Calendarul se actualizează pe parcursul sezonului.<br/>
           Urmărește-ne pe Facebook pentru noutăți.
         </p>
