@@ -1,33 +1,27 @@
 @import "tailwindcss";
 
 /* ============================================================
-   FOC ȘI GUST TRADIȚIONAL — Design tokens (Tailwind theme)
+   FOC ȘI GUST TRADIȚIONAL — design tokens
    Colors sampled from the brand logo. Display = Bitter (slab
-   serif, mirrors wordmark); UI/body = Hanken Grotesk.
+   serif); UI/body = Hanken Grotesk.
    ============================================================ */
 @theme {
-  /* Brand core — straight from the logo */
-  --color-ink:          #2E2A24; /* charcoal wordmark + medallion */
-  --color-paprika:      #8E1F1B; /* deep red — PRIMARY */
-  --color-paprika-deep: #6F1714; /* pressed / hover-dark */
-  --color-flame:        #C2611E; /* flame orange — SECONDARY */
-  --color-flame-bright: #D56E34; /* brightest flame highlight */
-  --color-ember:        #9E2B12; /* red-orange transition */
-
-  /* Appetizing folk extensions */
-  --color-honey:        #D69A2D; /* mustard / honey gold */
+  --color-ink:          #2E2A24;
+  --color-paprika:      #8E1F1B;
+  --color-paprika-deep: #6F1714;
+  --color-flame:        #C2611E;
+  --color-flame-bright: #D56E34;
+  --color-ember:        #9E2B12;
+  --color-honey:        #D69A2D;
   --color-honey-soft:   #E8C879;
-  --color-herb:         #5B7A45; /* fresh green */
+  --color-herb:         #5B7A45;
   --color-herb-deep:    #3E5A30;
-
-  /* Warm neutrals */
-  --color-parchment:    #F5EFE3; /* page background */
-  --color-parchment-2:  #EFE7D7; /* alt section background */
-  --color-surface:      #FDFBF6; /* cards / raised surfaces */
-  --color-cream-line:   #E5DAC6; /* hairline borders */
-  --color-cream-line-2: #D8CAB2; /* stronger border */
-
-  /* Legacy aliases (kept so existing utility names still resolve) */
+  --color-parchment:    #F5EFE3;
+  --color-parchment-2:  #EFE7D7;
+  --color-surface:      #FDFBF6;
+  --color-cream-line:   #E5DAC6;
+  --color-cream-line-2: #D8CAB2;
+  /* legacy aliases */
   --color-fire:  #8E1F1B;
   --color-cream: #F5EFE3;
   --color-navy:  #2E2A24;
@@ -36,129 +30,60 @@
   --font-body:    "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-/* Raw design-system tokens (brand vocabulary for inline/CSS use) */
+/* Raw design-system tokens (brand vocabulary used by inline styles) */
 :root {
-  --ink: #2E2A24;          --paprika: #8E1F1B;      --paprika-deep: #6F1714;
-  --flame: #C2611E;        --flame-bright: #D56E34; --ember: #9E2B12;
-  --honey: #D69A2D;        --honey-soft: #E8C879;   --herb: #5B7A45; --herb-deep: #3E5A30;
-  --parchment: #F5EFE3;    --parchment-2: #EFE7D7;  --surface: #FDFBF6;
-  --cream-line: #E5DAC6;   --cream-line-2: #D8CAB2;
-  --fg-1: #2E2A24;         --fg-2: #6E6357;         --fg-3: #9A8E7D;
-  --fg-on-dark: #F5EFE3;   --fg-on-dark-2: #C9BCA8;
+  --ink:#2E2A24; --paprika:#8E1F1B; --paprika-deep:#6F1714;
+  --flame:#C2611E; --flame-bright:#D56E34; --ember:#9E2B12;
+  --honey:#D69A2D; --honey-soft:#E8C879; --herb:#5B7A45; --herb-deep:#3E5A30;
+  --parchment:#F5EFE3; --parchment-2:#EFE7D7; --surface:#FDFBF6;
+  --cream-line:#E5DAC6; --cream-line-2:#D8CAB2;
+  --fg-1:#2E2A24; --fg-2:#6E6357; --fg-3:#9A8E7D;
+  --fg-on-dark:#F5EFE3; --fg-on-dark-2:#C9BCA8;
+  --success:#5B7A45; --warning:#D69A2D; --danger:#8E1F1B; --link:#8E1F1B;
 
-  --tracking-caps: 0.14em;
-  --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-xl: 24px; --radius-pill: 999px;
+  --font-display:"Bitter", Georgia, "Times New Roman", serif;
+  --font-sans:"Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* Warm-tinted shadows (brown, not gray) */
-  --shadow-sm: 0 2px 6px rgba(46,42,36,0.08);
-  --shadow-md: 0 8px 20px -6px rgba(46,42,36,0.14);
-  --shadow-lg: 0 18px 40px -12px rgba(46,42,36,0.22);
-  --shadow-ember: 0 10px 30px -8px rgba(142,31,27,0.30);
+  --radius-sm:6px; --radius-md:10px; --radius-lg:16px; --radius-xl:24px; --radius-pill:999px;
 
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-xs:0 1px 2px rgba(46,42,36,0.06);
+  --shadow-sm:0 2px 6px rgba(46,42,36,0.08);
+  --shadow-md:0 8px 20px -6px rgba(46,42,36,0.14);
+  --shadow-lg:0 18px 40px -12px rgba(46,42,36,0.22);
+  --shadow-ember:0 10px 30px -8px rgba(142,31,27,0.30);
+
+  --ease-out:cubic-bezier(0.22,1,0.36,1);
+  --ease-soft:cubic-bezier(0.4,0,0.2,1);
+  --dur-fast:160ms; --dur-base:260ms; --dur-slow:480ms;
 }
 
-* {
-  scroll-behavior: smooth;
-}
+* { scroll-behavior: smooth; }
 
 body {
-  background-color: #F5EFE3;
-  color: #2E2A24;
-  font-family: "Hanken Grotesk", system-ui, sans-serif;
+  background-color: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
-/* Display headlines use the slab serif with heritage weight.
-   (Bitter at 400 is far lighter than the previous DM Serif Display,
-   so headings get an explicit weight to keep their bold presence.) */
+/* Display headlines use the slab serif with heritage weight. */
 h1, h2, h3, h4 {
-  font-family: "Bitter", Georgia, "Times New Roman", serif;
+  font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 h1 { font-weight: 800; }
 
-/* Hide default cursor on desktop — exclude dashboard */
-@media (pointer: fine) {
-  *:not(.dashboard-root):not(.dashboard-root *),
-  *:not(.dashboard-root)::before,
-  *:not(.dashboard-root)::after {
-    cursor: none !important;
-  }
-  .dashboard-root,
-  .dashboard-root * {
-    cursor: auto;
-  }
-}
-
-/* Grain texture overlay */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.018;
-  pointer-events: none;
-  z-index: 9998;
-}
-
-/* Floating gradient mesh keyframes for Hero */
-@keyframes float1 {
-  0%   { transform: translate(0px, 0px); }
-  50%  { transform: translate(30px, -20px); }
-  100% { transform: translate(0px, 0px); }
-}
-@keyframes float2 {
-  0%   { transform: translate(0px, 0px); }
-  50%  { transform: translate(-25px, 15px); }
-  100% { transform: translate(0px, 0px); }
-}
-@keyframes float3 {
-  0%   { transform: translate(0px, 0px); }
-  50%  { transform: translate(20px, 25px); }
-  100% { transform: translate(0px, 0px); }
-}
-
-/* Marquee animation for WatermarkBand */
-@keyframes marquee {
-  0%   { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-marquee {
-  animation: marquee 25s linear infinite;
-  display: flex;
-  width: max-content;
-}
-
-/* Character stagger hover on CTA buttons */
-.btn-stagger .char {
-  display: inline-block;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-.btn-stagger:hover .char {
-  transform: translateY(-3px);
-  opacity: 0.85;
-}
-
-/* Focus styles */
 :focus-visible {
-  outline: 2px solid #8E1F1B;
+  outline: 2px solid var(--paprika);
   outline-offset: 2px;
   border-radius: 3px;
 }
 
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-  }
-
-  .animate-marquee {
-    animation: none !important;
   }
 }
