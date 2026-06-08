@@ -25,9 +25,16 @@ export const FG_MENU = [
 ]
 
 export const FG_FAIRS = [
-  { place: "Târgul de Crăciun", city: "Cluj-Napoca · Piața Unirii", dates: "1–23 Dec", live: true },
-  { place: "Festivalul Gustului", city: "Sibiu · Piața Mare", dates: "14–16 Iun", live: false },
-  { place: "Târg de Sf. Maria", city: "Bistrița · Centru", dates: "13–15 Aug", live: false },
+  { place: "Valea Vinului",   city: "Târg de țară",         dates: "6 iun · sâmbătă"   },
+  { place: "Halmeu",          city: "Târg de țară",         dates: "11 iun · joi"       },
+  { place: "Târșolț",         city: "Târg de țară",         dates: "13 iun · sâmbătă"  },
+  { place: "Turț",            city: "Târg de țară",         dates: "18 iun · joi", home: true },
+  { place: "Tarna Mare",      city: "Târg de țară",         dates: "20 iun · sâmbătă"  },
+  { place: "Călinești-Oaș",   city: "Târg comunal",         dates: "22 iun · luni"      },
+  { place: "Bixad",           city: "Târg de țară",         dates: "24 iun · miercuri"  },
+  { place: "Gherța Mică",     city: "Târg lunar",           dates: "25 iun · joi"       },
+  { place: "Bătarci",         city: "Târg de țară",         dates: "27 iun · sâmbătă"  },
+  { place: "Medieșu Aurit",   city: "Târg de țară",         dates: "30 iun · marți"     },
 ]
 
 export const FG_NAV = [

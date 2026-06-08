@@ -38,14 +38,6 @@ export default function Home({ onNav, onAdd }) {
               <Button onClick={() => onNav("meniu")} icon="arrowRight">Vezi meniul</Button>
               <Button variant="ghost" onClick={() => onNav("evenimente")}>Rezervați un eveniment</Button>
             </div></Reveal>
-            <Reveal delay={320}><div style={{ display: "flex", gap: isMobile ? 22 : 26, marginTop: 40 }}>
-              {[["12+", "ani de târguri"], ["40+", "rețete de familie"], ["500+", "evenimente"]].map(([n, l]) => (
-                <div key={l}>
-                  <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: isMobile ? 26 : 30, color: "var(--paprika)" }}>{n}</div>
-                  <div style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--fg-2)", marginTop: 2 }}>{l}</div>
-                </div>
-              ))}
-            </div></Reveal>
           </div>
           <Reveal delay={180} y={28}>
             <div style={{ position: "relative" }}>
@@ -127,8 +119,8 @@ export default function Home({ onNav, onAdd }) {
                   </div>
                   <div style={{ textAlign: "right", flex: "none" }}>
                     <div style={{ fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 14, color: "var(--parchment)" }}>{f.dates}</div>
-                    {f.live && <span style={{ display: "inline-flex", alignItems: "center", gap: 6, marginTop: 5, fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 700, color: "var(--flame-bright)" }}>
-                      <span style={{ width: 7, height: 7, borderRadius: 999, background: "var(--flame-bright)" }} />Acum la târg</span>}
+                    {f.home && <span style={{ display: "inline-flex", alignItems: "center", gap: 6, marginTop: 5, fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 700, color: "var(--flame-bright)" }}>
+                      <span style={{ width: 7, height: 7, borderRadius: 999, background: "var(--flame-bright)" }} />Acasă</span>}
                   </div>
                 </div>
               </Reveal>
