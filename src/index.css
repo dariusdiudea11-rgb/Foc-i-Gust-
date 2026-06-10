@@ -84,6 +84,22 @@ h1 { font-weight: 800; }
    Motion — page transitions, flame glow, marquee, micro-hovers
    ============================================================ */
 
+/* Subtle grain texture — gives the parchment a handcrafted, premium feel */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23g)'/></svg>");
+  background-size: 200px;
+  opacity: .032;
+  mix-blend-mode: multiply;
+}
+
+/* Better text rendering on all headings */
+h1, h2, h3, h4 { text-rendering: optimizeLegibility; font-optical-sizing: auto; }
+
 /* Screen change: fade + rise (re-triggered via key={screen}) */
 @keyframes fg-screen-in {
   from { opacity: 0; transform: translateY(14px); }
@@ -116,9 +132,18 @@ h1 { font-weight: 800; }
   border-color: #5a5248 !important;
 }
 
-/* Button icon nudges right on hover */
+/* Button icon nudges right on hover, presses on active */
 .fg-btn-icon { display: inline-flex; transition: transform .22s var(--ease-out); }
 button:hover .fg-btn-icon { transform: translateX(3px); }
+button:active { transform: scale(.97) !important; }
+
+/* Nav link hover */
+.fg-nav-link { transition: color .2s, background .2s var(--ease-soft) !important; }
+.fg-nav-link:hover { background: rgba(142,31,27,.07) !important; color: var(--paprika) !important; }
+
+/* Footer link hover */
+.fg-footer-link { transition: color .22s, opacity .22s; }
+.fg-footer-link:hover { color: var(--parchment) !important; opacity: 1 !important; }
 
 /* Category chips lift slightly */
 .fg-chip { transition: all .2s var(--ease-soft); }

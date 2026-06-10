@@ -50,11 +50,19 @@ export function Icon({ name, size = 22, stroke = 2, fill = "none", style }) {
 
 /* ---------- Eyebrow ---------- */
 export function Eyebrow({ children, light, style }) {
-  return <div style={{
-    fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 13,
-    letterSpacing: "0.14em", textTransform: "uppercase",
-    color: light ? "var(--flame-bright)" : "var(--paprika)", ...style
-  }}>{children}</div>
+  return (
+    <div style={{
+      fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 11.5,
+      letterSpacing: "0.18em", textTransform: "uppercase",
+      color: light ? "var(--flame-bright)" : "var(--paprika)", ...style
+    }}>
+      <span aria-hidden="true" style={{
+        display: "inline-block", width: 5, height: 5, background: "currentColor",
+        transform: "rotate(45deg) translateY(-1px)", marginRight: 9, opacity: 0.75,
+      }} />
+      {children}
+    </div>
+  )
 }
 
 /* ---------- Button ---------- */

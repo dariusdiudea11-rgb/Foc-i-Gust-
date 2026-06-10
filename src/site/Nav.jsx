@@ -25,14 +25,15 @@ export default function Nav({ current, onNav }) {
           <nav style={{ display: "flex", alignItems: "center", gap: 4 }}>
             {FG_NAV.map(n => (
               <button key={n.id} onClick={() => onNav(n.id)}
+                className="fg-nav-link"
                 style={{
                   fontFamily: "var(--font-sans)", fontWeight: 600, fontSize: 15,
-                  background: "transparent", border: "none", cursor: "pointer", padding: "9px 16px",
+                  background: "transparent", border: "none", cursor: "pointer", padding: "9px 18px",
                   borderRadius: 999, color: current === n.id ? "var(--paprika)" : "var(--fg-1)",
-                  position: "relative", transition: "color .2s"
+                  position: "relative",
                 }}>
                 {n.label}
-                {current === n.id && <span style={{ position: "absolute", left: 16, right: 16, bottom: 3, height: 2, background: "var(--paprika)", borderRadius: 2 }} />}
+                {current === n.id && <span style={{ position: "absolute", left: 18, right: 18, bottom: 4, height: 2, background: "var(--paprika)", borderRadius: 2 }} />}
               </button>
             ))}
           </nav>

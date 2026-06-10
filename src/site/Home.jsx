@@ -16,6 +16,12 @@ export default function Home({ onNav }) {
     <div>
       {/* HERO */}
       <section style={{ position: "relative", overflow: "hidden", background: "var(--parchment)" }}>
+        {/* decorative background emblem */}
+        <img src={emblem} aria-hidden="true" alt="" style={{
+          position: "absolute", right: isMobile ? -70 : -140, top: -80,
+          width: isMobile ? 320 : 560, opacity: 0.045,
+          pointerEvents: "none", userSelect: "none", transform: "rotate(15deg)",
+        }} />
         <div style={{
           ...wrap, padding: isMobile ? "40px 20px 52px" : "72px 32px 80px",
           display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.05fr 0.95fr",
@@ -69,14 +75,15 @@ export default function Home({ onNav }) {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: 26 }}>
             {triad.map((t, i) => (
               <Reveal key={t.t} delay={i * 90}>
-                <div style={{ textAlign: "center", padding: "8px 16px" }}>
+                <div style={{ textAlign: "center", padding: "8px 20px" }}>
                   <div style={{
-                    width: 60, height: 60, borderRadius: 999, margin: "0 auto 16px",
-                    background: "var(--surface)", border: "1px solid var(--cream-line)", boxShadow: "var(--shadow-sm)",
+                    width: 72, height: 72, borderRadius: 22, margin: "0 auto 22px",
+                    background: "linear-gradient(145deg, rgba(142,31,27,.13), rgba(194,97,30,.09))",
+                    border: "1px solid rgba(142,31,27,.16)",
                     display: "flex", alignItems: "center", justifyContent: "center", color: "var(--paprika)"
-                  }}><Icon name={t.icon} size={26} /></div>
-                  <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 26, margin: "0 0 8px", color: "var(--ink)" }}>{t.t}</h3>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 15, lineHeight: 1.6, color: "var(--fg-2)", margin: "0 auto", maxWidth: 280 }}>{t.d}</p>
+                  }}><Icon name={t.icon} size={30} stroke={1.5} /></div>
+                  <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 27, margin: "0 0 10px", color: "var(--ink)", letterSpacing: "-.01em" }}>{t.t}</h3>
+                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 15.5, lineHeight: 1.65, color: "var(--fg-2)", margin: "0 auto", maxWidth: 260 }}>{t.d}</p>
                 </div>
               </Reveal>
             ))}

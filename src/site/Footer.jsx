@@ -19,15 +19,15 @@ export default function Footer({ onNav }) {
         <div>
           <h4 style={{ fontFamily: "var(--font-display)", color: "var(--parchment)", fontSize: 16, margin: "4px 0 14px" }}>Navigare</h4>
           {FG_NAV.map(n => (
-            <div key={n.id} onClick={() => onNav(n.id)}
+            <div key={n.id} onClick={() => onNav(n.id)} className="fg-footer-link"
               style={{ fontFamily: "var(--font-sans)", fontSize: 14, padding: "5px 0", cursor: "pointer", color: "var(--fg-on-dark-2)" }}>{n.label}</div>
           ))}
         </div>
         <div>
           <h4 style={{ fontFamily: "var(--font-display)", color: "var(--parchment)", fontSize: 16, margin: "4px 0 14px" }}>Contact</h4>
-          <a href="tel:+40746170890" style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--font-sans)", fontSize: 14, padding: "5px 0", color: "var(--fg-on-dark-2)", textDecoration: "none" }}><Icon name="phone" size={16} /> 0746 170 890</a>
-          <a href="mailto:darius.diudea11@gmail.com" style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--font-sans)", fontSize: 14, padding: "5px 0", wordBreak: "break-all", color: "var(--fg-on-dark-2)", textDecoration: "none" }}><Icon name="mail" size={16} /> darius.diudea11@gmail.com</a>
-          <div style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--font-sans)", fontSize: 14, padding: "5px 0" }}><Icon name="mapPin" size={16} /> România · la târguri</div>
+          <a href="tel:+40746170890" className="fg-footer-link" style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--font-sans)", fontSize: 14, padding: "5px 0", color: "var(--fg-on-dark-2)", textDecoration: "none" }}><Icon name="phone" size={16} /> 0746 170 890</a>
+          <a href="mailto:darius.diudea11@gmail.com" className="fg-footer-link" style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--font-sans)", fontSize: 14, padding: "5px 0", wordBreak: "break-all", color: "var(--fg-on-dark-2)", textDecoration: "none" }}><Icon name="mail" size={16} /> darius.diudea11@gmail.com</a>
+          <div style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--font-sans)", fontSize: 14, padding: "5px 0", color: "var(--fg-on-dark-2)" }}><Icon name="mapPin" size={16} /> România · la târguri</div>
         </div>
         <div>
           <h4 style={{ fontFamily: "var(--font-display)", color: "var(--parchment)", fontSize: 16, margin: "4px 0 14px" }}>Urmăriți-ne</h4>
