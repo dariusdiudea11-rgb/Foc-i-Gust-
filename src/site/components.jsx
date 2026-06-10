@@ -158,15 +158,66 @@ export function FolkDivider({ style }) {
   )
 }
 
+/* ---------- Tilt3D wrapper (perspective tilt following mouse) ---------- */
+export function Tilt3D({ children, style, strength = 10 }) {
+  const ref = useRef(null)
+  const [rot, setRot] = useState({ x: 0, y: 0 })
+  const [over, setOver] = useState(false)
+  const onMove = (e) => {
+    const el = ref.current; if (!el) return
+    const r = el.getBoundingClientRect()
+    const nx = (e.clientX - r.left) / r.width - 0.5
+    const ny = (e.clientY - r.top) / r.height - 0.5
+    setRot({ x: -ny * strength, y: nx * strength })
+  }
+  return (
+    <div ref={ref}
+      onMouseMove={onMove}
+      onMouseEnter={() => setOver(true)}
+      onMouseLeave={() => { setOver(false); setRot({ x: 0, y: 0 }) }}
+      style={{
+        transform: over
+          ? `perspective(900px) rotateX(${rot.x}deg) rotateY(${rot.y}deg) scale3d(1.025,1.025,1.025)`
+          : "perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)",
+        transition: over ? "transform .08s linear" : "transform .55s var(--ease-out)",
+        willChange: "transform",
+        ...style,
+      }}>
+      {children}
+    </div>
+  )
+}
+
 /* ---------- Dish card ---------- */
 export function DishCard({ dish }) {
-  const [h, setH] = useState(false)
+  const ref = useRef(null)
+  const [rot, setRot] = useState({ x: 0, y: 0 })
+  const [over, setOver] = useState(false)
+  const onMove = (e) => {
+    const el = ref.current; if (!el) return
+    const r = el.getBoundingClientRect()
+    const nx = (e.clientX - r.left) / r.width - 0.5
+    const ny = (e.clientY - r.top) / r.height - 0.5
+    setRot({ x: -ny * 14, y: nx * 14 })
+  }
+  const sheenX = (rot.y / 14 + 0.5) * 100
+  const sheenY = (-rot.x / 14 + 0.5) * 100
   return (
-    <div onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
+    <div ref={ref}
+      onMouseMove={onMove}
+      onMouseEnter={() => setOver(true)}
+      onMouseLeave={() => { setOver(false); setRot({ x: 0, y: 0 }) }}
       style={{
+        position: "relative",
         background: "var(--surface)", border: "1px solid var(--cream-line)", borderRadius: 16,
-        boxShadow: h ? "var(--shadow-md)" : "var(--shadow-sm)", overflow: "hidden",
-        transform: h ? "translateY(-4px)" : "none", transition: "transform .26s var(--ease-out), box-shadow .26s"
+        boxShadow: over ? "var(--shadow-lg)" : "var(--shadow-sm)", overflow: "hidden",
+        transform: over
+          ? `perspective(900px) rotateX(${rot.x}deg) rotateY(${rot.y}deg) scale3d(1.03,1.03,1.03)`
+          : "perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)",
+        transition: over
+          ? "box-shadow .3s, transform .08s linear"
+          : "box-shadow .4s var(--ease-out), transform .55s var(--ease-out)",
+        willChange: "transform",
       }}>
       <Photo seed={dish.seed} tag={dish.tag} tagTone={dish.tagTone} style={{ height: 168 }} />
       <div style={{ padding: "16px 18px 18px" }}>
@@ -178,6 +229,11 @@ export function DishCard({ dish }) {
           <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 20, color: "var(--paprika)" }}>{dish.price}</span>
         </div>
       </div>
+      {/* moving light sheen */}
+      {over && <div aria-hidden="true" style={{
+        position: "absolute", inset: 0, borderRadius: 16, pointerEvents: "none",
+        background: `radial-gradient(circle at ${sheenX}% ${sheenY}%, rgba(255,255,255,.22) 0%, transparent 62%)`,
+      }} />}
     </div>
   )
 }

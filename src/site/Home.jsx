@@ -1,4 +1,4 @@
-import { Eyebrow, Button, Photo, FolkDivider, DishCard, Icon, Reveal, MarqueeBand, emblem } from './components'
+import { Eyebrow, Button, Photo, FolkDivider, DishCard, Icon, Reveal, MarqueeBand, Tilt3D, emblem } from './components'
 import { FG_MENU, FG_FAIRS } from './data'
 import { useIsMobile } from './useIsMobile'
 
@@ -42,20 +42,22 @@ export default function Home({ onNav }) {
           <Reveal delay={180} y={28}>
             <div style={{ position: "relative" }}>
               <Photo seed={1} style={{ height: isMobile ? 300 : 460, borderRadius: 24, boxShadow: "var(--shadow-lg)" }} label="Foto: fel principal" />
-              <div style={{
-                position: "absolute", bottom: -22, left: isMobile ? 12 : -22, background: "var(--surface)",
-                border: "1px solid var(--cream-line)", borderRadius: 16, padding: "14px 18px",
-                boxShadow: "var(--shadow-md)", display: "flex", alignItems: "center", gap: 12
-              }}>
+              <Tilt3D strength={8} style={{ position: "absolute", bottom: -22, left: isMobile ? 12 : -22 }}>
                 <div style={{
-                  width: 42, height: 42, borderRadius: 999, background: "rgba(142,31,27,.1)",
-                  display: "flex", alignItems: "center", justifyContent: "center", color: "var(--paprika)"
-                }}><Icon name="flame" size={22} /></div>
-                <div>
-                  <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 16, color: "var(--ink)" }}>Gătit pe foc</div>
-                  <div style={{ fontFamily: "var(--font-sans)", fontSize: 12.5, color: "var(--fg-2)" }}>zilnic, proaspăt</div>
+                  background: "var(--surface)",
+                  border: "1px solid var(--cream-line)", borderRadius: 16, padding: "14px 18px",
+                  boxShadow: "var(--shadow-md)", display: "flex", alignItems: "center", gap: 12
+                }}>
+                  <div style={{
+                    width: 42, height: 42, borderRadius: 999, background: "rgba(142,31,27,.1)",
+                    display: "flex", alignItems: "center", justifyContent: "center", color: "var(--paprika)"
+                  }}><Icon name="flame" size={22} /></div>
+                  <div>
+                    <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 16, color: "var(--ink)" }}>Gătit pe foc</div>
+                    <div style={{ fontFamily: "var(--font-sans)", fontSize: 12.5, color: "var(--fg-2)" }}>zilnic, proaspăt</div>
+                  </div>
                 </div>
-              </div>
+              </Tilt3D>
             </div>
           </Reveal>
         </div>

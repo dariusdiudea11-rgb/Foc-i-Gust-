@@ -1,4 +1,4 @@
-import { Eyebrow, Button, Photo, FolkDivider, Icon, Reveal, emblem } from './components'
+import { Eyebrow, Button, Photo, FolkDivider, Icon, Reveal, Tilt3D, emblem } from './components'
 import { useIsMobile } from './useIsMobile'
 
 export default function About({ onNav }) {
@@ -45,11 +45,13 @@ export default function About({ onNav }) {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: 26 }}>
             {values.map((v, i) => (
               <Reveal key={v.t} delay={i * 90}>
-                <div style={{ background: "var(--surface)", border: "1px solid var(--cream-line)", borderRadius: 16, padding: "26px 24px", boxShadow: "var(--shadow-sm)", height: "100%", boxSizing: "border-box" }}>
-                  <div style={{ width: 50, height: 50, borderRadius: 12, background: "rgba(142,31,27,.09)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--paprika)", marginBottom: 14 }}><Icon name={v.icon} size={24} /></div>
-                  <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 21, color: "var(--ink)", margin: "0 0 7px" }}>{v.t}</h3>
-                  <p style={{ fontFamily: "var(--font-sans)", fontSize: 14.5, lineHeight: 1.6, color: "var(--fg-2)", margin: 0 }}>{v.d}</p>
-                </div>
+                <Tilt3D style={{ height: "100%" }}>
+                  <div style={{ background: "var(--surface)", border: "1px solid var(--cream-line)", borderRadius: 16, padding: "26px 24px", boxShadow: "var(--shadow-sm)", height: "100%", boxSizing: "border-box" }}>
+                    <div style={{ width: 50, height: 50, borderRadius: 12, background: "rgba(142,31,27,.09)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--paprika)", marginBottom: 14 }}><Icon name={v.icon} size={24} /></div>
+                    <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 21, color: "var(--ink)", margin: "0 0 7px" }}>{v.t}</h3>
+                    <p style={{ fontFamily: "var(--font-sans)", fontSize: 14.5, lineHeight: 1.6, color: "var(--fg-2)", margin: 0 }}>{v.d}</p>
+                  </div>
+                </Tilt3D>
               </Reveal>
             ))}
           </div>
