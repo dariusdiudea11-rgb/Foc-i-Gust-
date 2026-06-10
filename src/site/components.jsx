@@ -4,6 +4,7 @@
    ========================================================= */
 import { useState, useEffect, useRef } from 'react'
 import emblem from '../assets/brand/emblem.png'
+import { useIsMobile } from './useIsMobile'
 
 export { emblem }
 
@@ -162,6 +163,58 @@ export function FolkDivider({ style }) {
         <D c="var(--ink)" /><D c="var(--paprika)" big /><D c="var(--flame)" /><D c="var(--paprika)" big /><D c="var(--ink)" />
       </span>
       <span style={{ height: 2, width: 80, maxWidth: "22vw", background: "linear-gradient(90deg,var(--cream-line-2),transparent)" }} />
+    </div>
+  )
+}
+
+/* ---------- Ember particles (rising sparks from the grill photo) ---------- */
+const EMBER_DATA = [
+  { left: "18%", btm: "8%",  drift: "8px",  s: 3.5, delay: 0,   dur: 3.8, c: "var(--flame-bright)" },
+  { left: "38%", btm: "14%", drift: "-6px", s: 4,   delay: 0.9, dur: 4.3, c: "var(--honey)" },
+  { left: "55%", btm: "6%",  drift: "10px", s: 3,   delay: 1.6, dur: 3.6, c: "var(--flame-bright)" },
+  { left: "28%", btm: "20%", drift: "-8px", s: 4.5, delay: 2.3, dur: 4.7, c: "var(--flame)" },
+  { left: "65%", btm: "11%", drift: "6px",  s: 3,   delay: 0.4, dur: 4.1, c: "var(--honey-soft)" },
+  { left: "47%", btm: "24%", drift: "-5px", s: 3.5, delay: 1.9, dur: 3.4, c: "var(--flame-bright)" },
+  { left: "22%", btm: "4%",  drift: "9px",  s: 3,   delay: 2.8, dur: 4.5, c: "var(--honey)" },
+  { left: "72%", btm: "18%", drift: "-7px", s: 4,   delay: 1.2, dur: 4.0, c: "var(--flame)" },
+]
+export function EmberParticles() {
+  return (
+    <div aria-hidden="true" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+      {EMBER_DATA.map((e, i) => (
+        <div key={i} style={{
+          position: "absolute", left: e.left, bottom: e.btm,
+          width: e.s, height: e.s, borderRadius: "50%",
+          background: e.c, boxShadow: `0 0 ${e.s * 2.5}px ${e.c}`,
+          animation: `fg-ember ${e.dur}s ease-out ${e.delay}s infinite`,
+          "--drift": e.drift,
+        }} />
+      ))}
+    </div>
+  )
+}
+
+/* ---------- MagneticWrap (desktop-only cursor attraction) ---------- */
+export function MagneticWrap({ children, strength = 0.28 }) {
+  const isMobile = useIsMobile(820)
+  const ref = useRef(null)
+  const [off, setOff] = useState({ x: 0, y: 0 })
+  if (isMobile) return <>{children}</>
+  const onMove = (e) => {
+    const r = ref.current?.getBoundingClientRect()
+    if (!r) return
+    setOff({ x: (e.clientX - (r.left + r.width / 2)) * strength, y: (e.clientY - (r.top + r.height / 2)) * strength })
+  }
+  const isRest = off.x === 0 && off.y === 0
+  return (
+    <div ref={ref} onMouseMove={onMove} onMouseLeave={() => setOff({ x: 0, y: 0 })}
+      style={{
+        display: "inline-flex",
+        transform: `translate(${off.x}px, ${off.y}px)`,
+        transition: isRest ? "transform .55s var(--ease-out)" : "transform .12s linear",
+        willChange: "transform",
+      }}>
+      {children}
     </div>
   )
 }

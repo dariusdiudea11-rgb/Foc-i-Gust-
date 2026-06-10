@@ -1,4 +1,4 @@
-import { Eyebrow, Button, Photo, FolkDivider, DishCard, Icon, Reveal, MarqueeBand, Tilt3D, emblem } from './components'
+import { Eyebrow, Button, Photo, FolkDivider, DishCard, Icon, Reveal, MarqueeBand, Tilt3D, EmberParticles, MagneticWrap, emblem } from './components'
 import { FG_MENU, FG_FAIRS } from './data'
 import { useIsMobile } from './useIsMobile'
 
@@ -41,13 +41,14 @@ export default function Home({ onNav }) {
               Gătim mâncare de acasă, pe foc, pentru oameni care iubesc gustul adevărat — la târguri,
               festivaluri și la evenimentele voastre.</p></Reveal>
             <Reveal delay={240}><div style={{ display: "flex", gap: 14, marginTop: 32, flexWrap: "wrap" }}>
-              <Button onClick={() => onNav("meniu")} icon="arrowRight">Vezi meniul</Button>
-              <Button variant="ghost" onClick={() => onNav("evenimente")}>Rezervați un eveniment</Button>
+              <MagneticWrap><Button onClick={() => onNav("meniu")} icon="arrowRight">Vezi meniul</Button></MagneticWrap>
+              <MagneticWrap><Button variant="ghost" onClick={() => onNav("evenimente")}>Rezervați un eveniment</Button></MagneticWrap>
             </div></Reveal>
           </div>
           <Reveal delay={180} y={28}>
             <div style={{ position: "relative" }}>
               <Photo seed={1} style={{ height: isMobile ? 300 : 460, borderRadius: 24, boxShadow: "var(--shadow-lg)" }} label="Foto: fel principal" />
+              <EmberParticles />
               <Tilt3D strength={8} style={{ position: "absolute", bottom: -22, left: isMobile ? 12 : -22 }}>
                 <div style={{
                   background: "var(--surface)",
