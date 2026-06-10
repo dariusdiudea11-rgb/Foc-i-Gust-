@@ -30,7 +30,7 @@ export default function Menu() {
       }}>
         <div style={{ ...wrap, padding: "14px 20px", display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap" }}>
           {cats.map(c => (
-            <button key={c} onClick={() => setActive(c)} style={{
+            <button key={c} onClick={() => setActive(c)} className="fg-chip" style={{
               fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 14, padding: "9px 18px",
               borderRadius: 999, cursor: "pointer", transition: "all .2s", border: "1.5px solid",
               borderColor: active === c ? "var(--paprika)" : "var(--cream-line-2)",

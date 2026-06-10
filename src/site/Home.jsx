@@ -1,4 +1,4 @@
-import { Eyebrow, Button, Photo, FolkDivider, DishCard, Icon, Reveal, emblem } from './components'
+import { Eyebrow, Button, Photo, FolkDivider, DishCard, Icon, Reveal, MarqueeBand, emblem } from './components'
 import { FG_MENU, FG_FAIRS } from './data'
 import { useIsMobile } from './useIsMobile'
 
@@ -83,6 +83,9 @@ export default function Home({ onNav }) {
         </div>
       </section>
 
+      {/* MARQUEE */}
+      <MarqueeBand items={["Mici pe jar", "Ceafă de porc", "Cârnăciori de casă", "Aripioare la grătar", "Cartofi pai", "Gătit pe foc, ca acasă"]} />
+
       {/* FEATURED DISHES */}
       <section style={{ background: "var(--parchment)" }}>
         <div style={{ ...wrap, padding: isMobile ? "52px 20px" : "72px 32px" }}>
@@ -111,7 +114,7 @@ export default function Home({ onNav }) {
           <div style={{ display: "grid", gap: 12 }}>
             {FG_FAIRS.map((f, i) => (
               <Reveal key={f.place} delay={i * 80} y={12}>
-                <div style={{ background: "rgba(245,239,227,.06)", border: "1px solid #403a32", borderRadius: 14, padding: "18px 22px", display: "flex", alignItems: "center", gap: 18 }}>
+                <div className="fg-fair-card" style={{ background: "rgba(245,239,227,.06)", border: "1px solid #403a32", borderRadius: 14, padding: "18px 22px", display: "flex", alignItems: "center", gap: 18 }}>
                   <div style={{ width: 46, height: 46, borderRadius: 12, background: "rgba(194,97,30,.18)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--flame-bright)", flex: "none" }}><Icon name="mapPin" size={22} /></div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 19, color: "var(--parchment)" }}>{f.place}</div>
@@ -147,7 +150,7 @@ export default function Home({ onNav }) {
             </div>
             {!isMobile && (
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <img src={emblem} alt="" style={{ width: 180, opacity: .9, filter: "drop-shadow(0 12px 24px rgba(0,0,0,.25))" }} />
+                <img src={emblem} alt="" className="fg-flame" style={{ width: 180, opacity: .9 }} />
               </div>
             )}
           </div>

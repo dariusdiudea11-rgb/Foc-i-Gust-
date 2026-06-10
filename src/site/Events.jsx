@@ -73,7 +73,7 @@ export default function Events() {
             <div style={{ padding: isMobile ? "24px 20px 26px" : "30px 30px 32px", display: "grid", gap: 18 }}>
               <Field label="Tip eveniment">
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                  {types.map(t => <button key={t} onClick={() => setType(t)} style={{
+                  {types.map(t => <button key={t} onClick={() => setType(t)} className="fg-chip" style={{
                     fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 600, padding: "9px 16px",
                     borderRadius: 999, cursor: "pointer", border: "1.5px solid",
                     borderColor: type === t ? "var(--paprika)" : "var(--cream-line-2)",

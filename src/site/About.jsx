@@ -12,7 +12,7 @@ export default function About({ onNav }) {
     <div style={{ background: "var(--parchment)" }}>
       <section>
         <div style={{ maxWidth: 900, margin: "0 auto", padding: isMobile ? "52px 20px 24px" : "72px 32px 24px", textAlign: "center" }}>
-          <img src={emblem} alt="" style={{ width: 92, height: 92, objectFit: "contain", marginBottom: 18 }} />
+          <img src={emblem} alt="" className="fg-flame" style={{ width: 92, height: 92, objectFit: "contain", marginBottom: 18 }} />
           <Eyebrow style={{ textAlign: "center" }}>Despre noi</Eyebrow>
           <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: isMobile ? 34 : 50, letterSpacing: "-.02em", color: "var(--ink)", margin: "10px 0 18px", lineHeight: 1.06 }}>
             O tradiție care merge mai departe</h1>

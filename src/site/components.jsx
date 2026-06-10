@@ -76,7 +76,7 @@ export function Button({ children, variant = "primary", size = "md", icon, onCli
   return (
     <button type={type} onClick={onClick} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
       style={{ ...base, ...variants[variant], transform: h ? "translateY(-1px)" : "none", ...style }}>
-      {children}{icon && <Icon name={icon} size={size === "sm" ? 16 : 18} />}
+      {children}{icon && <span className="fg-btn-icon"><Icon name={icon} size={size === "sm" ? 16 : 18} /></span>}
     </button>
   )
 }
@@ -104,7 +104,7 @@ export function Badge({ children, tone = "paprika", dot }) {
 export function Logo({ size = 40, light, stacked }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 11, flexDirection: stacked ? "column" : "row" }}>
-      <img src={emblem} alt="" style={{ width: size, height: size, borderRadius: 8, objectFit: "contain" }} />
+      <img src={emblem} alt="" className="fg-flame" style={{ width: size, height: size, borderRadius: 8, objectFit: "contain" }} />
       <div style={{ lineHeight: 1.04, textAlign: stacked ? "center" : "left", whiteSpace: "nowrap" }}>
         <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: size * 0.42,
           color: light ? "var(--parchment)" : "var(--ink)", letterSpacing: "-.01em" }}>Foc Și Gust</div>
@@ -177,6 +177,34 @@ export function DishCard({ dish }) {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
           <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 20, color: "var(--paprika)" }}>{dish.price}</span>
         </div>
+      </div>
+    </div>
+  )
+}
+
+/* ---------- Marquee band (slow scrolling specialties strip) ---------- */
+export function MarqueeBand({ items }) {
+  const Diamond = () => <span aria-hidden="true" style={{
+    width: 8, height: 8, transform: "rotate(45deg)", background: "var(--honey)",
+    display: "inline-block", margin: "0 26px", flexShrink: 0
+  }} />
+  const row = items.map((t, i) => (
+    <span key={i} style={{ display: "inline-flex", alignItems: "center", whiteSpace: "nowrap" }}>
+      <span style={{
+        fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 17,
+        color: "var(--parchment)", letterSpacing: ".02em"
+      }}>{t}</span>
+      <Diamond />
+    </span>
+  ))
+  return (
+    <div className="fg-marquee" aria-hidden="true" style={{
+      background: "var(--paprika)", overflow: "hidden", padding: "13px 0",
+      borderTop: "1px solid rgba(245,239,227,.12)", borderBottom: "1px solid rgba(245,239,227,.12)"
+    }}>
+      <div className="fg-marquee-track">
+        <div style={{ display: "flex", alignItems: "center" }}>{row}</div>
+        <div style={{ display: "flex", alignItems: "center" }}>{row}</div>
       </div>
     </div>
   )

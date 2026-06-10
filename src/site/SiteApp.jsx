@@ -15,10 +15,12 @@ export default function SiteApp() {
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--parchment)" }}>
       <Nav current={screen} onNav={nav} />
       <main style={{ flex: 1 }}>
-        {screen === "home" && <Home onNav={nav} />}
-        {screen === "meniu" && <Menu />}
-        {screen === "evenimente" && <Events />}
-        {screen === "despre" && <About onNav={nav} />}
+        <div key={screen} className="fg-screen">
+          {screen === "home" && <Home onNav={nav} />}
+          {screen === "meniu" && <Menu />}
+          {screen === "evenimente" && <Events />}
+          {screen === "despre" && <About onNav={nav} />}
+        </div>
       </main>
       <Footer onNav={nav} />
     </div>
