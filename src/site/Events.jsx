@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Eyebrow, Button, Photo, Icon } from './components'
 import { useIsMobile } from './useIsMobile'
 
+const WHATSAPP_NUMBER = "40746170890"
+
 function Field({ label, children }) {
   return <label style={{ display: "grid", gap: 6 }}>
     <span style={{ fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 700, color: "var(--fg-2)" }}>{label}</span>
@@ -14,11 +16,25 @@ const fgInput = {
 
 export default function Events() {
   const isMobile = useIsMobile(820)
-  const [step, setStep] = useState(1)
-  const [type, setType] = useState("Nuntă")
+  const [type, setType]         = useState("Nuntă")
+  const [guests, setGuests]     = useState("")
+  const [locality, setLocality] = useState("")
+  const [date, setDate]         = useState("")
+  const [details, setDetails]   = useState("")
   const types = ["Nuntă", "Botez", "Petrecere", "Eveniment de firmă", "Masă în familie"]
-  const steps = ["Detalii", "Date", "Trimis"]
   const twoCol = { display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }
+
+  const openWhatsApp = () => {
+    const lines = [
+      `Bună! Aș dori o ofertă pentru un eveniment: ${type.toLowerCase()}.`,
+      guests   && `Număr invitați: ${guests}`,
+      locality && `Localitate: ${locality}`,
+      date     && `Data: ${date}`,
+      details  && `Detalii: ${details}`,
+    ].filter(Boolean)
+    const msg = encodeURIComponent(lines.join("\n"))
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank", "noopener")
+  }
 
   return (
     <div style={{ background: "var(--parchment)" }}>
@@ -29,7 +45,7 @@ export default function Events() {
             <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: isMobile ? 32 : 46, letterSpacing: "-.02em", color: "var(--parchment)", margin: "10px 0 14px", lineHeight: 1.08 }}>
               Gătim pe foc<br />pentru sărbătoarea voastră</h1>
             <p style={{ fontFamily: "var(--font-sans)", fontSize: 17, lineHeight: 1.65, color: "var(--fg-on-dark-2)", margin: "0 0 24px", maxWidth: 420 }}>
-              Spuneți-ne despre eveniment și revenim cu o ofertă în maximum 24 de ore. Fără bătăi de cap.</p>
+              Spuneți-ne despre eveniment pe WhatsApp și revenim cu o ofertă în maximum 24 de ore. Fără bătăi de cap.</p>
             <div style={{ display: "grid", gap: 12 }}>
               {[["users", "De la 20 la 400 de invitați"], ["flame", "Gătit pe loc, pe foc"], ["check", "Ofertă în 24h, fără obligații"]].map(([ic, t]) => (
                 <div key={t} style={{ display: "flex", alignItems: "center", gap: 12, fontFamily: "var(--font-sans)", fontSize: 15.5, color: "var(--parchment)" }}>
@@ -44,75 +60,56 @@ export default function Events() {
       <section>
         <div style={{ maxWidth: 720, margin: "0 auto", padding: isMobile ? "40px 20px 70px" : "56px 32px 90px" }}>
           <div style={{ background: "var(--surface)", border: "1px solid var(--cream-line)", borderRadius: 20, boxShadow: "var(--shadow-md)", overflow: "hidden" }}>
-            {/* stepper */}
-            <div style={{ display: "flex", borderBottom: "1px solid var(--cream-line)" }}>
-              {steps.map((s, i) => {
-                const n = i + 1, done = step > n, on = step === n
-                return <div key={s} style={{
-                  flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 9,
-                  padding: "16px 8px", background: on ? "var(--parchment-2)" : "transparent",
-                  borderBottom: on ? "2px solid var(--paprika)" : "2px solid transparent"
-                }}>
-                  <span style={{
-                    width: 24, height: 24, borderRadius: 999, fontSize: 12, fontWeight: 800,
-                    fontFamily: "var(--font-sans)", display: "flex", alignItems: "center", justifyContent: "center",
-                    background: done || on ? "var(--paprika)" : "var(--cream-line)", color: done || on ? "#fff" : "var(--fg-3)"
-                  }}>
-                    {done ? <Icon name="check" size={14} /> : n}</span>
-                  {!isMobile && <span style={{ fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 700, color: on ? "var(--ink)" : "var(--fg-3)" }}>{s}</span>}
-                </div>
-              })}
+            <div style={{ padding: "18px 30px", borderBottom: "1px solid var(--cream-line)", background: "var(--parchment-2)", display: "flex", alignItems: "center", gap: 12 }}>
+              <span style={{ width: 38, height: 38, borderRadius: 999, background: "rgba(37,160,80,.12)", display: "flex", alignItems: "center", justifyContent: "center", color: "#25a050" }}>
+                <Icon name="phone" size={19} />
+              </span>
+              <div>
+                <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 17, color: "var(--ink)" }}>Cereți o ofertă pe WhatsApp</div>
+                <div style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--fg-2)" }}>Completați detaliile — mesajul se scrie singur.</div>
+              </div>
             </div>
 
-            <div style={{ padding: isMobile ? "24px 20px 26px" : "30px 30px 32px" }}>
-              {step === 1 && <div style={{ display: "grid", gap: 18 }}>
-                <Field label="Tip eveniment">
-                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                    {types.map(t => <button key={t} onClick={() => setType(t)} style={{
-                      fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 600, padding: "9px 16px",
-                      borderRadius: 999, cursor: "pointer", border: "1.5px solid",
-                      borderColor: type === t ? "var(--paprika)" : "var(--cream-line-2)",
-                      background: type === t ? "rgba(142,31,27,.08)" : "transparent",
-                      color: type === t ? "var(--paprika)" : "var(--fg-1)"
-                    }}>{t}</button>)}
-                  </div>
-                </Field>
-                <div style={twoCol}>
-                  <Field label="Număr invitați"><input style={fgInput} placeholder="ex. 80" /></Field>
-                  <Field label="Localitate"><input style={fgInput} placeholder="ex. Cluj-Napoca" /></Field>
+            <div style={{ padding: isMobile ? "24px 20px 26px" : "30px 30px 32px", display: "grid", gap: 18 }}>
+              <Field label="Tip eveniment">
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  {types.map(t => <button key={t} onClick={() => setType(t)} style={{
+                    fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 600, padding: "9px 16px",
+                    borderRadius: 999, cursor: "pointer", border: "1.5px solid",
+                    borderColor: type === t ? "var(--paprika)" : "var(--cream-line-2)",
+                    background: type === t ? "rgba(142,31,27,.08)" : "transparent",
+                    color: type === t ? "var(--paprika)" : "var(--fg-1)"
+                  }}>{t}</button>)}
                 </div>
-                <Field label="Spuneți-ne despre eveniment">
-                  <textarea style={{ ...fgInput, minHeight: 92, resize: "vertical" }} placeholder="Meniu dorit, preferințe, întrebări…" /></Field>
-                <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 4 }}>
-                  <Button onClick={() => setStep(2)} icon="arrowRight">Continuați</Button>
-                </div>
-              </div>}
+              </Field>
+              <div style={twoCol}>
+                <Field label="Număr invitați (opțional)">
+                  <input style={fgInput} placeholder="ex. 80" value={guests} onChange={e => setGuests(e.target.value)} /></Field>
+                <Field label="Localitate (opțional)">
+                  <input style={fgInput} placeholder="ex. Negrești-Oaș" value={locality} onChange={e => setLocality(e.target.value)} /></Field>
+              </div>
+              <Field label="Data evenimentului (opțional)">
+                <input style={fgInput} placeholder="zz / ll / aaaa" value={date} onChange={e => setDate(e.target.value)} /></Field>
+              <Field label="Alte detalii (opțional)">
+                <textarea style={{ ...fgInput, minHeight: 92, resize: "vertical" }} placeholder="Meniu dorit, preferințe, întrebări…"
+                  value={details} onChange={e => setDetails(e.target.value)} /></Field>
 
-              {step === 2 && <div style={{ display: "grid", gap: 18 }}>
-                <div style={twoCol}>
-                  <Field label="Nume"><input style={fgInput} placeholder="Numele vostru" /></Field>
-                  <Field label="Telefon"><input style={fgInput} placeholder="07.." /></Field>
-                </div>
-                <div style={twoCol}>
-                  <Field label="Email"><input style={fgInput} placeholder="email@exemplu.ro" /></Field>
-                  <Field label="Data evenimentului"><input style={fgInput} placeholder="zz / ll / aaaa" /></Field>
-                </div>
-                <label style={{ display: "flex", gap: 10, alignItems: "flex-start", fontFamily: "var(--font-sans)", fontSize: 13.5, color: "var(--fg-2)", lineHeight: 1.5 }}>
-                  <input type="checkbox" style={{ marginTop: 3, accentColor: "var(--paprika)" }} defaultChecked />
-                  Sunt de acord să fiu contactat cu privire la această cerere.</label>
-                <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4 }}>
-                  <Button variant="ghost" onClick={() => setStep(1)}>Înapoi</Button>
-                  <Button onClick={() => setStep(3)} icon="check">Trimiteți cererea</Button>
-                </div>
-              </div>}
+              <button onClick={openWhatsApp} style={{
+                display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+                fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 16, color: "#fff",
+                background: "#25a050", border: "none", borderRadius: 12, padding: "15px 24px",
+                cursor: "pointer", marginTop: 4, boxShadow: "0 6px 18px rgba(37,160,80,.3)",
+                transition: "transform .2s, box-shadow .2s"
+              }}
+                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 24px rgba(37,160,80,.4)" }}
+                onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 6px 18px rgba(37,160,80,.3)" }}>
+                <Icon name="phone" size={20} /> Trimiteți pe WhatsApp
+              </button>
 
-              {step === 3 && <div style={{ textAlign: "center", padding: "20px 10px 12px" }}>
-                <div style={{ width: 72, height: 72, borderRadius: 999, margin: "0 auto 20px", background: "rgba(91,122,69,.14)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--herb)" }}><Icon name="check" size={36} /></div>
-                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 28, color: "var(--ink)", margin: "0 0 8px" }}>Cererea a fost trimisă!</h3>
-                <p style={{ fontFamily: "var(--font-sans)", fontSize: 16, color: "var(--fg-2)", margin: "0 auto 24px", maxWidth: 400, lineHeight: 1.6 }}>
-                  Mulțumim! Revenim cu o ofertă pentru <strong style={{ color: "var(--paprika)" }}>{type.toLowerCase()}</strong> în maximum 24 de ore.</p>
-                <Button variant="ghost" onClick={() => setStep(1)}>Trimiteți o nouă cerere</Button>
-              </div>}
+              <p style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--fg-3)", textAlign: "center", margin: 0, lineHeight: 1.5 }}>
+                Se deschide WhatsApp cu mesajul pregătit — îl puteți modifica înainte de trimitere.<br />
+                Sau sunați direct: <a href="tel:+40746170890" style={{ color: "var(--paprika)", fontWeight: 700, textDecoration: "none" }}>0746 170 890</a>
+              </p>
             </div>
           </div>
         </div>

@@ -25,19 +25,18 @@ export default function Footer({ onNav }) {
         </div>
         <div>
           <h4 style={{ fontFamily: "var(--font-display)", color: "var(--parchment)", fontSize: 16, margin: "4px 0 14px" }}>Contact</h4>
-          <div style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--font-sans)", fontSize: 14, padding: "5px 0" }}><Icon name="phone" size={16} /> 0746 170 890</div>
-          <div style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--font-sans)", fontSize: 14, padding: "5px 0", wordBreak: "break-all" }}><Icon name="mail" size={16} /> darius.diudea11@gmail.com</div>
+          <a href="tel:+40746170890" style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--font-sans)", fontSize: 14, padding: "5px 0", color: "var(--fg-on-dark-2)", textDecoration: "none" }}><Icon name="phone" size={16} /> 0746 170 890</a>
+          <a href="mailto:darius.diudea11@gmail.com" style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--font-sans)", fontSize: 14, padding: "5px 0", wordBreak: "break-all", color: "var(--fg-on-dark-2)", textDecoration: "none" }}><Icon name="mail" size={16} /> darius.diudea11@gmail.com</a>
           <div style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: "var(--font-sans)", fontSize: 14, padding: "5px 0" }}><Icon name="mapPin" size={16} /> România · la târguri</div>
         </div>
         <div>
           <h4 style={{ fontFamily: "var(--font-display)", color: "var(--parchment)", fontSize: 16, margin: "4px 0 14px" }}>Urmăriți-ne</h4>
           <div style={{ display: "flex", gap: 10 }}>
-            {["instagram", "facebook"].map(s => (
-              <div key={s} style={{
+            <a href="https://www.instagram.com/foc_si_gust_traditional" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+              style={{
                 width: 40, height: 40, borderRadius: 999, border: "1px solid #4a443a",
                 display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "var(--parchment)"
-              }}><Icon name={s} size={19} /></div>
-            ))}
+              }}><Icon name="instagram" size={19} /></a>
           </div>
         </div>
       </div>

@@ -159,7 +159,7 @@ export function FolkDivider({ style }) {
 }
 
 /* ---------- Dish card ---------- */
-export function DishCard({ dish, onAdd }) {
+export function DishCard({ dish }) {
   const [h, setH] = useState(false)
   return (
     <div onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
@@ -176,7 +176,6 @@ export function DishCard({ dish, onAdd }) {
         <p style={{ fontFamily: "var(--font-sans)", fontSize: 13.5, color: "var(--fg-2)", margin: "5px 0 15px", lineHeight: 1.5 }}>{dish.desc}</p>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
           <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 20, color: "var(--paprika)" }}>{dish.price}</span>
-          <Button size="sm" onClick={() => onAdd && onAdd(dish)} icon="plus">Adaugă</Button>
         </div>
       </div>
     </div>

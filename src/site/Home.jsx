@@ -2,7 +2,7 @@ import { Eyebrow, Button, Photo, FolkDivider, DishCard, Icon, Reveal, emblem } f
 import { FG_MENU, FG_FAIRS } from './data'
 import { useIsMobile } from './useIsMobile'
 
-export default function Home({ onNav, onAdd }) {
+export default function Home({ onNav }) {
   const isMobile = useIsMobile(820)
   const triad = [
     { icon: "flame", t: "Foc", d: "Gătim pe foc și jar, cum se făcea dintotdeauna. Fără scurtături." },
@@ -94,7 +94,7 @@ export default function Home({ onNav, onAdd }) {
             <Button variant="ghost" size="sm" onClick={() => onNav("meniu")} icon="arrowRight">Tot meniul</Button>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: 24 }}>
-            {featured.map((d, i) => <Reveal key={d.name} delay={i * 80}><DishCard dish={d} onAdd={onAdd} /></Reveal>)}
+            {featured.map((d, i) => <Reveal key={d.name} delay={i * 80}><DishCard dish={d} /></Reveal>)}
           </div>
         </div>
       </section>

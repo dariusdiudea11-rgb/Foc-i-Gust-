@@ -3,7 +3,7 @@ import { Logo, Icon, Button } from './components'
 import { FG_NAV } from './data'
 import { useIsMobile } from './useIsMobile'
 
-export default function Nav({ current, onNav, cartCount }) {
+export default function Nav({ current, onNav }) {
   const isMobile = useIsMobile(820)
   const [open, setOpen] = useState(false)
 
@@ -39,18 +39,7 @@ export default function Nav({ current, onNav, cartCount }) {
         )}
 
         {!isMobile ? (
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <button onClick={() => onNav("meniu")} aria-label="Meniu"
-              style={{ position: "relative", background: "transparent", border: "none", cursor: "pointer", color: "var(--fg-1)", display: "flex", alignItems: "center", padding: 6 }}>
-              <Icon name="flame" size={22} />
-              {cartCount > 0 && <span style={{
-                position: "absolute", top: -2, right: -4, background: "var(--paprika)", color: "#fff",
-                fontSize: 10, fontWeight: 700, minWidth: 16, height: 16, borderRadius: 999,
-                display: "flex", alignItems: "center", justifyContent: "center", padding: "0 4px"
-              }}>{cartCount}</span>}
-            </button>
-            <Button size="sm" onClick={() => onNav("evenimente")}>Rezervați</Button>
-          </div>
+          <Button size="sm" onClick={() => onNav("evenimente")}>Rezervați</Button>
         ) : (
           <button onClick={() => setOpen(o => !o)} aria-label="Meniu" aria-expanded={open}
             style={{ background: "transparent", border: "none", cursor: "pointer", color: "var(--ink)", display: "flex", alignItems: "center", padding: 6 }}>

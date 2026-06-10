@@ -3,7 +3,7 @@ import { Eyebrow, FolkDivider, DishCard, Reveal } from './components'
 import { FG_MENU } from './data'
 import { useIsMobile } from './useIsMobile'
 
-export default function Menu({ onAdd }) {
+export default function Menu() {
   const isMobile = useIsMobile(820)
   const cats = ["Toate", "Combouri", "Grătar", "Garnituri", "Băuturi"]
   const [active, setActive] = useState("Toate")
@@ -43,7 +43,7 @@ export default function Menu({ onAdd }) {
 
       <section>
         <div style={{ ...wrap, padding: isMobile ? "32px 20px 70px" : "40px 32px 80px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: 24 }}>
-          {list.map((d, i) => <Reveal key={d.name + active} delay={(i % 3) * 70}><DishCard dish={d} onAdd={onAdd} /></Reveal>)}
+          {list.map((d, i) => <Reveal key={d.name + active} delay={(i % 3) * 70}><DishCard dish={d} /></Reveal>)}
         </div>
       </section>
     </div>
